@@ -240,31 +240,62 @@ runna_task = Task(
                             children=[
                                 Task(
                                     "id: UUID = uuid4()",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "name: str = 'calories",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "interval start date: datetime = now",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "interval start amount: double = 0",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "interval target amount: double = 1200",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "interval length: timedelta = 1 day",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "bucket size: timedelta = 5 minutes",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "unit: str = 'calories'",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
                                 Task(
                                     "reset: bool = 'false'",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                    ],
                                 ),
+                            ],
+                            events=[
+                                TaskEventStart([2023, 12, 13, 14, 12]),
+                                TaskEventComplete([2023, 12, 13, 14, 19]),
                             ],
                         ),
                         Task(
