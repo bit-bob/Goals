@@ -302,11 +302,11 @@ class GoalsDB(DBInterface):
                 connection.commit()
 
 
-if __name__ == "__main__":
-    db = GoalsDB()
+goals_db = GoalsDB()
 
+if __name__ == "__main__":
     print("\n == Create Goal == ")
-    db.create_goal(
+    goals_db.create_goal(
         name="beep",
         interval_start_date=datetime(2023, 11, 13),
         interval_start_amount=0,
@@ -318,25 +318,25 @@ if __name__ == "__main__":
     )
 
     print("\n == Read Goals == ")
-    goals = db.read_goals()
+    goals = goals_db.read_goals()
     pprint(goals)
 
     print("\n == Read Goal == ")
     example_goal = goals[0]
-    read_goal = db.read_goal(example_goal.id)
+    read_goal = goals_db.read_goal(example_goal.id)
     print(read_goal)
 
     print("\n == Delete Goal == ")
     previous_length = len(goals)
-    db.delete_goal(example_goal.id)
-    new_length = len(db.read_goals())
+    goals_db.delete_goal(example_goal.id)
+    new_length = len(goals_db.read_goals())
     if new_length >= previous_length:
         raise Exception
     print(f"new_length {new_length} < previous_length {previous_length}")
 
     print("\n == Create Record == ")
     if new_length == 0:
-        db.create_goal(
+        goals_db.create_goal(
             name="boop",
             interval_start_date=datetime(2023, 10, 12),
             interval_start_amount=10,
@@ -346,27 +346,27 @@ if __name__ == "__main__":
             unit="pounds",
             reset=True,
         )
-    example_goal = db.read_goals()[0]
+    example_goal = goals_db.read_goals()[0]
     print(example_goal)
-    db.create_record(
+    goals_db.create_record(
         goal_id=example_goal.id,
         date=datetime(2023, 12, 20, 2),
         amount=10,
     )
 
     print("\n == Read Records == ")
-    records = db.read_records()
+    records = goals_db.read_records()
     pprint(records)
 
     print("\n == Read Record == ")
     example_record = records[0]
-    read_record = db.read_record(example_record.id)
+    read_record = goals_db.read_record(example_record.id)
     print(read_record)
 
     print("\n == Delete Record == ")
     previous_length = len(records)
-    db.delete_record(example_record.id)
-    new_length = len(db.read_records())
+    goals_db.delete_record(example_record.id)
+    new_length = len(goals_db.read_records())
     if new_length >= previous_length:
         raise Exception
     print(f"new_length {new_length} < previous_length {previous_length}")

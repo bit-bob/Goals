@@ -494,6 +494,12 @@ runna_task = Task(
                                     children=[
                                         Task(
                                             "Create",
+                                            events=[
+                                                TaskEventStart([2023, 11, 13, 16, 10]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 18, 21]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "Read all",
