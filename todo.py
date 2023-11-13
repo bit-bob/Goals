@@ -481,6 +481,10 @@ runna_task = Task(
                     children=[
                         Task(
                             "Structure",
+                            events=[
+                                TaskEventStart([2023, 11, 13, 17, 54]),
+                                TaskEventComplete([2023, 11, 13, 18, 10]),
+                            ],
                         ),
                         Task(
                             "Endpoints",

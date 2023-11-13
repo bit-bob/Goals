@@ -3,3 +3,4 @@ __pycache__
 .parcel-cache
 openapi.json
 backend/goals.db
+events.log
