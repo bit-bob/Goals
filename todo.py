@@ -441,6 +441,12 @@ runna_task = Task(
                                         ),
                                         Task(
                                             "Read all",
+                                            events=[
+                                                TaskEventStart([2023, 11, 13, 17, 33]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 17, 42]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "Read one",

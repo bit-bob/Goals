@@ -6,7 +6,7 @@ from uuid import UUID, uuid4
 
 from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
-from models import GoalsModel
+from models import GoalsModel, RecordsModel
 
 
 class GoalsDB(DBInterface):
@@ -222,6 +222,34 @@ class GoalsDB(DBInterface):
                 )
                 connection.commit()
 
+    def read_records(
+        self,
+    ) -> list[RecordsModel]:
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    """
+                    SELECT
+                        id,
+                        goal_id,
+                        datetime(date,'localtime') as date,
+                        amount,
+                        datetime(created_date,'localtime') as created_date
+                    FROM records
+                    ORDER BY created_date;
+                    """,
+                )
+                return [
+                    RecordsModel(
+                        id=row[0],
+                        goal_id=row[1],
+                        date=row[2],
+                        amount=row[3],
+                        created_date=row[4],
+                    )
+                    for row in cursor.fetchall()
+                ]
+
 
 if __name__ == "__main__":
     db = GoalsDB()
@@ -274,3 +302,7 @@ if __name__ == "__main__":
         date=datetime(2023, 12, 20, 2),
         amount=10,
     )
+
+    print("\n == Read Records == ")
+    records = db.read_records()
+    pprint(records)
