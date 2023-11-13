@@ -16,7 +16,7 @@ class Connection:
             raise Exception("Need a path")
 
         self.connection = sqlite3.connect(self.path)
-        logging.debug("Connection to SQLite DB successful")
+        logging.debug(f"Connection to SQLite DB {self.path} successful")
 
         self.cursor = self.connection.cursor()
         return self.cursor
