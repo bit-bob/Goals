@@ -95,7 +95,7 @@ class GoalsDB(DBInterface):
                 )
                 connection.commit()
 
-    def read_goals(
+    def get_goals(
         self,
     ) -> list[GoalsModel]:
         with closing(sqlite3.connect(self.path)) as connection:
@@ -133,7 +133,7 @@ class GoalsDB(DBInterface):
                     for row in cursor.fetchall()
                 ]
 
-    def read_goal(
+    def get_goal(
         self,
         goal_id: UUID,
     ) -> GoalsModel:
@@ -222,7 +222,7 @@ class GoalsDB(DBInterface):
                 )
                 connection.commit()
 
-    def read_records(
+    def get_records(
         self,
     ) -> list[RecordsModel]:
         with closing(sqlite3.connect(self.path)) as connection:
@@ -250,7 +250,7 @@ class GoalsDB(DBInterface):
                     for row in cursor.fetchall()
                 ]
 
-    def read_record(
+    def get_record(
         self,
         record_id: UUID,
     ) -> RecordsModel:
@@ -317,19 +317,19 @@ if __name__ == "__main__":
         reset=False,
     )
 
-    print("\n == Read Goals == ")
-    goals = goals_db.read_goals()
+    print("\n == Get Goals == ")
+    goals = goals_db.get_goals()
     pprint(goals)
 
-    print("\n == Read Goal == ")
+    print("\n == Get Goal == ")
     example_goal = goals[0]
-    read_goal = goals_db.read_goal(example_goal.id)
-    print(read_goal)
+    get_goal = goals_db.get_goal(example_goal.id)
+    print(get_goal)
 
     print("\n == Delete Goal == ")
     previous_length = len(goals)
     goals_db.delete_goal(example_goal.id)
-    new_length = len(goals_db.read_goals())
+    new_length = len(goals_db.get_goals())
     if new_length >= previous_length:
         raise Exception
     print(f"new_length {new_length} < previous_length {previous_length}")
@@ -346,7 +346,7 @@ if __name__ == "__main__":
             unit="pounds",
             reset=True,
         )
-    example_goal = goals_db.read_goals()[0]
+    example_goal = goals_db.get_goals()[0]
     print(example_goal)
     goals_db.create_record(
         goal_id=example_goal.id,
@@ -354,19 +354,19 @@ if __name__ == "__main__":
         amount=10,
     )
 
-    print("\n == Read Records == ")
-    records = goals_db.read_records()
+    print("\n == Get Records == ")
+    records = goals_db.get_records()
     pprint(records)
 
-    print("\n == Read Record == ")
+    print("\n == Get Record == ")
     example_record = records[0]
-    read_record = goals_db.read_record(example_record.id)
-    print(read_record)
+    get_record = goals_db.get_record(example_record.id)
+    print(get_record)
 
     print("\n == Delete Record == ")
     previous_length = len(records)
     goals_db.delete_record(example_record.id)
-    new_length = len(goals_db.read_records())
+    new_length = len(goals_db.get_records())
     if new_length >= previous_length:
         raise Exception
     print(f"new_length {new_length} < previous_length {previous_length}")

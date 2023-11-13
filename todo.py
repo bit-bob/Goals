@@ -396,7 +396,7 @@ runna_task = Task(
                                             ],
                                         ),
                                         Task(
-                                            "Read all",
+                                            "Get all",
                                             events=[
                                                 TaskEventStart([2023, 11, 13, 16, 24]),
                                                 TaskEventComplete(
@@ -405,7 +405,7 @@ runna_task = Task(
                                             ],
                                         ),
                                         Task(
-                                            "Read one",
+                                            "Get one",
                                             events=[
                                                 TaskEventStart([2023, 11, 13, 16, 43]),
                                                 TaskEventComplete(
@@ -440,7 +440,7 @@ runna_task = Task(
                                             ],
                                         ),
                                         Task(
-                                            "Read all",
+                                            "Get all",
                                             events=[
                                                 TaskEventStart([2023, 11, 13, 17, 33]),
                                                 TaskEventComplete(
@@ -449,7 +449,7 @@ runna_task = Task(
                                             ],
                                         ),
                                         Task(
-                                            "Read one",
+                                            "Get one",
                                             events=[
                                                 TaskEventStart([2023, 11, 13, 17, 42]),
                                                 TaskEventComplete(
@@ -502,10 +502,10 @@ runna_task = Task(
                                             ],
                                         ),
                                         Task(
-                                            "Read all",
+                                            "Get all",
                                         ),
                                         Task(
-                                            "Read one",
+                                            "Get one",
                                         ),
                                         # Task(
                                         #     "Update",
@@ -535,10 +535,10 @@ runna_task = Task(
                                             "Create",
                                         ),
                                         Task(
-                                            "Read all",
+                                            "Get all",
                                         ),
                                         Task(
-                                            "Read one",
+                                            "Get one",
                                         ),
                                         # Task(
                                         #     "Update",

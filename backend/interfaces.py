@@ -2,7 +2,7 @@ class DBInterface:
     def create_goal(self):
         raise NotImplementedError
 
-    def read_goal(self):
+    def get_goal(self):
         raise NotImplementedError
 
     def update_goal(self):
@@ -14,7 +14,7 @@ class DBInterface:
     def create_record(self):
         raise NotImplementedError
 
-    def read_record(self):
+    def get_record(self):
         raise NotImplementedError
 
     def update_record(self):
