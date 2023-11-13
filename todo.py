@@ -241,61 +241,61 @@ runna_task = Task(
                                 Task(
                                     "id: UUID = uuid4()",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "name: str = 'calories",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "interval start date: datetime = now",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "interval start amount: double = 0",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "interval target amount: double = 1200",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "interval length: timedelta = 1 day",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "bucket size: timedelta = 5 minutes",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "unit: str = 'calories'",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                                 Task(
                                     "reset: bool = 'false'",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
                                     ],
                                 ),
                             ],
                             events=[
-                                TaskEventStart([2023, 12, 13, 14, 12]),
-                                TaskEventComplete([2023, 12, 13, 14, 19]),
+                                TaskEventStart([2023, 11, 13, 14, 12]),
+                                TaskEventComplete([2023, 11, 13, 14, 19]),
                             ],
                         ),
                         Task(
@@ -304,31 +304,31 @@ runna_task = Task(
                                 Task(
                                     "id: UUID = uuid4()",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                        TaskEventComplete([2023, 11, 13, 14, 25]),
                                     ],
                                 ),
                                 Task(
                                     "goal id: UUID",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                        TaskEventComplete([2023, 11, 13, 14, 25]),
                                     ],
                                 ),
                                 Task(
                                     "date: datetime = now",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                        TaskEventComplete([2023, 11, 13, 14, 25]),
                                     ],
                                 ),
                                 Task(
                                     "amount: double = 0",
                                     events=[
-                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                        TaskEventComplete([2023, 11, 13, 14, 25]),
                                     ],
                                 ),
                             ],
                             events=[
-                                TaskEventStart([2023, 12, 13, 14, 19]),
-                                TaskEventComplete([2023, 12, 13, 14, 25]),
+                                TaskEventStart([2023, 11, 13, 14, 19]),
+                                TaskEventComplete([2023, 11, 13, 14, 25]),
                             ],
                         ),
                     ],
@@ -338,36 +338,68 @@ runna_task = Task(
                     priority=Priority.HIGH,
                     children=[
                         Task(
-                            "Goals",
+                            "Structure",
                             children=[
                                 Task(
-                                    "Create",
+                                    "define the interface",
+                                    events=[
+                                        TaskEventComplete([2023, 11, 13, 14, 31]),
+                                    ],
                                 ),
                                 Task(
-                                    "Read",
+                                    "make the connection",
+                                    events=[
+                                        TaskEventComplete([2023, 11, 13, 14, 31]),
+                                    ],
                                 ),
-                                # Task(
-                                #     "Update",
-                                # ),
                                 Task(
-                                    "Delete",
+                                    "make the tables",
+                                    events=[
+                                        TaskEventComplete([2023, 11, 13, 14, 31]),
+                                    ],
                                 ),
+                            ],
+                            events=[
+                                TaskEventStart([2023, 11, 13, 14, 27]),
+                                TaskEventComplete([2023, 11, 13, 14, 31]),
                             ],
                         ),
                         Task(
-                            "Records",
+                            "Add functions",
                             children=[
                                 Task(
-                                    "Create",
+                                    "Goals",
+                                    children=[
+                                        Task(
+                                            "Create",
+                                        ),
+                                        Task(
+                                            "Read",
+                                        ),
+                                        # Task(
+                                        #     "Update",
+                                        # ),
+                                        Task(
+                                            "Delete",
+                                        ),
+                                    ],
                                 ),
                                 Task(
-                                    "Read",
-                                ),
-                                # Task(
-                                #     "Update",
-                                # ),
-                                Task(
-                                    "Delete",
+                                    "Records",
+                                    children=[
+                                        Task(
+                                            "Create",
+                                        ),
+                                        Task(
+                                            "Read",
+                                        ),
+                                        # Task(
+                                        #     "Update",
+                                        # ),
+                                        Task(
+                                            "Delete",
+                                        ),
+                                    ],
                                 ),
                             ],
                         ),
