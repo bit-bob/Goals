@@ -303,16 +303,32 @@ runna_task = Task(
                             children=[
                                 Task(
                                     "id: UUID = uuid4()",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                    ],
                                 ),
                                 Task(
                                     "goal id: UUID",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                    ],
                                 ),
                                 Task(
                                     "date: datetime = now",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                    ],
                                 ),
                                 Task(
                                     "amount: double = 0",
+                                    events=[
+                                        TaskEventComplete([2023, 12, 13, 14, 25]),
+                                    ],
                                 ),
+                            ],
+                            events=[
+                                TaskEventStart([2023, 12, 13, 14, 19]),
+                                TaskEventComplete([2023, 12, 13, 14, 25]),
                             ],
                         ),
                     ],

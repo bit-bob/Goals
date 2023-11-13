@@ -15,3 +15,11 @@ class GoalsModel(BaseModel):
     unit: str
     reset: bool
     created_date: datetime
+
+
+class RecordsModel(BaseModel):
+    id: UUID
+    goal_id: UUID
+    date: datetime
+    amount: float
+    created_date: datetime
