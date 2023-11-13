@@ -284,6 +284,23 @@ class GoalsDB(DBInterface):
                     created_date=row[4],
                 )
 
+    def delete_record(
+        self,
+        record_id: UUID,
+    ):
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    """
+                    DELETE FROM records 
+                    WHERE id=?
+                    """,
+                    [
+                        str(record_id),
+                    ],
+                )
+                connection.commit()
+
 
 if __name__ == "__main__":
     db = GoalsDB()
@@ -345,3 +362,11 @@ if __name__ == "__main__":
     example_record = records[0]
     read_record = db.read_record(example_record.id)
     print(read_record)
+
+    print("\n == Delete Record == ")
+    previous_length = len(records)
+    db.delete_record(example_record.id)
+    new_length = len(db.read_records())
+    if new_length >= previous_length:
+        raise Exception
+    print(f"new_length {new_length} < previous_length {previous_length}")
