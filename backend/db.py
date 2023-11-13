@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from uuid import uuid4
 
 from interfaces import DBInterface
+from models import GoalsModel
 
 
 class GoalsDB(DBInterface):
@@ -92,6 +93,45 @@ class GoalsDB(DBInterface):
                 )
                 connection.commit()
 
+    def read_goals(
+        self,
+    ) -> list[GoalsModel]:
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    """
+                    SELECT
+                        id,
+                        name,
+                        datetime(interval_start_date,'localtime') as interval_start_date,
+                        interval_start_amount,
+                        interval_target_amount,
+                        interval_length_seconds,
+                        bucket_size_seconds,
+                        unit,
+                        reset,
+                        datetime(created_date,'localtime') as created_date
+                    FROM goals
+                    ORDER BY created_date;
+                    """,
+                )
+                return [
+                    GoalsModel(
+                        id=row[0],
+                        name=row[1],
+                        interval_start_date=row[2],
+                        interval_start_amount=row[3],
+                        interval_target_amount=row[4],
+                        interval_length=timedelta(seconds=float(row[5])),
+                        bucket_size=timedelta(seconds=float(row[6])),
+                        unit=row[7],
+                        reset=row[8],
+                        created_date=row[9],
+                    )
+                    for row in cursor.fetchall()
+                ]
+
+
 if __name__ == "__main__":
     db = GoalsDB()
     db.create_goal(
@@ -104,3 +144,6 @@ if __name__ == "__main__":
         unit="calories",
         reset=False,
     )
+    goals = db.read_goals()
+    for goal in goals:
+        print(goal)

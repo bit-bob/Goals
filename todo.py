@@ -396,7 +396,16 @@ runna_task = Task(
                                             ],
                                         ),
                                         Task(
-                                            "Read",
+                                            "Read all",
+                                            events=[
+                                                TaskEventStart([2023, 11, 13, 16, 24]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 16, 43]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "Read one",
                                         ),
                                         # Task(
                                         #     "Update",
@@ -413,7 +422,10 @@ runna_task = Task(
                                             "Create",
                                         ),
                                         Task(
-                                            "Read",
+                                            "Read all",
+                                        ),
+                                        Task(
+                                            "Read one",
                                         ),
                                         # Task(
                                         #     "Update",
@@ -437,7 +449,10 @@ runna_task = Task(
                                     "Create",
                                 ),
                                 Task(
-                                    "Read",
+                                    "Read all",
+                                ),
+                                Task(
+                                    "Read one",
                                 ),
                                 # Task(
                                 #     "Update",
@@ -467,7 +482,10 @@ runna_task = Task(
                                     "Create",
                                 ),
                                 Task(
-                                    "Read",
+                                    "Read all",
+                                ),
+                                Task(
+                                    "Read one",
                                 ),
                                 # Task(
                                 #     "Update",
