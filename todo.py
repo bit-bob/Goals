@@ -413,9 +413,10 @@ runna_task = Task(
                                                 ),
                                             ],
                                         ),
-                                        # Task(
-                                        #     "Update",
-                                        # ),
+                                        Task(
+                                            "Update",
+                                            priority=Priority.LOW,
+                                        ),
                                         Task(
                                             "Delete",
                                             events=[
@@ -457,9 +458,10 @@ runna_task = Task(
                                                 ),
                                             ],
                                         ),
-                                        # Task(
-                                        #     "Update",
-                                        # ),
+                                        Task(
+                                            "Update",
+                                            priority=Priority.LOW,
+                                        ),
                                         Task(
                                             "Delete",
                                             events=[
@@ -512,10 +514,12 @@ runna_task = Task(
                                         ),
                                         Task(
                                             "Get one",
+                                            priority=Priority.LOW,
                                         ),
-                                        # Task(
-                                        #     "Update",
-                                        # ),
+                                        Task(
+                                            "Update",
+                                            priority=Priority.LOW,
+                                        ),
                                         Task(
                                             "Delete",
                                             events=[
@@ -552,9 +556,10 @@ runna_task = Task(
                                         Task(
                                             "Get one",
                                         ),
-                                        # Task(
-                                        #     "Update",
-                                        # ),
+                                        Task(
+                                            "Update",
+                                            priority=Priority.LOW,
+                                        ),
                                         Task(
                                             "Delete",
                                         ),
@@ -577,6 +582,31 @@ runna_task = Task(
                             children=[
                                 Task(
                                     "'bucket' is too technical / not intuitive",
+                                ),
+                                Task(
+                                    "Fix API endpoint paths. See https://restfulapi.net/resource-naming/",
+                                    children=[
+                                        Task(
+                                            "Avoid CRUD descriptions like create, instead use HTTP request methods to know which function is performed",
+                                            children=[
+                                                Task(
+                                                    "create -> post(/resource)",
+                                                ),
+                                                Task(
+                                                    "read all -> get(/resource)",
+                                                ),
+                                                Task(
+                                                    "read one -> get(/resource/{id})",
+                                                ),
+                                                Task(
+                                                    "update -> put(/resource/{id})",
+                                                ),
+                                                Task(
+                                                    "delete -> delete(/resource/{id})",
+                                                ),
+                                            ],
+                                        )
+                                    ],
                                 ),
                             ],
                         ),
