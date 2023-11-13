@@ -334,6 +334,46 @@ runna_task = Task(
                     ],
                 ),
                 Task(
+                    "Database",
+                    priority=Priority.HIGH,
+                    children=[
+                        Task(
+                            "Goals",
+                            children=[
+                                Task(
+                                    "Create",
+                                ),
+                                Task(
+                                    "Read",
+                                ),
+                                # Task(
+                                #     "Update",
+                                # ),
+                                Task(
+                                    "Delete",
+                                ),
+                            ],
+                        ),
+                        Task(
+                            "Records",
+                            children=[
+                                Task(
+                                    "Create",
+                                ),
+                                Task(
+                                    "Read",
+                                ),
+                                # Task(
+                                #     "Update",
+                                # ),
+                                Task(
+                                    "Delete",
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+                Task(
                     "API endpoints",
                     children=[
                         Task(
@@ -363,45 +403,6 @@ runna_task = Task(
                                     # the front end wants a list of all records in a period of time
                                     # given a time like Jan 5th 5pm
                                     # the start and
-                                ),
-                            ],
-                        ),
-                        Task(
-                            "Records",
-                            children=[
-                                Task(
-                                    "Create",
-                                ),
-                                Task(
-                                    "Read",
-                                ),
-                                # Task(
-                                #     "Update",
-                                # ),
-                                Task(
-                                    "Delete",
-                                ),
-                            ],
-                        ),
-                    ],
-                ),
-                Task(
-                    "Database",
-                    children=[
-                        Task(
-                            "Goals",
-                            children=[
-                                Task(
-                                    "Create",
-                                ),
-                                Task(
-                                    "Read",
-                                ),
-                                # Task(
-                                #     "Update",
-                                # ),
-                                Task(
-                                    "Delete",
                                 ),
                             ],
                         ),
