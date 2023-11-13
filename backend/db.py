@@ -1,6 +1,7 @@
 import sqlite3
 from contextlib import closing
 from datetime import datetime, timedelta, timezone
+from pprint import pprint
 from uuid import UUID, uuid4
 
 from exceptions import ResourceNotFoundException
@@ -176,6 +177,23 @@ class GoalsDB(DBInterface):
                     created_date=row[9],
                 )
 
+    def delete_goal(
+        self,
+        goal_id: UUID,
+    ):
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    """
+                    DELETE FROM goals 
+                    WHERE id=?
+                    """,
+                    [
+                        str(goal_id),
+                    ],
+                )
+                connection.commit()
+
 
 if __name__ == "__main__":
     db = GoalsDB()
@@ -192,16 +210,19 @@ if __name__ == "__main__":
         reset=False,
     )
 
-    example_goal = None
     print("\n == Read Goals == ")
-    for goal in db.read_goals():
-        print(goal)
-
-        if example_goal is None:
-            example_goal = goal
+    goals = db.read_goals()
+    pprint(goals)
 
     print("\n == Read Goal == ")
-    if example_goal is None:
-        raise Exception
+    example_goal = goals[0]
     read_goal = db.read_goal(example_goal.id)
     print(read_goal)
+
+    print("\n == Delete Goal == ")
+    previous_length = len(goals)
+    db.delete_goal(example_goal.id)
+    new_length = len(db.read_goals())
+    if new_length >= previous_length:
+        raise Exception
+    print(f"new_length {new_length} < previous_length {previous_length}")

@@ -418,6 +418,12 @@ runna_task = Task(
                                         # ),
                                         Task(
                                             "Delete",
+                                            events=[
+                                                TaskEventStart([2023, 11, 13, 16, 59]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 17, 6]
+                                                ),
+                                            ],
                                         ),
                                     ],
                                 ),
