@@ -518,6 +518,12 @@ runna_task = Task(
                                         # ),
                                         Task(
                                             "Delete",
+                                            events=[
+                                                TaskEventStart([2023, 11, 13, 18, 59]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 19, 5]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "Get Progress Interval(goal_id: str, start_time: datetime, end_time: datetime) -> (start_amount: double, records_in_interval: List[Records])",

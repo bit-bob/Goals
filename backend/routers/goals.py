@@ -1,8 +1,9 @@
 import logging
 from datetime import datetime, timedelta
+from uuid import UUID
 
 from db import goals_db
-from exceptions import handle_http_exceptions
+from exceptions import ResourceNotFoundException, handle_http_exceptions
 from fastapi import APIRouter
 from models import GoalsModel
 from pydantic import BaseModel
@@ -53,3 +54,23 @@ async def get_goals() -> GetGoalsResponse:
     return GetGoalsResponse(
         goals=goals_db.get_goals(),
     )
+
+
+# Delete
+class DeleteGoalRequest(BaseModel):
+    goal_id: UUID
+
+
+@router.post("/goals/delete")
+async def delete_goal(
+    request: DeleteGoalRequest,
+) -> None:
+    try:
+        goal = goals_db.get_goal(request.goal_id)
+        if goal is None:
+            raise Exception
+
+        logging.warn(f"Deleting '{goal.name}'")
+        goals_db.delete_goal(request.goal_id)
+    except ResourceNotFoundException:
+        pass
