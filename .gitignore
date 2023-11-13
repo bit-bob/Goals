@@ -4,3 +4,4 @@ __pycache__
 openapi.json
 backend/goals.db
 events.log
+api-client

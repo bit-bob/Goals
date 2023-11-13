@@ -17,7 +17,7 @@ if __name__ == "__main__":
     # run api server
     config = uvicorn.Config(
         "app:app",
-        host=os.getenv("HOST", default="127.0.0.1"),
+        host=os.getenv("HOST", default="0.0.0.0"),
         port=int(os.getenv("PORT", default="8000")),
         log_level="info",
     )

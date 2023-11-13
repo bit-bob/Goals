@@ -1,0 +1,38 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mantine/core": "^7.2.2",
+    "@mantine/dates": "^7.2.2",
+    "@mantine/ds": "^7.2.2",
+    "@mantine/form": "^7.2.2",
+    "@mantine/hooks": "^7.2.2",
+    "@tabler/icons-react": "^2.40.0",
+    "api-client": "file:../api-client",
+    "capacitor-plugin-safe-area": "^2.0.5",
+    "humanize-duration": "^3.31.0",
+    "next": "14.0.2",
+    "parse-duration": "^1.1.0",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/humanize-duration": "^3.27.3",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.2",
+    "postcss": "^8.4.31",
+    "postcss-preset-mantine": "^1.11.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5"
+  }
+}

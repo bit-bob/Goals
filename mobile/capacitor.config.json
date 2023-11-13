@@ -1,0 +1,11 @@
+{
+  "appId": "dev.lukeharris.goals",
+  "appName": "goals",
+  "bundledWebRuntime": false,
+  "webDir": "../frontend/out",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}
