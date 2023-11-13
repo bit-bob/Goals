@@ -343,25 +343,41 @@ runna_task = Task(
                                 Task(
                                     "define the interface",
                                     events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 31]),
+                                        TaskEventComplete([2023, 11, 13, 15, 1]),
                                     ],
                                 ),
                                 Task(
-                                    "make the connection",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 31]),
+                                    "handle connections",
+                                    children=[
+                                        Task(
+                                            "make the connection",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 15, 1]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "make connection closing more consistent / explicit",
+                                            events=[
+                                                TaskEventStart([2023, 11, 13, 15, 32]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 15, 50]
+                                                ),
+                                            ],
+                                        ),
                                     ],
                                 ),
                                 Task(
                                     "make the tables",
                                     events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 31]),
+                                        TaskEventComplete([2023, 11, 13, 15, 1]),
                                     ],
                                 ),
                             ],
                             events=[
                                 TaskEventStart([2023, 11, 13, 14, 27]),
-                                TaskEventComplete([2023, 11, 13, 14, 31]),
+                                TaskEventComplete([2023, 11, 13, 15, 1]),
                             ],
                         ),
                         Task(
