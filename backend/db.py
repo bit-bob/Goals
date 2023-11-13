@@ -1,8 +1,9 @@
 import sqlite3
 from contextlib import closing
 from datetime import datetime, timedelta, timezone
-from uuid import uuid4
+from uuid import UUID, uuid4
 
+from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
 from models import GoalsModel
 
@@ -131,9 +132,55 @@ class GoalsDB(DBInterface):
                     for row in cursor.fetchall()
                 ]
 
+    def read_goal(
+        self,
+        goal_id: UUID,
+    ) -> GoalsModel:
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    """
+                    SELECT
+                        id,
+                        name,
+                        datetime(interval_start_date,'localtime') as interval_start_date,
+                        interval_start_amount,
+                        interval_target_amount,
+                        interval_length_seconds,
+                        bucket_size_seconds,
+                        unit,
+                        reset,
+                        datetime(created_date,'localtime') as created_date
+                    FROM goals
+                    WHERE id=? 
+                    """,
+                    [
+                        str(goal_id),
+                    ],
+                )
+
+                row = cursor.fetchone()
+                if row is None:
+                    raise ResourceNotFoundException
+
+                return GoalsModel(
+                    id=row[0],
+                    name=row[1],
+                    interval_start_date=row[2],
+                    interval_start_amount=row[3],
+                    interval_target_amount=row[4],
+                    interval_length=timedelta(seconds=float(row[5])),
+                    bucket_size=timedelta(seconds=float(row[6])),
+                    unit=row[7],
+                    reset=row[8],
+                    created_date=row[9],
+                )
+
 
 if __name__ == "__main__":
     db = GoalsDB()
+
+    print("\n == Create Goals == ")
     db.create_goal(
         name="beep",
         interval_start_date=datetime(2023, 11, 13),
@@ -144,6 +191,17 @@ if __name__ == "__main__":
         unit="calories",
         reset=False,
     )
-    goals = db.read_goals()
-    for goal in goals:
+
+    example_goal = None
+    print("\n == Read Goals == ")
+    for goal in db.read_goals():
         print(goal)
+
+        if example_goal is None:
+            example_goal = goal
+
+    print("\n == Read Goal == ")
+    if example_goal is None:
+        raise Exception
+    read_goal = db.read_goal(example_goal.id)
+    print(read_goal)
