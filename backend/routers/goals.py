@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from db import goals_db
 from exceptions import handle_http_exceptions
 from fastapi import APIRouter
+from models import GoalsModel
 from pydantic import BaseModel
 
 router = APIRouter(
@@ -38,4 +39,17 @@ async def create_goal(
         bucket_size=request.bucket_size,
         unit=request.unit,
         reset=request.reset,
+    )
+
+
+# Read
+class GetGoalsResponse(BaseModel):
+    goals: list[GoalsModel]
+
+
+@router.get("/")
+async def get_goals() -> GetGoalsResponse:
+    logging.debug(f"Getting Goals")
+    return GetGoalsResponse(
+        goals=goals_db.get_goals(),
     )

@@ -503,6 +503,12 @@ runna_task = Task(
                                         ),
                                         Task(
                                             "Get all",
+                                            events=[
+                                                TaskEventStart([2023, 11, 13, 18, 42]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 18, 51]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "Get one",
