@@ -194,11 +194,39 @@ class GoalsDB(DBInterface):
                 )
                 connection.commit()
 
+    def create_record(
+        self,
+        goal_id: UUID,
+        date: datetime,
+        amount: float,
+    ):
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    """
+                    INSERT INTO records(
+                        id,
+                        goal_id,
+                        date,
+                        amount,
+                        created_date
+                    ) VALUES(?,?,?,?,?);
+                    """,
+                    [
+                        str(uuid4()),
+                        str(goal_id),
+                        date,
+                        amount,
+                        datetime.now().replace(tzinfo=timezone.utc),
+                    ],
+                )
+                connection.commit()
+
 
 if __name__ == "__main__":
     db = GoalsDB()
 
-    print("\n == Create Goals == ")
+    print("\n == Create Goal == ")
     db.create_goal(
         name="beep",
         interval_start_date=datetime(2023, 11, 13),
@@ -226,3 +254,23 @@ if __name__ == "__main__":
     if new_length >= previous_length:
         raise Exception
     print(f"new_length {new_length} < previous_length {previous_length}")
+
+    print("\n == Create Record == ")
+    if new_length == 0:
+        db.create_goal(
+            name="boop",
+            interval_start_date=datetime(2023, 10, 12),
+            interval_start_amount=10,
+            interval_target_amount=100,
+            interval_length=timedelta(days=30),
+            bucket_size=timedelta(hours=1),
+            unit="pounds",
+            reset=True,
+        )
+    example_goal = db.read_goals()[0]
+    print(example_goal)
+    db.create_record(
+        goal_id=example_goal.id,
+        date=datetime(2023, 12, 20, 2),
+        amount=10,
+    )
