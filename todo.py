@@ -476,58 +476,67 @@ runna_task = Task(
                     ],
                 ),
                 Task(
-                    "API endpoints",
+                    "API",
+                    priority=Priority.HIGH,
                     children=[
                         Task(
-                            "Goals",
-                            children=[
-                                Task(
-                                    "Create",
-                                ),
-                                Task(
-                                    "Read all",
-                                ),
-                                Task(
-                                    "Read one",
-                                ),
-                                # Task(
-                                #     "Update",
-                                # ),
-                                Task(
-                                    "Delete",
-                                ),
-                                Task(
-                                    "Get Progress Interval(goal_id: str, start_time: datetime, end_time: datetime) -> (start_amount: double, records_in_interval: List[Records])",
-                                    # if we have many records for a given goal
-                                    # the goal started on the 1st of January
-                                    # the interval is 1 day and accrual amount is 1200 cal
-                                    # the bucket / increment interval is 5 mins
-                                    # we had records on the 10th, 12th, 18th January and 6th Feburary
-                                    # today is the 18th February
-                                    #
-                                    # the front end wants a list of all records in a period of time
-                                    # given a time like Jan 5th 5pm
-                                    # the start and
-                                ),
-                            ],
+                            "Structure",
                         ),
                         Task(
-                            "Records",
+                            "Endpoints",
                             children=[
                                 Task(
-                                    "Create",
+                                    "Goals",
+                                    children=[
+                                        Task(
+                                            "Create",
+                                        ),
+                                        Task(
+                                            "Read all",
+                                        ),
+                                        Task(
+                                            "Read one",
+                                        ),
+                                        # Task(
+                                        #     "Update",
+                                        # ),
+                                        Task(
+                                            "Delete",
+                                        ),
+                                        Task(
+                                            "Get Progress Interval(goal_id: str, start_time: datetime, end_time: datetime) -> (start_amount: double, records_in_interval: List[Records])",
+                                            # if we have many records for a given goal
+                                            # the goal started on the 1st of January
+                                            # the interval is 1 day and accrual amount is 1200 cal
+                                            # the bucket / increment interval is 5 mins
+                                            # we had records on the 10th, 12th, 18th January and 6th Feburary
+                                            # today is the 18th February
+                                            #
+                                            # the front end wants a list of all records in a period of time
+                                            # given a time like Jan 5th 5pm
+                                            # the start and
+                                        ),
+                                    ],
                                 ),
                                 Task(
-                                    "Read all",
-                                ),
-                                Task(
-                                    "Read one",
-                                ),
-                                # Task(
-                                #     "Update",
-                                # ),
-                                Task(
-                                    "Delete",
+                                    "Records",
+                                    children=[
+                                        Task(
+                                            "Create",
+                                        ),
+                                        Task(
+                                            "Read all",
+                                        ),
+                                        Task(
+                                            "Read one",
+                                        ),
+                                        # Task(
+                                        #     "Update",
+                                        # ),
+                                        Task(
+                                            "Delete",
+                                        ),
+                                    ],
                                 ),
                             ],
                         ),
