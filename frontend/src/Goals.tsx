@@ -66,6 +66,7 @@ export default function Goals() {
         <NewGoalForm
           onSubmit={async (newGoal) => {
             await goalsApi.createGoal({ goalsModel: newGoal });
+            closeNewGoalDisclosure();
             revalidate();
           }}
         />
