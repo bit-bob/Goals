@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
-export default function Goal() {
+export function GoalPage() {
   const { goalId } = useParams();
   return (
     <>

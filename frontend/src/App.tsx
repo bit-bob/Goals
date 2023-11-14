@@ -1,17 +1,17 @@
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { SafeArea } from "capacitor-plugin-safe-area";
 import React from "react";
 import {
-  Route,
   createBrowserRouter,
   createRoutesFromElements,
+  Route,
   RouterProvider,
 } from "react-router-dom";
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { SafeArea } from "capacitor-plugin-safe-area";
 
-import Goals from "./Goals";
-import Goal from "./Goal";
-import AppLayout from "./AppLayout";
 import { goalsApi } from "./api";
+import AppLayout from "./AppLayout";
+import { GoalPage } from "./Goal/GoalPage";
+import { GoalsPage } from "./Goals/GoalsPage";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
@@ -25,8 +25,12 @@ SafeArea.getSafeAreaInsets().then(({ insets }) => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" Component={AppLayout}>
-      <Route path="/:goalId" Component={Goal} />
-      <Route path="/" loader={() => goalsApi.getGoals()} Component={Goals} />
+      <Route path="/:goalId" Component={GoalPage} />
+      <Route
+        path="/"
+        loader={() => goalsApi.getGoals()}
+        Component={GoalsPage}
+      />
     </Route>
   )
 );
