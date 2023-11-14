@@ -25,7 +25,7 @@ class CreateGoalRequest(BaseModel):
     reset: bool
 
 
-@router.post("/create")
+@router.post("/")
 @handle_http_exceptions
 async def create_goal(
     request: CreateGoalRequest,
@@ -57,20 +57,16 @@ async def get_goals() -> GetGoalsResponse:
 
 
 # Delete
-class DeleteGoalRequest(BaseModel):
-    goal_id: UUID
-
-
-@router.post("/goals/delete")
+@router.delete("/{item_id}")
 async def delete_goal(
-    request: DeleteGoalRequest,
+    goal_id: UUID,
 ) -> None:
     try:
-        goal = goals_db.get_goal(request.goal_id)
+        goal = goals_db.get_goal(goal_id)
         if goal is None:
             raise Exception
 
         logging.warn(f"Deleting '{goal.name}'")
-        goals_db.delete_goal(request.goal_id)
+        goals_db.delete_goal(goal_id)
     except ResourceNotFoundException:
         pass

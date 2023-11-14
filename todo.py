@@ -573,18 +573,44 @@ runna_task = Task(
                                             children=[
                                                 Task(
                                                     "create -> post(/resource)",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 14, 13, 22]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 13, 26]
+                                                        ),
+                                                    ],
                                                 ),
                                                 Task(
                                                     "read all -> get(/resource)",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 14, 13, 26]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 13, 29]
+                                                        ),
+                                                    ],
                                                 ),
                                                 Task(
                                                     "read one -> get(/resource/{id})",
+                                                    priority=Priority.LOW,
                                                 ),
                                                 Task(
                                                     "update -> put(/resource/{id})",
+                                                    priority=Priority.LOW,
                                                 ),
                                                 Task(
                                                     "delete -> delete(/resource/{id})",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 14, 13, 29]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 13, 37]
+                                                        ),
+                                                    ],
                                                 ),
                                             ],
                                         )
