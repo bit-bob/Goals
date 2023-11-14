@@ -12,7 +12,7 @@ router = APIRouter(
 
 
 # Create
-@router.post("/")
+@router.post("")
 @handle_http_exceptions
 async def create_goal(
     goal: Goal,
@@ -24,7 +24,7 @@ async def create_goal(
 
 
 # Read
-@router.get("/")
+@router.get("")
 @handle_http_exceptions
 async def get_goals() -> list[Goal]:
     logging.debug(f"Getting Goals")

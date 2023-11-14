@@ -12,7 +12,7 @@ router = APIRouter(
 
 
 # Create
-@router.post("/")
+@router.post("")
 @handle_http_exceptions
 async def create_record(
     record: Record,
@@ -25,7 +25,7 @@ async def create_record(
 
 
 # Read
-@router.get("/")
+@router.get("")
 @handle_http_exceptions
 async def get_records() -> list[Record]:
     logging.debug(f"Getting Records")
