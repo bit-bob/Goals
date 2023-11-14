@@ -1,24 +1,15 @@
 import React from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { Card, Flex, Progress, SimpleGrid, Text } from "@mantine/core";
-import { useEffect, useState } from "react";
 import { IconPlus } from "@tabler/icons-react";
 import { ResponsiveModal } from "./ResponsiveModal";
 import { NewGoalForm } from "./NewGoalForm";
+import { goalsApi } from "./api";
 
 import {
   GoalsModel,
-  DefaultApi,
-  Configuration,
-  GetGoalsResponse,
 } from "api-client";
 import { Link, useLoaderData, useRevalidator } from "react-router-dom";
-
-const goalsApi = new DefaultApi(
-  new Configuration({
-    basePath: "http://192.168.1.179:8000",
-  })
-);
 
 export default function Goals() {
   const [
@@ -26,7 +17,7 @@ export default function Goals() {
     { toggle: toggleNewGoalDisclosure, close: closeNewGoalDisclosure },
   ] = useDisclosure();
 
-  const { goals } = useLoaderData() as GetGoalsResponse;
+  const goals = useLoaderData() as GoalsModel[];
   const { revalidate } = useRevalidator();
 
   return (
@@ -73,8 +64,8 @@ export default function Goals() {
         onClose={closeNewGoalDisclosure}
       >
         <NewGoalForm
-          onSubmit={async (createGoalRequest) => {
-            await goalsApi.createGoal({ createGoalRequest });
+          onSubmit={async (newGoal) => {
+            await goalsApi.createGoal({ goalsModel: newGoal });
             revalidate();
           }}
         />

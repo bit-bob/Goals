@@ -11,13 +11,13 @@ import {
   TextInput,
 } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
-import { CreateGoalRequest } from "api-client";
+import { GoalsModel } from "api-client";
 import parse from "parse-duration";
 // @ts-ignore
 import humanizeDuration from "humanize-duration";
 
 interface NewGoalFormProps {
-  onSubmit: (request: CreateGoalRequest) => void;
+  onSubmit: (goal: GoalsModel) => void;
 }
 
 const units = [
@@ -74,7 +74,7 @@ function parseHumanDuration(v?: string) {
 }
 
 export function NewGoalForm({ onSubmit }: NewGoalFormProps) {
-  const form = useForm<Partial<CreateGoalRequest>>({
+  const form = useForm<Partial<GoalsModel>>({
     initialValues: {
       name: "",
       intervalStartDate: new Date(),
@@ -104,7 +104,7 @@ export function NewGoalForm({ onSubmit }: NewGoalFormProps) {
   return (
     <form
       onSubmit={form.onSubmit((values) => {
-        onSubmit(values as CreateGoalRequest);
+        onSubmit(values as GoalsModel);
       })}
     >
       <Stack gap="md">
