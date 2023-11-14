@@ -4,6 +4,10 @@ from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 
 
+def datetime_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
 class Goal(BaseModel):
     id: UUID = Field(
         default_factory=uuid4,
@@ -17,7 +21,7 @@ class Goal(BaseModel):
     unit: str
     reset: bool
     created_date: datetime = Field(
-        default_factory=lambda: datetime.now().replace(tzinfo=timezone.utc),
+        default_factory=datetime_now,
     )
 
 
@@ -29,7 +33,7 @@ class Record(BaseModel):
     date: datetime
     amount: float
     created_date: datetime = Field(
-        default_factory=lambda: datetime.now().replace(tzinfo=timezone.utc),
+        default_factory=datetime_now,
     )
 
 
