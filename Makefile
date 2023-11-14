@@ -11,7 +11,7 @@ install:
 
 openapi:
 	.venv/bin/python backend/gen_openapi.py openapi.json
-	openapi-generator generate -i ./openapi.json -g typescript-fetch -o ./api_client
+	openapi-generator generate -i ./openapi.json -g typescript-fetch -o ./api-client
 
 pretty:
 	.venv/bin/black backend
