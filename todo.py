@@ -541,7 +541,12 @@ runna_task = Task(
                                             # the front end wants a list of all records in a period of time
                                             # given a time like Jan 5th 5pm
                                             # the start and
-                                            priority=Priority.LOW,
+                                            events=[
+                                                TaskEventStart([2023, 11, 14, 15, 34]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 17, 23]
+                                                ),
+                                            ],
                                         ),
                                     ],
                                 ),

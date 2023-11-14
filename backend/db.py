@@ -2,11 +2,12 @@ import sqlite3
 from contextlib import closing
 from datetime import datetime, timedelta
 from pprint import pprint
+from typing import Optional
 from uuid import UUID
 
 from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
-from models import Goal, Record
+from models import Goal, Progress, Record
 
 
 class GoalsDB(DBInterface):
@@ -243,6 +244,99 @@ class GoalsDB(DBInterface):
                     )
                     for row in cursor.fetchall()
                 ]
+
+    def get_records_for_goal(
+        self,
+        goal_id: UUID,
+        interval_start_date: Optional[datetime] = None,
+        interval_end_date: Optional[datetime] = None,
+    ) -> list[Record]:
+        where_clause = ""
+        args = [
+            str(goal_id),
+        ]
+
+        if interval_start_date is not None:
+            if interval_end_date is not None:
+                where_clause = "goal_id=? AND date>=? AND date<=?"
+                args = [
+                    str(goal_id),
+                    interval_start_date,
+                    interval_end_date,
+                ]
+            else:
+                where_clause = "goal_id=? AND date>=?"
+                args = [
+                    str(goal_id),
+                    interval_start_date,
+                ]
+        else:
+            if interval_end_date is not None:
+                where_clause = "goal_id=? AND date<=?"
+                args = [
+                    str(goal_id),
+                    interval_end_date,
+                ]
+            else:
+                where_clause = "goal_id=?"
+                args = [
+                    str(goal_id),
+                ]
+
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    f"""
+                    SELECT
+                        id,
+                        goal_id,
+                        datetime(date,'localtime') as date,
+                        amount,
+                        datetime(created_date,'localtime') as created_date
+                    FROM records
+                    WHERE {where_clause}
+                    ORDER BY date, created_date;
+                    """,
+                    args,
+                )
+                return [
+                    Record(
+                        id=row[0],
+                        goal_id=row[1],
+                        date=row[2],
+                        amount=row[3],
+                        created_date=row[4],
+                    )
+                    for row in cursor.fetchall()
+                ]
+
+    def get_progress_for_goal(
+        self,
+        goal_id: UUID,
+        interval_start_date: datetime,
+        interval_end_date: Optional[datetime] = None,
+    ) -> Progress:
+        records = self.get_records_for_goal(
+            goal_id=goal_id,
+        )
+        recorded_amount_at_start = 0
+        records_in_interval: list[Record] = []
+        for record in records:
+            if interval_end_date is not None:
+                if record.date > interval_end_date:
+                    continue
+
+            if record.date < interval_start_date:
+                recorded_amount_at_start = recorded_amount_at_start + record.amount
+
+            else:
+                records_in_interval.append(record)
+
+        return Progress(
+            goal_id=goal_id,
+            records=records_in_interval,
+            recorded_amount_at_start=recorded_amount_at_start,
+        )
 
     def get_record(
         self,

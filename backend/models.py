@@ -31,3 +31,9 @@ class Record(BaseModel):
     created_date: datetime = Field(
         default_factory=lambda: datetime.now().replace(tzinfo=timezone.utc),
     )
+
+
+class Progress(BaseModel):
+    goal_id: UUID
+    records: list[Record]
+    recorded_amount_at_start: float
