@@ -14,6 +14,9 @@ class GoalsDB(DBInterface):
 
     def __init__(self) -> None:
         super().__init__()
+        self.create_tables()
+
+    def create_tables(self):
         self.create_goals_table()
         self.create_records_table()
 
