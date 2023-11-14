@@ -110,7 +110,7 @@ class GoalsDB(DBInterface):
                         reset,
                         datetime(created_date,'localtime') as created_date
                     FROM goals
-                    ORDER BY created_date;
+                    ORDER BY interval_start_date, created_date;
                     """,
                 )
                 return [
@@ -230,7 +230,7 @@ class GoalsDB(DBInterface):
                         amount,
                         datetime(created_date,'localtime') as created_date
                     FROM records
-                    ORDER BY created_date;
+                    ORDER BY date, created_date;
                     """,
                 )
                 return [
