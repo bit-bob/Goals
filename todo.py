@@ -565,24 +565,6 @@ runna_task = Task(
                                         ),
                                     ],
                                 ),
-                            ],
-                        ),
-                    ],
-                ),
-            ],
-        ),
-        Task(
-            "Cleanup",
-            children=[
-                Task(
-                    "Naming",
-                    children=[
-                        Task(
-                            "Pick better names",
-                            children=[
-                                Task(
-                                    "'bucket' is too technical / not intuitive",
-                                ),
                                 Task(
                                     "Fix API endpoint paths. See https://restfulapi.net/resource-naming/",
                                     children=[
@@ -607,6 +589,55 @@ runna_task = Task(
                                             ],
                                         )
                                     ],
+                                ),
+                                Task(
+                                    "Fix API endpoint return types",
+                                    children=[
+                                        Task(
+                                            "create -> created_resource",
+                                        ),
+                                        Task(
+                                            "read all -> list[resources]",
+                                        ),
+                                        Task(
+                                            "read one -> resource",
+                                        ),
+                                        Task(
+                                            "update -> updated_resource",
+                                        ),
+                                        Task(
+                                            "delete -> None",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        Task(
+            "Offline",
+            children=[
+                Task(
+                    "Keep an offline journal of requests",
+                ),
+                Task(
+                    "Keep an offline cache of the db",
+                ),
+            ],
+        ),
+        Task(
+            "Cleanup",
+            children=[
+                Task(
+                    "Naming",
+                    children=[
+                        Task(
+                            "Pick better names",
+                            children=[
+                                Task(
+                                    "'bucket' is too technical / not intuitive",
                                 ),
                             ],
                         ),
