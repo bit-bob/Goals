@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from models import GoalsModel, RecordsModel
+from models import Goal, Record
 
 
 class DBInterface:
@@ -11,19 +11,19 @@ class DBInterface:
 
     def create_goal(
         self,
-        goal: GoalsModel,
+        goal: Goal,
     ):
         raise NotImplementedError
 
     def get_goals(
         self,
-    ) -> list[GoalsModel]:
+    ) -> list[Goal]:
         raise NotImplementedError
 
     def get_goal(
         self,
         goal_id: UUID,
-    ) -> GoalsModel:
+    ) -> Goal:
         raise NotImplementedError
 
     def delete_goal(
@@ -34,19 +34,19 @@ class DBInterface:
 
     def create_record(
         self,
-        record: RecordsModel,
+        record: Record,
     ):
         raise NotImplementedError
 
     def get_records(
         self,
-    ) -> list[RecordsModel]:
+    ) -> list[Record]:
         raise NotImplementedError
 
     def get_record(
         self,
         record_id: UUID,
-    ) -> RecordsModel:
+    ) -> Record:
         raise NotImplementedError
 
     def delete_record(

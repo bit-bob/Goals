@@ -6,7 +6,7 @@ from uuid import UUID
 
 from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
-from models import GoalsModel, RecordsModel
+from models import Goal, Record
 
 
 class GoalsDB(DBInterface):
@@ -57,7 +57,7 @@ class GoalsDB(DBInterface):
 
     def create_goal(
         self,
-        goal: GoalsModel,
+        goal: Goal,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
@@ -93,7 +93,7 @@ class GoalsDB(DBInterface):
 
     def get_goals(
         self,
-    ) -> list[GoalsModel]:
+    ) -> list[Goal]:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
                 cursor.execute(
@@ -114,7 +114,7 @@ class GoalsDB(DBInterface):
                     """,
                 )
                 return [
-                    GoalsModel(
+                    Goal(
                         id=row[0],
                         name=str(row[1]),
                         interval_start_date=row[2],
@@ -132,7 +132,7 @@ class GoalsDB(DBInterface):
     def get_goal(
         self,
         goal_id: UUID,
-    ) -> GoalsModel:
+    ) -> Goal:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
                 cursor.execute(
@@ -160,7 +160,7 @@ class GoalsDB(DBInterface):
                 if row is None:
                     raise ResourceNotFoundException
 
-                return GoalsModel(
+                return Goal(
                     id=row[0],
                     name=str(row[1]),
                     interval_start_date=row[2],
@@ -192,7 +192,7 @@ class GoalsDB(DBInterface):
 
     def create_record(
         self,
-        record: RecordsModel,
+        record: Record,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
@@ -218,7 +218,7 @@ class GoalsDB(DBInterface):
 
     def get_records(
         self,
-    ) -> list[RecordsModel]:
+    ) -> list[Record]:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
                 cursor.execute(
@@ -234,7 +234,7 @@ class GoalsDB(DBInterface):
                     """,
                 )
                 return [
-                    RecordsModel(
+                    Record(
                         id=row[0],
                         goal_id=row[1],
                         date=row[2],
@@ -247,7 +247,7 @@ class GoalsDB(DBInterface):
     def get_record(
         self,
         record_id: UUID,
-    ) -> RecordsModel:
+    ) -> Record:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
                 cursor.execute(
@@ -270,7 +270,7 @@ class GoalsDB(DBInterface):
                 if row is None:
                     raise ResourceNotFoundException
 
-                return RecordsModel(
+                return Record(
                     id=row[0],
                     goal_id=row[1],
                     date=row[2],
@@ -301,7 +301,7 @@ goals_db = GoalsDB()
 if __name__ == "__main__":
     print("\n == Create Goal == ")
     goals_db.create_goal(
-        GoalsModel(
+        Goal(
             name="beep",
             interval_start_date=datetime(2023, 11, 13),
             interval_start_amount=0,
@@ -333,7 +333,7 @@ if __name__ == "__main__":
     print("\n == Create Record == ")
     if new_length == 0:
         goals_db.create_goal(
-            GoalsModel(
+            Goal(
                 name="boop",
                 interval_start_date=datetime(2023, 10, 12),
                 interval_start_amount=10,
@@ -347,7 +347,7 @@ if __name__ == "__main__":
     example_goal = goals_db.get_goals()[0]
     print(example_goal)
     goals_db.create_record(
-        RecordsModel(
+        Record(
             goal_id=example_goal.id,
             date=datetime(2023, 12, 20, 2),
             amount=10,

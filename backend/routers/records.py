@@ -4,7 +4,7 @@ from uuid import UUID
 from db import goals_db
 from exceptions import ResourceNotFoundException, handle_http_exceptions
 from fastapi import APIRouter
-from models import RecordsModel
+from models import Record
 
 router = APIRouter(
     prefix="/records",
@@ -15,7 +15,7 @@ router = APIRouter(
 @router.post("/")
 @handle_http_exceptions
 async def create_record(
-    record: RecordsModel,
+    record: Record,
 ) -> None:
     goal = goals_db.get_goal(record.goal_id)
     logging.warn(f"Creating Record for Goal '{goal.name}'")
@@ -27,7 +27,7 @@ async def create_record(
 # Read
 @router.get("/")
 @handle_http_exceptions
-async def get_records() -> list[RecordsModel]:
+async def get_records() -> list[Record]:
     logging.debug(f"Getting Records")
     return goals_db.get_records()
 

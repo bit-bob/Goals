@@ -7,7 +7,7 @@ import { NewGoalForm } from "./NewGoalForm";
 import { goalsApi } from "./api";
 
 import {
-  GoalsModel,
+  Goal,
 } from "api-client";
 import { Link, useLoaderData, useRevalidator } from "react-router-dom";
 
@@ -17,7 +17,7 @@ export default function Goals() {
     { toggle: toggleNewGoalDisclosure, close: closeNewGoalDisclosure },
   ] = useDisclosure();
 
-  const goals = useLoaderData() as GoalsModel[];
+  const goals = useLoaderData() as Goal[];
   const { revalidate } = useRevalidator();
 
   return (
@@ -65,7 +65,7 @@ export default function Goals() {
       >
         <NewGoalForm
           onSubmit={async (newGoal) => {
-            await goalsApi.createGoal({ goalsModel: newGoal });
+            await goalsApi.createGoal({ goal: newGoal });
             closeNewGoalDisclosure();
             revalidate();
           }}

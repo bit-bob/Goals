@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 
 
-class GoalsModel(BaseModel):
+class Goal(BaseModel):
     id: UUID = Field(
         default_factory=uuid4,
     )
@@ -21,7 +21,7 @@ class GoalsModel(BaseModel):
     )
 
 
-class RecordsModel(BaseModel):
+class Record(BaseModel):
     id: UUID = Field(
         default_factory=uuid4,
     )
