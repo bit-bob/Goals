@@ -1,38 +1,45 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
+  "name": "capacitor-app",
+  "version": "1.0.0",
+  "description": "An Amazing Capacitor App",
+  "main": "index.js",
+  "keywords": [
+    "capacitor",
+    "mobile"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/camera": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/ios": "^5.5.1",
+    "@capacitor/splash-screen": "latest",
     "@mantine/core": "^7.2.2",
     "@mantine/dates": "^7.2.2",
-    "@mantine/ds": "^7.2.2",
     "@mantine/form": "^7.2.2",
     "@mantine/hooks": "^7.2.2",
     "@tabler/icons-react": "^2.40.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
     "api-client": "file:../api-client",
     "capacitor-plugin-safe-area": "^2.0.5",
     "humanize-duration": "^3.31.0",
-    "next": "14.0.2",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
     "parse-duration": "^1.1.0",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.18.0",
+    "sort-by": "^1.2.0",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@types/humanize-duration": "^3.27.3",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.2",
-    "postcss": "^8.4.31",
-    "postcss-preset-mantine": "^1.11.0",
-    "postcss-simple-vars": "^7.0.1",
-    "typescript": "^5"
-  }
+    "@capacitor/cli": "latest",
+    "vite": "^2.9.13"
+  },
+  "author": "",
+  "license": "ISC"
 }
