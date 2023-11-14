@@ -1,8 +1,8 @@
 import sqlite3
 from contextlib import closing
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from pprint import pprint
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
@@ -57,14 +57,7 @@ class GoalsDB(DBInterface):
 
     def create_goal(
         self,
-        name: str,
-        interval_start_date: datetime,
-        interval_start_amount: float,
-        interval_target_amount: float,
-        interval_length: timedelta,
-        bucket_size: timedelta,
-        unit: str,
-        reset: bool,
+        goal: GoalsModel,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
@@ -84,16 +77,16 @@ class GoalsDB(DBInterface):
                     ) VALUES(?,?,?,?,?,?,?,?,?,?);
                     """,
                     [
-                        str(uuid4()),
-                        name,
-                        interval_start_date,
-                        interval_start_amount,
-                        interval_target_amount,
-                        interval_length.total_seconds(),
-                        bucket_size.total_seconds(),
-                        unit,
-                        reset,
-                        datetime.now().replace(tzinfo=timezone.utc),
+                        str(goal.id),
+                        goal.name,
+                        goal.interval_start_date,
+                        goal.interval_start_amount,
+                        goal.interval_target_amount,
+                        goal.interval_length.total_seconds(),
+                        goal.bucket_size.total_seconds(),
+                        goal.unit,
+                        goal.reset,
+                        goal.created_date,
                     ],
                 )
                 connection.commit()
@@ -199,9 +192,7 @@ class GoalsDB(DBInterface):
 
     def create_record(
         self,
-        goal_id: UUID,
-        date: datetime,
-        amount: float,
+        record: RecordsModel,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
@@ -216,11 +207,11 @@ class GoalsDB(DBInterface):
                     ) VALUES(?,?,?,?,?);
                     """,
                     [
-                        str(uuid4()),
-                        str(goal_id),
-                        date,
-                        amount,
-                        datetime.now().replace(tzinfo=timezone.utc),
+                        str(record.id),
+                        str(record.goal_id),
+                        record.date,
+                        record.amount,
+                        record.created_date,
                     ],
                 )
                 connection.commit()
@@ -310,14 +301,16 @@ goals_db = GoalsDB()
 if __name__ == "__main__":
     print("\n == Create Goal == ")
     goals_db.create_goal(
-        name="beep",
-        interval_start_date=datetime(2023, 11, 13),
-        interval_start_amount=0,
-        interval_target_amount=1200,
-        interval_length=timedelta(days=1),
-        bucket_size=timedelta(minutes=5),
-        unit="calories",
-        reset=False,
+        GoalsModel(
+            name="beep",
+            interval_start_date=datetime(2023, 11, 13),
+            interval_start_amount=0,
+            interval_target_amount=1200,
+            interval_length=timedelta(days=1),
+            bucket_size=timedelta(minutes=5),
+            unit="calories",
+            reset=False,
+        )
     )
 
     print("\n == Get Goals == ")
@@ -340,21 +333,25 @@ if __name__ == "__main__":
     print("\n == Create Record == ")
     if new_length == 0:
         goals_db.create_goal(
-            name="boop",
-            interval_start_date=datetime(2023, 10, 12),
-            interval_start_amount=10,
-            interval_target_amount=100,
-            interval_length=timedelta(days=30),
-            bucket_size=timedelta(hours=1),
-            unit="pounds",
-            reset=True,
+            GoalsModel(
+                name="boop",
+                interval_start_date=datetime(2023, 10, 12),
+                interval_start_amount=10,
+                interval_target_amount=100,
+                interval_length=timedelta(days=30),
+                bucket_size=timedelta(hours=1),
+                unit="pounds",
+                reset=True,
+            )
         )
     example_goal = goals_db.get_goals()[0]
     print(example_goal)
     goals_db.create_record(
-        goal_id=example_goal.id,
-        date=datetime(2023, 12, 20, 2),
-        amount=10,
+        RecordsModel(
+            goal_id=example_goal.id,
+            date=datetime(2023, 12, 20, 2),
+            amount=10,
+        )
     )
 
     print("\n == Get Records == ")

@@ -621,19 +621,40 @@ runna_task = Task(
                                     children=[
                                         Task(
                                             "create -> created_resource",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 14, 5]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "read all -> list[resources]",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 14, 5]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "read one -> resource",
+                                            priority=Priority.LOW,
                                         ),
                                         Task(
                                             "update -> updated_resource",
+                                            priority=Priority.LOW,
                                         ),
                                         Task(
                                             "delete -> None",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 14, 5]
+                                                ),
+                                            ],
                                         ),
+                                    ],
+                                    events=[
+                                        TaskEventStart([2023, 11, 14, 13, 38]),
+                                        TaskEventComplete([2023, 11, 14, 14, 5]),
                                     ],
                                 ),
                             ],

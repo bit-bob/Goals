@@ -1,11 +1,11 @@
-from datetime import datetime, timedelta
-from uuid import UUID
+from datetime import datetime, timedelta, timezone
+from uuid import UUID, uuid4
 
 from pydantic import BaseModel
 
 
 class GoalsModel(BaseModel):
-    id: UUID
+    id: UUID = uuid4()
     name: str
     interval_start_date: datetime
     interval_start_amount: float
@@ -14,12 +14,12 @@ class GoalsModel(BaseModel):
     bucket_size: timedelta
     unit: str
     reset: bool
-    created_date: datetime
+    created_date: datetime = datetime.now().replace(tzinfo=timezone.utc)
 
 
 class RecordsModel(BaseModel):
-    id: UUID
+    id: UUID = uuid4()
     goal_id: UUID
     date: datetime
     amount: float
-    created_date: datetime
+    created_date: datetime = datetime.now().replace(tzinfo=timezone.utc)
