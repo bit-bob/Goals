@@ -541,6 +541,7 @@ runna_task = Task(
                                             # the front end wants a list of all records in a period of time
                                             # given a time like Jan 5th 5pm
                                             # the start and
+                                            priority=Priority.LOW,
                                         ),
                                     ],
                                 ),
@@ -549,12 +550,24 @@ runna_task = Task(
                                     children=[
                                         Task(
                                             "Create",
+                                            events=[
+                                                TaskEventStart([2023, 11, 14, 15, 28]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 15, 34]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "Get all",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 15, 34]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "Get one",
+                                            priority=Priority.LOW,
                                         ),
                                         Task(
                                             "Update",
@@ -562,6 +575,11 @@ runna_task = Task(
                                         ),
                                         Task(
                                             "Delete",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 15, 34]
+                                                ),
+                                            ],
                                         ),
                                     ],
                                 ),
