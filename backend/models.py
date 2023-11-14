@@ -1,11 +1,8 @@
 from datetime import datetime, timedelta, timezone
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel, Field
-
-
-def datetime_now() -> datetime:
-    return datetime.now(timezone.utc)
+from dates import datetime_now, make_date_timezone_aware
+from pydantic import BaseModel, Field, model_validator
 
 
 class Goal(BaseModel):
@@ -24,6 +21,13 @@ class Goal(BaseModel):
         default_factory=datetime_now,
     )
 
+    @model_validator(mode="after")
+    def make_dates_timezone_aware(
+        self,
+    ) -> "Goal":
+        make_date_timezone_aware(self.interval_start_date)
+        return self
+
 
 class Record(BaseModel):
     id: UUID = Field(
@@ -35,6 +39,13 @@ class Record(BaseModel):
     created_date: datetime = Field(
         default_factory=datetime_now,
     )
+
+    @model_validator(mode="after")
+    def make_dates_timezone_aware(
+        self,
+    ) -> "Record":
+        make_date_timezone_aware(self.date)
+        return self
 
 
 class Progress(BaseModel):

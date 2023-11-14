@@ -6,6 +6,7 @@ from db import goals_db
 from exceptions import ResourceNotFoundException, handle_http_exceptions
 from fastapi import APIRouter
 from models import Goal, Progress, Record
+from dates import make_date_timezone_aware
 
 router = APIRouter(
     prefix="/goals",
@@ -61,6 +62,7 @@ async def get_goal_progress(
     goal_id: UUID,
     interval_start_date: datetime,
 ) -> Progress:
+    make_date_timezone_aware(interval_start_date)
     goal = goals_db.get_goal(goal_id)
     logging.debug(f"Getting Progress for Goal '{goal.name}'")
     return goals_db.get_progress_for_goal(
