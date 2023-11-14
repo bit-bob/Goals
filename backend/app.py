@@ -1,11 +1,21 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.routing import APIRoute
+import asyncio
 
 from routers import goals, records
 
+
+async def slow():
+    # Useful for testing UI behaviour on slow networks
+    await asyncio.sleep(0.2)
+
 # App
-app = FastAPI()
+app = FastAPI(
+    dependencies=[
+        Depends(slow)
+    ]
+)
 
 app.add_middleware(
     CORSMiddleware,

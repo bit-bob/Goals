@@ -7,11 +7,11 @@ import { Goal } from "api-client";
 import { useLoaderData, useRevalidator } from "react-router-dom";
 
 import { goalsApi } from "../api";
-import { NewGoalForm } from "../NewGoalForm";
 import { ResponsiveModal } from "../ResponsiveModal";
 
 import { DisplayMode } from "./displayMode";
 import { GoalsList } from "./GoalsList";
+import { NewGoalForm } from "./NewGoalForm";
 
 export function GoalsPage() {
   const [
