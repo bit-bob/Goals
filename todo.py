@@ -426,6 +426,22 @@ runna_task = Task(
                                                 ),
                                             ],
                                         ),
+                                        Task(
+                                            "Get records",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 17, 23]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "Get progress",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 17, 23]
+                                                ),
+                                            ],
+                                        ),
                                     ],
                                 ),
                                 Task(
@@ -514,7 +530,11 @@ runna_task = Task(
                                         ),
                                         Task(
                                             "Get one",
-                                            priority=Priority.LOW,
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 17, 23]
+                                                ),
+                                            ],
                                         ),
                                         Task(
                                             "Update",
@@ -526,6 +546,14 @@ runna_task = Task(
                                                 TaskEventStart([2023, 11, 13, 18, 59]),
                                                 TaskEventComplete(
                                                     [2023, 11, 13, 19, 5]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "Get records",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 14, 17, 23]
                                                 ),
                                             ],
                                         ),
@@ -678,6 +706,71 @@ runna_task = Task(
                                     events=[
                                         TaskEventStart([2023, 11, 14, 13, 38]),
                                         TaskEventComplete([2023, 11, 14, 14, 5]),
+                                    ],
+                                ),
+                                Task(
+                                    "Add Validation",
+                                    children=[
+                                        Task(
+                                            "Goals",
+                                        ),
+                                        Task(
+                                            "Records",
+                                        ),
+                                    ],
+                                ),
+                                Task(
+                                    "Add Tests",
+                                    children=[
+                                        Task(
+                                            "Goals",
+                                            children=[
+                                                Task(
+                                                    "Create",
+                                                ),
+                                                Task(
+                                                    "Get all",
+                                                ),
+                                                Task(
+                                                    "Get one",
+                                                ),
+                                                Task(
+                                                    "Get records",
+                                                ),
+                                                Task(
+                                                    "Get progress",
+                                                ),
+                                                Task(
+                                                    "Update",
+                                                    priority=Priority.LOW,
+                                                ),
+                                                Task(
+                                                    "Delete",
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "Records",
+                                            children=[
+                                                Task(
+                                                    "Create",
+                                                ),
+                                                Task(
+                                                    "Get all",
+                                                ),
+                                                Task(
+                                                    "Get one",
+                                                    priority=Priority.LOW,
+                                                ),
+                                                Task(
+                                                    "Update",
+                                                    priority=Priority.LOW,
+                                                ),
+                                                Task(
+                                                    "Delete",
+                                                ),
+                                            ],
+                                        ),
                                     ],
                                 ),
                             ],
