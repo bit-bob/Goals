@@ -116,13 +116,13 @@ class GoalsDB(DBInterface):
                 return [
                     GoalsModel(
                         id=row[0],
-                        name=row[1],
+                        name=str(row[1]),
                         interval_start_date=row[2],
                         interval_start_amount=row[3],
                         interval_target_amount=row[4],
                         interval_length=timedelta(seconds=float(row[5])),
                         bucket_size=timedelta(seconds=float(row[6])),
-                        unit=row[7],
+                        unit=str(row[7]),
                         reset=row[8],
                         created_date=row[9],
                     )
@@ -162,13 +162,13 @@ class GoalsDB(DBInterface):
 
                 return GoalsModel(
                     id=row[0],
-                    name=row[1],
+                    name=str(row[1]),
                     interval_start_date=row[2],
                     interval_start_amount=row[3],
                     interval_target_amount=row[4],
                     interval_length=timedelta(seconds=float(row[5])),
                     bucket_size=timedelta(seconds=float(row[6])),
-                    unit=row[7],
+                    unit=str(row[7]),
                     reset=row[8],
                     created_date=row[9],
                 )
