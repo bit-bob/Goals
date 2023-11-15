@@ -10,12 +10,9 @@ async def slow():
     # Useful for testing UI behaviour on slow networks
     await asyncio.sleep(0.2)
 
+
 # App
-app = FastAPI(
-    dependencies=[
-        Depends(slow)
-    ]
-)
+app = FastAPI(dependencies=[Depends(slow)])
 
 app.add_middleware(
     CORSMiddleware,
