@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from uuid import UUID, uuid4
 
-from dates import datetime_now, make_date_timezone_aware
+from dates import datetime_now, get_timezone_aware_date
 from pydantic import BaseModel, Field, model_validator
 
 
@@ -25,7 +25,7 @@ class Goal(BaseModel):
     def make_dates_timezone_aware(
         self,
     ) -> "Goal":
-        make_date_timezone_aware(self.interval_start_date)
+        self.interval_start_date = get_timezone_aware_date(self.interval_start_date)
         return self
 
 
@@ -44,7 +44,7 @@ class Record(BaseModel):
     def make_dates_timezone_aware(
         self,
     ) -> "Record":
-        make_date_timezone_aware(self.date)
+        self.date = get_timezone_aware_date(self.date)
         return self
 
 

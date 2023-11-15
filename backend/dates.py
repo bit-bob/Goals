@@ -5,5 +5,5 @@ def datetime_now() -> datetime:
     return datetime.now(timezone.utc)
 
 
-def make_date_timezone_aware(date: datetime) -> None:
-    date.replace(tzinfo=timezone.utc)
+def get_timezone_aware_date(date: datetime) -> datetime:
+    return date.replace(tzinfo=timezone.utc)
