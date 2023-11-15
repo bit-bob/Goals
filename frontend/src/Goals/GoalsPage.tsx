@@ -1,7 +1,7 @@
 import { ActionIcon, Button, Flex, Stack, rem } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { IconColumns, IconLayoutGrid } from "@tabler/icons-react";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Goal } from "api-client";
 import { useLoaderData, useRevalidator } from "react-router-dom";
@@ -12,6 +12,7 @@ import { ResponsiveModal } from "../ResponsiveModal";
 import { DisplayMode } from "./displayMode";
 import { GoalsList } from "./GoalsList";
 import { NewGoalForm } from "./NewGoalForm";
+import { AppControlContext } from "../AppLayout";
 
 export function GoalsPage() {
   const [
@@ -27,31 +28,51 @@ export function GoalsPage() {
     defaultValue: DisplayMode.Grid,
   });
 
+  const appControls = useContext(AppControlContext);
+
+  useEffect(() => {
+    appControls.setTitle("Goals");
+    appControls.setLeadingAction({
+      type: "icon-group",
+      items: [
+        {
+          id: "set-display-grid",
+          variant: displayMode === DisplayMode.Grid ? "filled" : "default",
+          size: "lg",
+          ariaLabel: "Gallery",
+          icon: <IconLayoutGrid style={{ width: rem(20) }} stroke={1.5} />,
+        },
+        {
+          id: "set-display-table",
+          variant: displayMode === DisplayMode.Table ? "filled" : "default",
+          size: "lg",
+          ariaLabel: "Settings",
+          icon: <IconColumns style={{ width: rem(20) }} stroke={1.5} />,
+        },
+      ],
+    });
+    appControls.setTrailingAction({
+      type: "button",
+      id: "new-goal",
+      variant: "filled",
+      content: "New goal",
+    });
+    appControls.onAction((actionId) => {
+      switch (actionId) {
+        case "set-display-grid":
+          return setDisplayMode(DisplayMode.Grid);
+        case "set-display-table":
+          return setDisplayMode(DisplayMode.Table);
+        case "new-goal":
+          return toggleNewGoalDisclosure();
+        default:
+          return;
+      }
+    });
+  }, [displayMode]);
+
   return (
     <Stack>
-      <Flex justify="space-between">
-        <Button onClick={toggleNewGoalDisclosure}>New goal</Button>
-        <ActionIcon.Group>
-          <ActionIcon
-            variant={displayMode === DisplayMode.Grid ? "filled" : "default"}
-            size="lg"
-            aria-label="Gallery"
-            onClick={() => setDisplayMode(DisplayMode.Grid)}
-          >
-            <IconLayoutGrid style={{ width: rem(20) }} stroke={1.5} />
-          </ActionIcon>
-
-          <ActionIcon
-            variant={displayMode === DisplayMode.Table ? "filled" : "default"}
-            size="lg"
-            aria-label="Settings"
-            onClick={() => setDisplayMode(DisplayMode.Table)}
-          >
-            <IconColumns style={{ width: rem(20) }} stroke={1.5} />
-          </ActionIcon>
-        </ActionIcon.Group>
-      </Flex>
-
       <GoalsList
         goals={goals}
         displayMode={displayMode}

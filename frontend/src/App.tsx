@@ -20,9 +20,14 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/nprogress/styles.css";
+import { TabBar } from "./components/TabBar";
 
 SafeArea.getSafeAreaInsets().then(({ insets }) => {
   document.documentElement.style.setProperty("--inset-top", insets.top + "px");
+  document.documentElement.style.setProperty(
+    "--inset-bottom",
+    insets.bottom + "px"
+  );
 });
 
 function startNavigationProgress(
@@ -56,14 +61,14 @@ const router = createBrowserRouter(
           const completeNavigationProgress = startNavigationProgress();
           const goal = await goalsApi.getGoal({ goalId: params.goalId! });
           completeNavigationProgress();
-          return defer({
+          return {
             goal,
             progress: goalsApi.getGoalProgress({
               goalId: goal.id!,
               intervalStartDate: new Date(),
             }),
             records: goalsApi.getGoalRecords({ goalId: goal.id! }),
-          });
+          };
         }}
         Component={GoalPage}
       />
@@ -94,6 +99,17 @@ export default function App() {
             height: "var(--inset-top)",
             position: "fixed",
             top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 99999,
+          }}
+        />
+        <div
+          style={{
+            backgroundColor: "var(--mantine-color-body)",
+            height: "var(--inset-bottom)",
+            position: "fixed",
+            bottom: 0,
             left: 0,
             right: 0,
             zIndex: 99999,
