@@ -159,7 +159,9 @@ class GoalsDB(DBInterface):
 
                 row = cursor.fetchone()
                 if row is None:
-                    raise ResourceNotFoundException
+                    raise ResourceNotFoundException(
+                        message=f"Goal not found for id={goal_id}"
+                    )
 
                 return Goal(
                     id=row[0],
@@ -362,7 +364,9 @@ class GoalsDB(DBInterface):
 
                 row = cursor.fetchone()
                 if row is None:
-                    raise ResourceNotFoundException
+                    raise ResourceNotFoundException(
+                        message=f"Record not found for id={record_id}"
+                    )
 
                 return Record(
                     id=row[0],
