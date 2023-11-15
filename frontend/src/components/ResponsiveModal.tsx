@@ -2,6 +2,7 @@ import React from "react";
 import { Drawer, Modal, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { ReactNode } from "react";
+import { useMobileBreakpoint } from "../useMobileBreakpoint";
 
 interface ResponsiveModalProps {
   opened: boolean;
@@ -16,7 +17,7 @@ export function ResponsiveModal({
   title,
   children,
 }: ResponsiveModalProps) {
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isMobile = useMobileBreakpoint();
 
   return isMobile ? (
     <Drawer

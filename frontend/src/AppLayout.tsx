@@ -3,13 +3,20 @@ import {
   ActionIcon,
   ActionIconVariant,
   AppShell,
+  Avatar,
   Button,
   ButtonVariant,
   Flex,
   MantineSize,
+  Stack,
+  em,
 } from "@mantine/core";
 import { Outlet } from "react-router-dom";
 import { TabBar } from "./components/TabBar";
+import { useMobileBreakpoint } from "./useMobileBreakpoint";
+import { IconBolt, IconTargetArrow } from "@tabler/icons-react";
+// @ts-ignore
+import styles from "./AppLayout.module.css";
 
 interface NoAction {
   type: "none";
@@ -35,6 +42,12 @@ interface IconGroup {
 }
 
 type Action = NoAction | ButtonAction | IconGroup;
+
+export interface NavigationItem {
+  to: string;
+  icon: ReactNode;
+  label: string;
+}
 
 interface AppControls {
   setTitle: (title: string) => void;
@@ -97,6 +110,28 @@ export default function AppLayout() {
   const [leadingAction, setLeadingAction] = useState<Action>();
   const [trailingAction, setTrailingAction] = useState<Action>();
   const [onAction, setOnAction] = useState<(action: string) => void>();
+  const isMobile = useMobileBreakpoint();
+  const navigationItems: NavigationItem[] = [
+    {
+      to: "/",
+      label: "Goals",
+      icon: <IconTargetArrow />,
+    },
+    {
+      to: "/automations",
+      label: "Automations",
+      icon: <IconBolt />,
+    },
+  ];
+  const userNavigationItem: NavigationItem = {
+    to: "/profile",
+    label: "Profile",
+    icon: (
+      <Avatar color="blue" radius="xl">
+        LH
+      </Avatar>
+    ),
+  };
   return (
     <AppControlContext.Provider
       value={{
@@ -106,7 +141,15 @@ export default function AppLayout() {
         onAction: (v) => setOnAction(() => v),
       }}
     >
-      <AppShell header={{ height: 60 }} padding="md">
+      <AppShell
+        layout="alt"
+        header={{ height: 60 }}
+        navbar={{
+          width: 230,
+          breakpoint: em(750),
+        }}
+        padding="md"
+      >
         <AppShell.Header top="var(--inset-top)">
           <Flex h="100%" px="md" align="center" justify="space-between">
             <Actions action={leadingAction} onAction={onAction} />
@@ -114,6 +157,28 @@ export default function AppLayout() {
             <Actions action={trailingAction} onAction={onAction} />
           </Flex>
         </AppShell.Header>
+        {!isMobile && (
+          <AppShell.Navbar p="md">
+            <Stack gap="xs">
+              {navigationItems.map((item) => (
+                <Flex
+                  key={item.to}
+                  align="center"
+                  p={6}
+                  className={styles.desktopNavigationItem}
+                >
+                  <Flex pr="sm">{item.icon}</Flex>
+                  {item.label}
+                </Flex>
+              ))}
+            </Stack>
+            {/* {Array(15)
+              .fill(0)
+              .map((_, index) => (
+                <Skeleton key={index} h={28} mt="sm" animate={false} />
+              ))} */}
+          </AppShell.Navbar>
+        )}
         <AppShell.Main
           style={{ scrollPaddingTop: 100 }}
           pt="calc(var(--app-shell-header-offset, 0px) + var(--inset-top) + var(--app-shell-padding))"
@@ -121,8 +186,9 @@ export default function AppLayout() {
         >
           <Outlet />
         </AppShell.Main>
-
-        <TabBar />
+        {isMobile && (
+          <TabBar items={[...navigationItems, userNavigationItem]} />
+        )}
       </AppShell>
     </AppControlContext.Provider>
   );

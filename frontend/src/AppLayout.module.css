@@ -1,0 +1,10 @@
+.desktopNavigationItem {
+  color: var(--mantine-color-blue-light-color);
+}
+
+.desktopNavigationItem:hover {
+  border-radius: 2px;
+  background-color: var(--mantine-color-blue-light-hover);
+  color: var(--mantine-color-blue-light-color);
+  cursor: pointer;
+}

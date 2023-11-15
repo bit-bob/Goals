@@ -19,7 +19,6 @@ export function RenderAsync<T>({
   const [data, setData] = useState<T>();
 
   useEffect(() => {
-    console.log(resolve);
     setLoading(true);
     setError(undefined);
     setData(undefined);

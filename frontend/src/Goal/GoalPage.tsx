@@ -9,6 +9,7 @@ import { Goal, Progress, Record, ResponseError as EResponse } from "api-client";
 import { Button, Flex, Skeleton, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronLeft } from "@tabler/icons-react";
+import moment from "moment";
 
 import { goalsApi } from "../api";
 import { RenderAsync } from "../RenderAsync";
@@ -64,7 +65,7 @@ export function GoalPage() {
   return (
     <Stack>
       <RenderAsync
-        resolve={progress}
+        resolve={Promise.all([progress, records])}
         fallback={<Skeleton height={300} />}
         renderErrorElement={(reason) => {
           const containerStyle: CSSProperties = {
@@ -88,8 +89,14 @@ export function GoalPage() {
             </div>
           );
         }}
-        renderElement={() => <ProgressChart />}
+        renderElement={([_, resolvedRecords]) => (
+          <ProgressChart goal={goal} records={resolvedRecords} />
+        )}
       />
+
+      {goal.intervalLength}
+      <br />
+      {JSON.stringify(moment.duration(goal.intervalLength).years())}
 
       <RenderAsync
         resolve={records}

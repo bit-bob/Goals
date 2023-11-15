@@ -3,11 +3,11 @@ import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { IconColumns, IconLayoutGrid } from "@tabler/icons-react";
 import React, { useContext, useEffect, useState } from "react";
 
-import { Goal } from "api-client";
+import { Goal, Record } from "api-client";
 import { useLoaderData, useRevalidator } from "react-router-dom";
 
 import { goalsApi } from "../api";
-import { ResponsiveModal } from "../ResponsiveModal";
+import { ResponsiveModal } from "../components/ResponsiveModal";
 
 import { DisplayMode } from "./displayMode";
 import { GoalsList } from "./GoalsList";
@@ -20,7 +20,10 @@ export function GoalsPage() {
     { toggle: toggleNewGoalDisclosure, close: closeNewGoalDisclosure },
   ] = useDisclosure();
 
-  const goals = useLoaderData() as Goal[];
+  const [goals, goalRecords] = useLoaderData() as [
+    Goal[],
+    { [goalId: string]: Record[] }
+  ];
   const { revalidate } = useRevalidator();
 
   const [displayMode, setDisplayMode] = useLocalStorage({
@@ -75,8 +78,8 @@ export function GoalsPage() {
     <Stack>
       <GoalsList
         goals={goals}
+        goalRecords={goalRecords}
         displayMode={displayMode}
-        toggleNewGoalDisclosure={toggleNewGoalDisclosure}
       />
 
       <ResponsiveModal

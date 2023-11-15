@@ -13,6 +13,7 @@ import {
 import { DateTimePicker } from "@mantine/dates";
 import { Goal } from "api-client";
 import parse from "parse-duration";
+import { duration } from "moment";
 // @ts-ignore
 import humanizeDuration from "humanize-duration";
 
@@ -126,12 +127,14 @@ export function NewGoalForm({ onSubmit }: NewGoalFormProps) {
           description={parseHumanDuration(form.values.intervalLength)}
         />
 
-        <TextInput
-          label="Bucket size"
-          placeholder="5m"
-          {...form.getInputProps("bucketSize")}
-          description={parseHumanDuration(form.values.bucketSize)}
-        />
+        <Flex gap="lg" w="100%">
+          <TextInput
+            label="Bucket size"
+            placeholder="5m"
+            {...form.getInputProps("bucketSize")}
+            description={JSON.stringify(parse(form.values.bucketSize ?? ""))}
+          />
+        </Flex>
 
         <Autocomplete
           label="Unit"

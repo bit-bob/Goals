@@ -42,7 +42,6 @@ function startNavigationProgress(
     nprogress.set((elapsedTime / (elapsedTime + easing)) * maxProgress);
     const now = Date.now();
     elapsedTime += now - lastFrameTime;
-    console.log(elapsedTime);
     lastFrameTime = now;
   }, 50);
 
@@ -77,8 +76,24 @@ const router = createBrowserRouter(
         loader={async () => {
           const completeNavigationProgress = startNavigationProgress();
           const goals = await goalsApi.getGoals();
+          const goalRecords = await Promise.all(
+            goals.map((goal) =>
+              (async () => ({
+                goal,
+                records: await goalsApi.getGoalRecords({ goalId: goal.id! }),
+              }))()
+            )
+          ).then((r) =>
+            r.reduce(
+              (acc, cur) => ({
+                ...acc,
+                [cur.goal.id!]: cur.records,
+              }),
+              {}
+            )
+          );
           completeNavigationProgress();
-          return goals;
+          return [goals, goalRecords];
         }}
         Component={GoalsPage}
       />

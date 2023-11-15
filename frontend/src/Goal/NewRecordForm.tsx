@@ -4,7 +4,7 @@ import { useForm } from "@mantine/form";
 import { Goal, Record } from "api-client";
 import React from "react";
 
-import { ResponsiveModal } from "../ResponsiveModal";
+import { ResponsiveModal } from "../components/ResponsiveModal";
 
 interface NewRecordFormProps {
   opened: boolean;

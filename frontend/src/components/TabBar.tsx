@@ -1,8 +1,13 @@
-import { Avatar, Box, Flex } from "@mantine/core";
+import { Avatar, Flex } from "@mantine/core";
 import { IconBolt, IconTargetArrow } from "@tabler/icons-react";
-import React from "react";
+import React, { Fragment } from "react";
+import { NavigationItem } from "../AppLayout";
 
-export function TabBar() {
+export interface TabBarProps {
+  items: NavigationItem[];
+}
+
+export function TabBar({ items }: TabBarProps) {
   return (
     <Flex
       w="100%"
@@ -17,11 +22,11 @@ export function TabBar() {
           "calc(0.0625rem*var(--mantine-scale)) solid var(--mantine-color-dark-4)",
       }}
     >
-      <IconTargetArrow />
-      <IconBolt />
-      <Avatar color="blue" radius="xl">
-        LH
-      </Avatar>
+      {items.map((item) => (
+        <Flex key={item.to} direction="column">
+          {item.icon}
+        </Flex>
+      ))}
     </Flex>
   );
 }

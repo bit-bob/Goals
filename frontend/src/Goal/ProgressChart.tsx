@@ -1,21 +1,29 @@
+import { Goal, Record } from "api-client";
 import {
   createChart,
   ColorType,
   CrosshairMode,
   LineType,
+  LineStyle,
 } from "lightweight-charts";
 import React, { useEffect, useRef } from "react";
+import { getGraphDataFromRecords } from "../getGraphDataFromRecords";
 
-export const ChartComponent = (props) => {
+export const ChartComponent = (props: {
+  [x: string]: any;
+  goal: Goal;
+  records: Record[];
+}) => {
   const {
-    data,
     colors: {
       backgroundColor = "transparent",
-      lineColor = "#2962FF",
+      lineColor = "var(--mantine-color-blue-1)",
       textColor = "white",
       areaTopColor = "#2962FF",
       areaBottomColor = "rgba(41, 98, 255, 0.28)",
     } = {},
+    goal,
+    records,
   } = props;
 
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -43,12 +51,30 @@ export const ChartComponent = (props) => {
     chart.timeScale().fitContent();
 
     const newSeries = chart.addLineSeries({
-      //   lineColor,
-      //   topColor: areaTopColor,
-      //   bottomColor: areaBottomColor,
-      lineType: LineType.WithSteps,
+      lineType: LineType.Simple,
+      // color: "red",
     });
-    newSeries.setData(data);
+
+    const ledger = getGraphDataFromRecords(records);
+
+    newSeries.setData(ledger.entries);
+
+    if (ledger.entries.length > 0) {
+      const guide = chart.addLineSeries({
+        lineType: LineType.Simple,
+        lineStyle: LineStyle.Dashed,
+        lineWidth: 1,
+        color: "white",
+      });
+
+      guide.setData([
+        { time: ledger.entries[0].time, value: ledger.entries[0].value },
+        {
+          time: ledger.entries[ledger.entries.length - 1].time,
+          value: ledger.entries[ledger.entries.length - 1].value,
+        },
+      ]);
+    }
 
     window.addEventListener("resize", handleResize);
 
@@ -58,7 +84,8 @@ export const ChartComponent = (props) => {
       chart.remove();
     };
   }, [
-    data,
+    goal,
+    records,
     backgroundColor,
     lineColor,
     textColor,
@@ -69,19 +96,25 @@ export const ChartComponent = (props) => {
   return <div ref={chartContainerRef} />;
 };
 
-const initialData = [
-  { time: "2018-12-22", value: 32.51 },
-  { time: "2018-12-23", value: 31.11 },
-  { time: "2018-12-24", value: 27.02 },
-  { time: "2018-12-25", value: 27.32 },
-  { time: "2018-12-26", value: 25.17 },
-  { time: "2018-12-27", value: 28.89 },
-  { time: "2018-12-28", value: 25.46 },
-  { time: "2018-12-29", value: 23.92 },
-  { time: "2018-12-30", value: 22.68 },
-  { time: "2018-12-31", value: 22.67 },
-];
+// const initialData = [
+//   { time: "2018-12-22", value: 0 },
+//   { time: "2018-12-23", value: 1220 },
+//   { time: "2018-12-24", value: 1230 },
+//   { time: "2018-12-25", value: 1230 },
+//   { time: "2018-12-26", value: 1810 },
+//   { time: "2018-12-27", value: 1830 },
+//   { time: "2018-12-28", value: 2000 },
+//   { time: "2018-12-29", value: 2000 },
+//   { time: "2018-12-30", value: 2000 },
+//   { time: "2018-12-31", value: 2267 },
+// ];
 
-export function ProgressChart() {
-  return <ChartComponent data={initialData}></ChartComponent>;
+export function ProgressChart({
+  goal,
+  records,
+}: {
+  goal: Goal;
+  records: Record[];
+}) {
+  return <ChartComponent goal={goal} records={records} />;
 }
