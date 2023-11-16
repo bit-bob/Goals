@@ -8,10 +8,11 @@ import {
 } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { Goal, Record } from "api-client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 import { getGraphDataFromRecords } from "../getGraphDataFromRecords";
+// import { GoalsWidgetBridge } from "capacitor-plugin-goals-widget-bridge";
 
 export interface GoalsGridProps {
   goals: Goal[];
@@ -19,6 +20,11 @@ export interface GoalsGridProps {
 }
 
 export function GoalsGrid({ goals, goalRecords }: GoalsGridProps) {
+  useEffect(() => {
+    goals.forEach((goal) => {
+      // GoalsWidgetBridge.();
+    });
+  }, [goals, goalRecords]);
   return (
     <SimpleGrid
       cols={{ base: 1, sm: 1, md: 2, lg: 3, xl: 4 }}

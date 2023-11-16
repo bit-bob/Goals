@@ -8,6 +8,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        for scene in application.connectedScenes {
+            guard let windowScene = (scene as? UIWindowScene) else { return true }
+                
+            #if targetEnvironment(macCatalyst)
+            if let titlebar = windowScene.titlebar {
+                titlebar.titleVisibility = .hidden
+                titlebar.toolbar = nil
+            }
+            #endif
+        }
         return true
     }
 

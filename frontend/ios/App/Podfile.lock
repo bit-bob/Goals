@@ -4,6 +4,8 @@ PODS:
   - CapacitorCamera (5.0.7):
     - Capacitor
   - CapacitorCordova (5.5.1)
+  - CapacitorPluginGoalsWidgetBridge (0.0.1):
+    - Capacitor
   - CapacitorPluginSafeArea (2.0.5):
     - Capacitor
   - CapacitorSplashScreen (5.0.6):
@@ -13,6 +15,7 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - CapacitorPluginGoalsWidgetBridge (from `../../../capacitor-plugin-goals-widget-bridge`)
   - CapacitorPluginSafeArea (from `../../node_modules/capacitor-plugin-safe-area`)
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
 
@@ -23,6 +26,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/camera"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  CapacitorPluginGoalsWidgetBridge:
+    :path: "../../../capacitor-plugin-goals-widget-bridge"
   CapacitorPluginSafeArea:
     :path: "../../node_modules/capacitor-plugin-safe-area"
   CapacitorSplashScreen:
@@ -32,9 +37,10 @@ SPEC CHECKSUMS:
   Capacitor: 9da0a2415e3b6098511f8b5ffdb578d91ee79f8f
   CapacitorCamera: 084b0b228bba7d00587910337b1c89e93b1d32ab
   CapacitorCordova: e128cc7688c070ca0bfa439898a5f609da8dbcfe
+  CapacitorPluginGoalsWidgetBridge: 1224060abfe2684df56b6ce7ec19a74074c3bad6
   CapacitorPluginSafeArea: bfdd714827dbd89fb44fea286beec996e1b0c5c4
   CapacitorSplashScreen: 5fa2ab5e46cf5cc530cf16a51c80c7a986579ccd
 
-PODFILE CHECKSUM: 95fa8f76cec6c3c08d2dbc79a5cc96355428200b
+PODFILE CHECKSUM: 5ef143ad3671e8845f28ac7ec3171eadc10652a9
 
 COCOAPODS: 1.11.3
