@@ -225,132 +225,152 @@ class Task:
         return Priority.MEDIUM
 
 
-runna_task = Task(
+main_task = Task(
     "Goals",
     children=[
         Task(
-            "Backend",
+            "V0",
             children=[
                 Task(
-                    "Models",
-                    priority=Priority.HIGH,
+                    "Backend",
                     children=[
                         Task(
-                            "Goals Model",
+                            "Models",
+                            priority=Priority.HIGH,
                             children=[
                                 Task(
-                                    "id: UUID = uuid4()",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "name: str = 'calories",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "interval start date: datetime = now",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "interval start amount: double = 0",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "interval target amount: double = 1200",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "interval length: timedelta = 1 day",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "bucket size: timedelta = 5 minutes",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "unit: str = 'calories'",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                                Task(
-                                    "reset: bool = 'false'",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 19]),
-                                    ],
-                                ),
-                            ],
-                            events=[
-                                TaskEventStart([2023, 11, 13, 14, 12]),
-                                TaskEventComplete([2023, 11, 13, 14, 19]),
-                            ],
-                        ),
-                        Task(
-                            "Records Model",
-                            children=[
-                                Task(
-                                    "id: UUID = uuid4()",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 25]),
-                                    ],
-                                ),
-                                Task(
-                                    "goal id: UUID",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 25]),
-                                    ],
-                                ),
-                                Task(
-                                    "date: datetime = now",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 25]),
-                                    ],
-                                ),
-                                Task(
-                                    "amount: double = 0",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 14, 25]),
-                                    ],
-                                ),
-                            ],
-                            events=[
-                                TaskEventStart([2023, 11, 13, 14, 19]),
-                                TaskEventComplete([2023, 11, 13, 14, 25]),
-                            ],
-                        ),
-                    ],
-                ),
-                Task(
-                    "Database",
-                    priority=Priority.HIGH,
-                    children=[
-                        Task(
-                            "Structure",
-                            children=[
-                                Task(
-                                    "define the interface",
-                                    events=[
-                                        TaskEventComplete([2023, 11, 13, 15, 1]),
-                                    ],
-                                ),
-                                Task(
-                                    "handle connections",
+                                    "Goals",
                                     children=[
                                         Task(
-                                            "make the connection",
+                                            "id: UUID = uuid4()",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "name: str = 'calories",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "interval start date: datetime = now",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "interval start amount: double = 0",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "interval target amount: double = 1200",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "interval length: timedelta = 1 day",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "bucket size: timedelta = 5 minutes",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "unit: str = 'calories'",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "reset: bool = 'false'",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 19]
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                    events=[
+                                        TaskEventStart([2023, 11, 13, 14, 12]),
+                                        TaskEventComplete([2023, 11, 13, 14, 19]),
+                                    ],
+                                ),
+                                Task(
+                                    "Records",
+                                    children=[
+                                        Task(
+                                            "id: UUID = uuid4()",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 25]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "goal id: UUID",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 25]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "date: datetime = now",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 25]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "amount: double = 0",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 13, 14, 25]
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                    events=[
+                                        TaskEventStart([2023, 11, 13, 14, 19]),
+                                        TaskEventComplete([2023, 11, 13, 14, 25]),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        Task(
+                            "Database",
+                            priority=Priority.HIGH,
+                            children=[
+                                Task(
+                                    "Structure",
+                                    children=[
+                                        Task(
+                                            "define the interface",
                                             events=[
                                                 TaskEventComplete(
                                                     [2023, 11, 13, 15, 1]
@@ -358,132 +378,486 @@ runna_task = Task(
                                             ],
                                         ),
                                         Task(
-                                            "make connection closing more consistent / explicit",
+                                            "handle connections",
+                                            children=[
+                                                Task(
+                                                    "make the connection",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 15, 1]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "make connection closing more consistent / explicit",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 15, 32]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 15, 50]
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "make the tables",
                                             events=[
-                                                TaskEventStart([2023, 11, 13, 15, 32]),
                                                 TaskEventComplete(
-                                                    [2023, 11, 13, 15, 50]
+                                                    [2023, 11, 13, 15, 1]
                                                 ),
                                             ],
                                         ),
                                     ],
-                                ),
-                                Task(
-                                    "make the tables",
                                     events=[
+                                        TaskEventStart([2023, 11, 13, 14, 27]),
                                         TaskEventComplete([2023, 11, 13, 15, 1]),
                                     ],
                                 ),
-                            ],
-                            events=[
-                                TaskEventStart([2023, 11, 13, 14, 27]),
-                                TaskEventComplete([2023, 11, 13, 15, 1]),
-                            ],
-                        ),
-                        Task(
-                            "Add functions",
-                            children=[
                                 Task(
-                                    "Goals",
+                                    "Functions",
                                     children=[
                                         Task(
-                                            "Create",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 15, 53]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 16, 24]
+                                            "Goals",
+                                            children=[
+                                                Task(
+                                                    "Create",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 15, 53]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 16, 24]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get all",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 16, 24]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 16, 43]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get one",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 16, 43]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 16, 54]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Update",
+                                                ),
+                                                Task(
+                                                    "Delete",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 16, 59]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 17, 6]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get records",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 17, 23]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get progress",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 17, 23]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Delete related records when deleting goals",
                                                 ),
                                             ],
                                         ),
                                         Task(
-                                            "Get all",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 16, 24]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 16, 43]
+                                            "Records",
+                                            children=[
+                                                Task(
+                                                    "Create",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 17, 25]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 17, 33]
+                                                        ),
+                                                    ],
                                                 ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get one",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 16, 43]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 16, 54]
+                                                Task(
+                                                    "Get all",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 17, 33]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 17, 42]
+                                                        ),
+                                                    ],
                                                 ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Update",
-                                            priority=Priority.LOW,
-                                        ),
-                                        Task(
-                                            "Delete",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 16, 59]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 17, 6]
+                                                Task(
+                                                    "Get one",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 17, 42]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 17, 46]
+                                                        ),
+                                                    ],
                                                 ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get records",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 17, 23]
+                                                Task(
+                                                    "Update",
                                                 ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get progress",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 17, 23]
+                                                Task(
+                                                    "Delete",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 17, 47]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 17, 49]
+                                                        ),
+                                                    ],
                                                 ),
                                             ],
                                         ),
                                     ],
                                 ),
+                            ],
+                        ),
+                        Task(
+                            "API",
+                            priority=Priority.HIGH,
+                            children=[
                                 Task(
-                                    "Records",
+                                    "Structure",
+                                    events=[
+                                        TaskEventStart([2023, 11, 13, 17, 54]),
+                                        TaskEventComplete([2023, 11, 13, 18, 10]),
+                                    ],
+                                ),
+                                Task(
+                                    "Endpoints",
                                     children=[
                                         Task(
-                                            "Create",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 17, 25]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 17, 33]
+                                            "Goals",
+                                            children=[
+                                                Task(
+                                                    "Create",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 16, 10]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 18, 21]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get all",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 18, 42]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 18, 51]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get one",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 17, 23]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Update",
+                                                ),
+                                                Task(
+                                                    "Delete",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 13, 18, 59]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 13, 19, 5]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get records",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 17, 23]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get Progress Interval(goal_id: str, start_time: datetime, end_time: datetime) -> (start_amount: double, records_in_interval: List[Records])",
+                                                    # if we have many records for a given goal
+                                                    # the goal started on the 1st of January
+                                                    # the interval is 1 day and accrual amount is 1200 cal
+                                                    # the bucket / increment interval is 5 mins
+                                                    # we had records on the 10th, 12th, 18th January and 6th Feburary
+                                                    # today is the 18th February
+                                                    #
+                                                    # the front end wants a list of all records in a period of time
+                                                    # given a time like Jan 5th 5pm
+                                                    # the start and
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 14, 15, 34]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 17, 23]
+                                                        ),
+                                                    ],
                                                 ),
                                             ],
                                         ),
                                         Task(
-                                            "Get all",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 17, 33]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 17, 42]
+                                            "Records",
+                                            children=[
+                                                Task(
+                                                    "Create",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 14, 15, 28]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 15, 34]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get all",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 15, 34]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Get one",
+                                                ),
+                                                Task(
+                                                    "Update",
+                                                ),
+                                                Task(
+                                                    "Delete",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 15, 34]
+                                                        ),
+                                                    ],
                                                 ),
                                             ],
                                         ),
                                         Task(
-                                            "Get one",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 17, 42]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 17, 46]
+                                            "Fix API endpoint paths. See https://restfulapi.net/resource-naming/",
+                                            children=[
+                                                Task(
+                                                    "Avoid CRUD descriptions like create, instead use HTTP request methods to know which function is performed",
+                                                    children=[
+                                                        Task(
+                                                            "create -> post(/resource)",
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        14,
+                                                                        13,
+                                                                        22,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        14,
+                                                                        13,
+                                                                        26,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Task(
+                                                            "read all -> get(/resource)",
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        14,
+                                                                        13,
+                                                                        26,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        14,
+                                                                        13,
+                                                                        29,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Task(
+                                                            "read one -> get(/resource/{id})",
+                                                        ),
+                                                        Task(
+                                                            "update -> put(/resource/{id})",
+                                                        ),
+                                                        Task(
+                                                            "delete -> delete(/resource/{id})",
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        14,
+                                                                        13,
+                                                                        29,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        14,
+                                                                        13,
+                                                                        37,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                )
+                                            ],
+                                        ),
+                                        Task(
+                                            "Fix API endpoint return types",
+                                            children=[
+                                                Task(
+                                                    "create -> created_resource",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 14, 13, 38]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 14, 5]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "read all -> list[resources]",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 14, 5]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "read one -> resource",
+                                                ),
+                                                Task(
+                                                    "update -> updated_resource",
+                                                ),
+                                                Task(
+                                                    "delete -> None",
+                                                    events=[
+                                                        TaskEventComplete(
+                                                            [2023, 11, 14, 14, 5]
+                                                        ),
+                                                    ],
                                                 ),
                                             ],
                                         ),
                                         Task(
-                                            "Update",
+                                            "Add Tests",
+                                            children=[
+                                                Task(
+                                                    "Goals",
+                                                    children=[
+                                                        Task(
+                                                            "Create",
+                                                        ),
+                                                        Task(
+                                                            "Get all",
+                                                        ),
+                                                        Task(
+                                                            "Get one",
+                                                        ),
+                                                        Task(
+                                                            "Get records",
+                                                        ),
+                                                        Task(
+                                                            "Get progress",
+                                                        ),
+                                                        Task(
+                                                            "Update",
+                                                        ),
+                                                        Task(
+                                                            "Delete",
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Records",
+                                                    children=[
+                                                        Task(
+                                                            "Create",
+                                                        ),
+                                                        Task(
+                                                            "Get all",
+                                                        ),
+                                                        Task(
+                                                            "Get one",
+                                                        ),
+                                                        Task(
+                                                            "Update",
+                                                        ),
+                                                        Task(
+                                                            "Delete",
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "Add Validation",
                                             priority=Priority.LOW,
-                                        ),
-                                        Task(
-                                            "Delete",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 17, 47]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 17, 49]
+                                            children=[
+                                                Task(
+                                                    "Goals",
+                                                ),
+                                                Task(
+                                                    "Records",
                                                 ),
                                             ],
                                         ),
@@ -494,284 +868,522 @@ runna_task = Task(
                     ],
                 ),
                 Task(
-                    "API",
+                    "Use the app",
                     priority=Priority.HIGH,
                     children=[
                         Task(
-                            "Structure",
-                            events=[
-                                TaskEventStart([2023, 11, 13, 17, 54]),
-                                TaskEventComplete([2023, 11, 13, 18, 10]),
+                            "Setup the app on your phone",
+                            children=[
+                                Task(
+                                    "pull changes",
+                                    events=[
+                                        TaskEventComplete([2023, 11, 16, 16, 30]),
+                                    ],
+                                ),
+                                Task(
+                                    "build `capacitor-plugin-goals-widget-bridge`",
+                                    children=[
+                                        Task(
+                                            "npm install",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 16, 16, 30]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "npm run build",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 16, 16, 30]
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                ),
+                                Task(
+                                    "build `frontend`",
+                                    children=[
+                                        Task(
+                                            "npm install",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 16, 16, 30]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "npm run build",
+                                            events=[
+                                                TaskEventComplete(
+                                                    [2023, 11, 16, 16, 30]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "npx cap sync ios",
+                                            # N.B. you need to run this every time you've made changes to the frontend and rebuild it
+                                            children=[
+                                                Task(
+                                                    "Update the Xcode in the app store to get a newer version of the command line tool xcodebuild. current version 14.2, needs 15.x",
+                                                    children=[
+                                                        Task(
+                                                            "Update your macOS version to 14.X",
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        16,
+                                                                        16,
+                                                                        48,
+                                                                    ]
+                                                                ),
+                                                                TaskEventPause(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        16,
+                                                                        16,
+                                                                        55,
+                                                                    ]
+                                                                ),
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        16,
+                                                                        17,
+                                                                        57,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        16,
+                                                                        18,
+                                                                        31,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Task(
+                                                            "Update Xcode",
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        16,
+                                                                        19,
+                                                                        43,
+                                                                    ]
+                                                                ),
+                                                                TaskEventPause(
+                                                                    [2023, 11, 16, 20]
+                                                                ),
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        16,
+                                                                        39,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        17,
+                                                                        12,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Task(
+                                                            "fix xcodebuild",
+                                                            # ✖ update ios - failed!
+                                                            # [error] xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory
+                                                            #         '/Library/Developer/CommandLineTools' is a command line tools instance
+                                                            children=[
+                                                                Task(
+                                                                    "Install Command Line Tools if you haven't already with `xcode-select --install`",
+                                                                    # xcode-select: note: Command line tools are already installed. Use "Software Update" in System Settings or the softwareupdate command line interface to install updates
+                                                                    events=[
+                                                                        TaskEventStart(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                12,
+                                                                            ]
+                                                                        ),
+                                                                        TaskEventComplete(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                18,
+                                                                            ]
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                                Task(
+                                                                    "Enable command line tools with `sudo xcode-select --switch /Library/Developer/CommandLineTools`",
+                                                                    events=[
+                                                                        TaskEventStart(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                18,
+                                                                            ]
+                                                                        ),
+                                                                        TaskEventComplete(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                19,
+                                                                            ]
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                                Task(
+                                                                    "try again",
+                                                                    # failed again
+                                                                    events=[
+                                                                        TaskEventStart(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                19,
+                                                                            ]
+                                                                        ),
+                                                                        TaskEventComplete(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                20,
+                                                                            ]
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                                Task(
+                                                                    "try `sudo xcode-select --switch /Applications/Xcode.app`",
+                                                                    # this fixed it
+                                                                    events=[
+                                                                        TaskEventStart(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                20,
+                                                                            ]
+                                                                        ),
+                                                                        TaskEventComplete(
+                                                                            [
+                                                                                2023,
+                                                                                11,
+                                                                                18,
+                                                                                17,
+                                                                                31,
+                                                                            ]
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Task(
+                                                            "npx cap sync ios",
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        17,
+                                                                        31,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        17,
+                                                                        32,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "npx cap open ios",
+                                            events=[
+                                                TaskEventStart([2023, 11, 18, 17, 31]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 18, 17, 32]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "Fix the missing scheme",
+                                            children=[
+                                                Task(
+                                                    "Wait for Xcode to finish updating",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 17, 32]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 17, 51]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Close Xcode and try `npx cap open ios` again",
+                                                    # this worked
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 17, 51]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 17, 54]
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                ),
+                                Task(
+                                    "Sync to your phone",
+                                    children=[
+                                        Task(
+                                            "Try to sync",
+                                            # failed due to `unable to open configuration settings file`
+                                            events=[
+                                                TaskEventStart([2023, 11, 18, 17, 54]),
+                                                TaskEventComplete(
+                                                    [2023, 11, 18, 18, 3]
+                                                ),
+                                            ],
+                                        ),
+                                        Task(
+                                            "Fix `# failed due to `unable to open configuration settings file`",
+                                            children=[
+                                                Task(
+                                                    "try `cd frontend/ios/App; open App.xcworkspace`",
+                                                    # didn't work
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 18, 3]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 18, 9]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "try `pod install` in `frontend/ios/App`",
+                                                    # zsh: command not found: pod
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 18, 9]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 18, 12]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Instal `pod` with `brew install cocoapods`",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 18, 12]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 18, 17]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "try `pod install` in `frontend/ios/App`",
+                                                    # looks like it worked with some warnings
+                                                    # [!] The `App [Debug]` target overrides the `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES` build setting defined in `Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig'. This can lead to problems with the CocoaPods installation
+                                                    #     - Use the `$(inherited)` flag, or
+                                                    #     - Remove the build settings from the target.
+                                                    # [!] The `App [Release]` target overrides the `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES` build setting defined in `Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig'. This can lead to problems with the CocoaPods installation
+                                                    #     - Use the `$(inherited)` flag, or
+                                                    #     - Remove the build settings from the target.
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 18, 17]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 18, 18]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Try to sync again",
+                                                    # this worked
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 18, 18]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 18, 3]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Point it to your mac's IP address",
+                                                    children=[
+                                                        Task(
+                                                            "Find you IP address using `ifconfig` and looking for `inet` in `en0`",
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        18,
+                                                                        3,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        18,
+                                                                        24,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Task(
+                                                            "Update the `basePath` in `frontend/src/api.ts`",
+                                                            events=[
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        18,
+                                                                        24,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "build `frontend`",
+                                                    children=[
+                                                        Task(
+                                                            "npm run build; npx cap sync ios",
+                                                            # worked
+                                                            # don't need to run `npm install` because there are no new dependencies
+                                                            # `npx cap sync ios` takes all copied builds and moves them to the xcoded project
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        18,
+                                                                        24,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        18,
+                                                                        26,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Task(
+                                                            "Press the read from disk button in Xcode",
+                                                            # you need to do this every time you run `npx cap sync ios`
+                                                            # this might not always pop up
+                                                            events=[
+                                                                TaskEventStart(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        18,
+                                                                        26,
+                                                                    ]
+                                                                ),
+                                                                TaskEventComplete(
+                                                                    [
+                                                                        2023,
+                                                                        11,
+                                                                        18,
+                                                                        18,
+                                                                        28,
+                                                                    ]
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Run the backend server",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 18, 28]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 18, 30]
+                                                        ),
+                                                    ],
+                                                ),
+                                                Task(
+                                                    "Run the app on your phone again",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 18, 18, 30]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 18, 18, 32]
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                ),
                             ],
                         ),
                         Task(
-                            "Endpoints",
+                            "Run the app on a server",
                             children=[
                                 Task(
-                                    "Goals",
-                                    children=[
-                                        Task(
-                                            "Create",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 16, 10]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 18, 21]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get all",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 18, 42]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 18, 51]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get one",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 17, 23]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Update",
-                                            priority=Priority.LOW,
-                                        ),
-                                        Task(
-                                            "Delete",
-                                            events=[
-                                                TaskEventStart([2023, 11, 13, 18, 59]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 13, 19, 5]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get records",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 17, 23]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get Progress Interval(goal_id: str, start_time: datetime, end_time: datetime) -> (start_amount: double, records_in_interval: List[Records])",
-                                            # if we have many records for a given goal
-                                            # the goal started on the 1st of January
-                                            # the interval is 1 day and accrual amount is 1200 cal
-                                            # the bucket / increment interval is 5 mins
-                                            # we had records on the 10th, 12th, 18th January and 6th Feburary
-                                            # today is the 18th February
-                                            #
-                                            # the front end wants a list of all records in a period of time
-                                            # given a time like Jan 5th 5pm
-                                            # the start and
-                                            events=[
-                                                TaskEventStart([2023, 11, 14, 15, 34]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 17, 23]
-                                                ),
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                                Task(
-                                    "Records",
-                                    children=[
-                                        Task(
-                                            "Create",
-                                            events=[
-                                                TaskEventStart([2023, 11, 14, 15, 28]),
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 15, 34]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get all",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 15, 34]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Get one",
-                                            priority=Priority.LOW,
-                                        ),
-                                        Task(
-                                            "Update",
-                                            priority=Priority.LOW,
-                                        ),
-                                        Task(
-                                            "Delete",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 15, 34]
-                                                ),
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                                Task(
-                                    "Fix API endpoint paths. See https://restfulapi.net/resource-naming/",
-                                    children=[
-                                        Task(
-                                            "Avoid CRUD descriptions like create, instead use HTTP request methods to know which function is performed",
-                                            children=[
-                                                Task(
-                                                    "create -> post(/resource)",
-                                                    events=[
-                                                        TaskEventStart(
-                                                            [2023, 11, 14, 13, 22]
-                                                        ),
-                                                        TaskEventComplete(
-                                                            [2023, 11, 14, 13, 26]
-                                                        ),
-                                                    ],
-                                                ),
-                                                Task(
-                                                    "read all -> get(/resource)",
-                                                    events=[
-                                                        TaskEventStart(
-                                                            [2023, 11, 14, 13, 26]
-                                                        ),
-                                                        TaskEventComplete(
-                                                            [2023, 11, 14, 13, 29]
-                                                        ),
-                                                    ],
-                                                ),
-                                                Task(
-                                                    "read one -> get(/resource/{id})",
-                                                    priority=Priority.LOW,
-                                                ),
-                                                Task(
-                                                    "update -> put(/resource/{id})",
-                                                    priority=Priority.LOW,
-                                                ),
-                                                Task(
-                                                    "delete -> delete(/resource/{id})",
-                                                    events=[
-                                                        TaskEventStart(
-                                                            [2023, 11, 14, 13, 29]
-                                                        ),
-                                                        TaskEventComplete(
-                                                            [2023, 11, 14, 13, 37]
-                                                        ),
-                                                    ],
-                                                ),
-                                            ],
-                                        )
-                                    ],
-                                ),
-                                Task(
-                                    "Fix API endpoint return types",
-                                    children=[
-                                        Task(
-                                            "create -> created_resource",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 14, 5]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "read all -> list[resources]",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 14, 5]
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "read one -> resource",
-                                            priority=Priority.LOW,
-                                        ),
-                                        Task(
-                                            "update -> updated_resource",
-                                            priority=Priority.LOW,
-                                        ),
-                                        Task(
-                                            "delete -> None",
-                                            events=[
-                                                TaskEventComplete(
-                                                    [2023, 11, 14, 14, 5]
-                                                ),
-                                            ],
-                                        ),
-                                    ],
-                                    events=[
-                                        TaskEventStart([2023, 11, 14, 13, 38]),
-                                        TaskEventComplete([2023, 11, 14, 14, 5]),
-                                    ],
-                                ),
-                                Task(
-                                    "Add Validation",
-                                    children=[
-                                        Task(
-                                            "Goals",
-                                        ),
-                                        Task(
-                                            "Records",
-                                        ),
-                                    ],
-                                ),
-                                Task(
-                                    "Add Tests",
-                                    children=[
-                                        Task(
-                                            "Goals",
-                                            children=[
-                                                Task(
-                                                    "Create",
-                                                ),
-                                                Task(
-                                                    "Get all",
-                                                ),
-                                                Task(
-                                                    "Get one",
-                                                ),
-                                                Task(
-                                                    "Get records",
-                                                ),
-                                                Task(
-                                                    "Get progress",
-                                                ),
-                                                Task(
-                                                    "Update",
-                                                    priority=Priority.LOW,
-                                                ),
-                                                Task(
-                                                    "Delete",
-                                                ),
-                                            ],
-                                        ),
-                                        Task(
-                                            "Records",
-                                            children=[
-                                                Task(
-                                                    "Create",
-                                                ),
-                                                Task(
-                                                    "Get all",
-                                                ),
-                                                Task(
-                                                    "Get one",
-                                                    priority=Priority.LOW,
-                                                ),
-                                                Task(
-                                                    "Update",
-                                                    priority=Priority.LOW,
-                                                ),
-                                                Task(
-                                                    "Delete",
-                                                ),
-                                            ],
-                                        ),
-                                    ],
+                                    "Pick a server",
                                 ),
                             ],
                         ),
@@ -780,7 +1392,37 @@ runna_task = Task(
             ],
         ),
         Task(
-            "Offline",
+            "V1 - Users and Authentication",
+        ),
+        Task(
+            "V2 - More Fields",
+            children=[
+                Task(
+                    "Add `category` field to `goals`",
+                    children=[
+                        Task("Models"),
+                        Task(
+                            "Database",
+                            events=[
+                                TaskEventStart([2023, 11, 18, 21, 5]),
+                                TaskEventPause([2023, 11, 18, 21, 22]),
+                            ],
+                        ),
+                        Task("API"),
+                    ],
+                ),
+                Task(
+                    "Add `description` field to `records`",
+                    children=[
+                        Task("Models"),
+                        Task("Database"),
+                        Task("API"),
+                    ],
+                ),
+            ],
+        ),
+        Task(
+            "VL-1 - Offline",
             children=[
                 Task(
                     "Keep an offline journal of requests",
@@ -791,7 +1433,7 @@ runna_task = Task(
             ],
         ),
         Task(
-            "Cleanup",
+            "VL - Cleanup",
             children=[
                 Task(
                     "Naming",
@@ -891,7 +1533,7 @@ if __name__ == "__main__":
 
     for task in get_next_task(
         [
-            runna_task,
+            main_task,
         ],
         priorities_included=[
             Priority.HIGHEST,
