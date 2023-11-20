@@ -1,7 +1,6 @@
 import sqlite3
 from contextlib import closing
 from datetime import datetime, timedelta
-from pprint import pprint
 from typing import Optional
 from uuid import UUID
 
@@ -24,6 +23,7 @@ class GoalsDB(DBInterface):
     def create_goals_table(self):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS goals (
@@ -44,6 +44,7 @@ class GoalsDB(DBInterface):
     def create_records_table(self):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS records (
@@ -51,7 +52,8 @@ class GoalsDB(DBInterface):
                         goal_id TEXT,
                         date TEXT,
                         amount REAL,
-                        created_date TEXT DEFAULT CURRENT_TIMESTAMP
+                        created_date TEXT DEFAULT CURRENT_TIMESTAMP,
+                        FOREIGN KEY (goal_id) REFERENCES goals(id) ON DELETE CASCADE
                     );
                     """
                 )
@@ -62,6 +64,7 @@ class GoalsDB(DBInterface):
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     INSERT INTO goals(
@@ -97,19 +100,20 @@ class GoalsDB(DBInterface):
     ) -> list[Goal]:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
                         id,
                         name,
-                        datetime(interval_start_date,'localtime') as interval_start_date,
+                        datetime(interval_start_date,'utc') as interval_start_date,
                         interval_start_amount,
                         interval_target_amount,
                         interval_length_seconds,
                         bucket_size_seconds,
                         unit,
                         reset,
-                        datetime(created_date,'localtime') as created_date
+                        datetime(created_date,'utc') as created_date
                     FROM goals
                     ORDER BY interval_start_date, created_date;
                     """,
@@ -136,19 +140,20 @@ class GoalsDB(DBInterface):
     ) -> Goal:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
                         id,
                         name,
-                        datetime(interval_start_date,'localtime') as interval_start_date,
+                        datetime(interval_start_date,'utc') as interval_start_date,
                         interval_start_amount,
                         interval_target_amount,
                         interval_length_seconds,
                         bucket_size_seconds,
                         unit,
                         reset,
-                        datetime(created_date,'localtime') as created_date
+                        datetime(created_date,'utc') as created_date
                     FROM goals
                     WHERE id=? 
                     """,
@@ -182,6 +187,7 @@ class GoalsDB(DBInterface):
     ) -> Goal:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     UPDATE goals
@@ -237,6 +243,7 @@ class GoalsDB(DBInterface):
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     DELETE FROM goals 
@@ -254,6 +261,7 @@ class GoalsDB(DBInterface):
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     INSERT INTO records(
@@ -279,14 +287,15 @@ class GoalsDB(DBInterface):
     ) -> list[Record]:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
                         id,
                         goal_id,
-                        datetime(date,'localtime') as date,
+                        datetime(date,'utc') as date,
                         amount,
-                        datetime(created_date,'localtime') as created_date
+                        datetime(created_date,'utc') as created_date
                     FROM records
                     ORDER BY date, created_date;
                     """,
@@ -342,14 +351,15 @@ class GoalsDB(DBInterface):
 
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     f"""
                     SELECT
                         id,
                         goal_id,
-                        datetime(date,'localtime') as date,
+                        datetime(date,'utc') as date,
                         amount,
-                        datetime(created_date,'localtime') as created_date
+                        datetime(created_date,'utc') as created_date
                     FROM records
                     WHERE {where_clause}
                     ORDER BY date, created_date;
@@ -401,14 +411,15 @@ class GoalsDB(DBInterface):
     ) -> Record:
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
                         id,
                         goal_id,
-                        datetime(date,'localtime') as date,
+                        datetime(date,'utc') as date,
                         amount,
-                        datetime(created_date,'localtime') as created_date
+                        datetime(created_date,'utc') as created_date
                     FROM records
                     WHERE id=? 
                     """,
@@ -437,6 +448,7 @@ class GoalsDB(DBInterface):
     ):
         with closing(sqlite3.connect(self.path)) as connection:
             with closing(connection.cursor()) as cursor:
+                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     DELETE FROM records 
@@ -465,38 +477,37 @@ if __name__ == "__main__":
             reset=False,
         )
     )
-    print("Created")
 
     print("\n == Get Goals == ")
     goals = goals_db.get_goals()
-    print(f"Got {goals}")
 
     print("\n == Get Goal == ")
     example_goal = goals[0]
+
     get_goal = goals_db.get_goal(example_goal.id)
-    print(f"Got {get_goal}")
 
     print("\n == Update Goal == ")
     example_goal.name = "plop"
-    updated_goal = goals_db.update_goal(goal=example_goal)
-    get_updated_goal = goals_db.get_goal(example_goal.id)
 
+    updated_goal = goals_db.update_goal(goal=example_goal)
+
+    get_updated_goal = goals_db.get_goal(example_goal.id)
     assert (
         updated_goal == get_updated_goal
-    ), f"updated_goal {updated_goal} should equal get_updated_goal {get_updated_goal}"
-    print(f"Updated")
+    ), f"Failed to update goal\n updated_goal should equal get_updated_goal\n updated_goal = {updated_goal}\n get_updated_goal = {get_updated_goal}"
 
     print("\n == Delete Goal == ")
-    previous_length = len(goals)
+    previous_length_goals = len(goals)
+
     goals_db.delete_goal(example_goal.id)
-    new_length = len(goals_db.get_goals())
+
+    length_goals = len(goals_db.get_goals())
     assert (
-        new_length < previous_length
-    ), f"new_length {new_length} should be less than previous_length {previous_length}"
-    print(f"Deleted")
+        length_goals < previous_length_goals
+    ), f"Failed to delete goal\n length_goals should be less than previous_length_goals\n length_goals = {length_goals}\n previous_length_goals = {previous_length_goals}"
 
     print("\n == Create Record == ")
-    if new_length == 0:
+    if length_goals == 0:
         goals_db.create_goal(
             Goal(
                 name="boop",
@@ -517,22 +528,51 @@ if __name__ == "__main__":
             amount=10,
         )
     )
-    print("Created")
 
     print("\n == Get Records == ")
     records = goals_db.get_records()
-    print(f"Got {records}")
 
     print("\n == Get Record == ")
     example_record = records[0]
+
     get_record = goals_db.get_record(example_record.id)
-    print(f"Got {get_record}")
+
+    print("\n == Get Records For Goal == ")
+    example_record = records[0]
+
+    get_records_for_goal = goals_db.get_records_for_goal(goal_id=example_record.goal_id)
+
+    num_records_for_goal = len(get_records_for_goal)
+    record_for_goal = get_records_for_goal[0]
+    assert (
+        num_records_for_goal == 1
+    ), f"Failed to get record for goal\n expected one record, got {num_records_for_goal}"
+    assert (
+        example_record == record_for_goal
+    ), f"Failed to get record for goal\n example_record should equal record_for_goal\n example_record = {example_record}\n record_for_goal = {record_for_goal}"
+
+    print("\n == Cascade Delete Records when Deleting Goals == ")
+    previous_length_records = len(goals_db.get_records())
+
+    goals_db.delete_goal(example_goal.id)
+
+    length_records = len(goals_db.get_records())
+    assert (
+        length_records < previous_length_records
+    ), f"Failed to cascade delete goals\n length_records should be less than previous_length_records\n length_records = {length_records}\n previous_length_records = {previous_length_records}"
+    length_records_for_goal = len(
+        goals_db.get_records_for_goal(goal_id=example_goal.id)
+    )
+    assert (
+        length_records_for_goal == 0
+    ), f"Failed to cascade delete goals\n length_records_for_goal should be length_records_for_goal\n length_records_for_goal = {length_records_for_goal}"
 
     print("\n == Delete Record == ")
-    previous_length = len(records)
+    previous_length_records = len(records)
+
     goals_db.delete_record(example_record.id)
-    new_length = len(goals_db.get_records())
+
+    length_records = len(goals_db.get_records())
     assert (
-        new_length < previous_length
-    ), f"new_length {new_length} should be less than previous_length {previous_length}"
-    print(f"Deleted")
+        length_records < previous_length_records
+    ), f"Failed to delete record\n length_records should be less than previous_length_records\n length_records = {length_records}\n previous_length_records = {previous_length_records}"

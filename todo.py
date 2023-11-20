@@ -500,6 +500,20 @@ main_task = Task(
                                                 ),
                                                 Task(
                                                     "Delete related records when deleting goals",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 20, 16, 12]
+                                                        ),
+                                                        TaskEventPause(
+                                                            [2023, 11, 20, 17, 22]
+                                                        ),
+                                                        TaskEventStart(
+                                                            [2023, 11, 20, 17, 29]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 20, 17, 52]
+                                                        ),
+                                                    ],
                                                 ),
                                             ],
                                         ),
