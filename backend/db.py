@@ -176,6 +176,61 @@ class GoalsDB(DBInterface):
                     created_date=row[9],
                 )
 
+    def update_goal(
+        self,
+        goal: Goal,
+    ) -> Goal:
+        with closing(sqlite3.connect(self.path)) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    """
+                    UPDATE goals
+                    SET name = ?,
+                        interval_start_date = ?,
+                        interval_start_amount = ?,
+                        interval_target_amount = ?,
+                        interval_length_seconds = ?,
+                        bucket_size_seconds = ?,
+                        unit = ?,
+                        reset = ?,
+                        created_date = ?
+                    WHERE id = ?
+                    RETURNING *;
+                    """,
+                    [
+                        goal.name,
+                        goal.interval_start_date,
+                        goal.interval_start_amount,
+                        goal.interval_target_amount,
+                        goal.interval_length.total_seconds(),
+                        goal.bucket_size.total_seconds(),
+                        goal.unit,
+                        goal.reset,
+                        goal.created_date,
+                        str(goal.id),
+                    ],
+                )
+
+                row = cursor.fetchone()
+                if row is None:
+                    raise ResourceNotFoundException(
+                        message=f"Goal not found for id={goal.id}"
+                    )
+                connection.commit()
+
+                return Goal(
+                    id=row[0],
+                    name=str(row[1]),
+                    interval_start_date=row[2],
+                    interval_start_amount=row[3],
+                    interval_target_amount=row[4],
+                    interval_length=timedelta(seconds=float(row[5])),
+                    bucket_size=timedelta(seconds=float(row[6])),
+                    unit=str(row[7]),
+                    reset=row[8],
+                    created_date=row[9],
+                )
+
     def delete_goal(
         self,
         goal_id: UUID,
@@ -410,23 +465,35 @@ if __name__ == "__main__":
             reset=False,
         )
     )
+    print("Created")
 
     print("\n == Get Goals == ")
     goals = goals_db.get_goals()
-    pprint(goals)
+    print(f"Got {goals}")
 
     print("\n == Get Goal == ")
     example_goal = goals[0]
     get_goal = goals_db.get_goal(example_goal.id)
-    print(get_goal)
+    print(f"Got {get_goal}")
+
+    print("\n == Update Goal == ")
+    example_goal.name = "plop"
+    updated_goal = goals_db.update_goal(goal=example_goal)
+    get_updated_goal = goals_db.get_goal(example_goal.id)
+
+    assert (
+        updated_goal == get_updated_goal
+    ), f"updated_goal {updated_goal} should equal get_updated_goal {get_updated_goal}"
+    print(f"Updated")
 
     print("\n == Delete Goal == ")
     previous_length = len(goals)
     goals_db.delete_goal(example_goal.id)
     new_length = len(goals_db.get_goals())
-    if new_length >= previous_length:
-        raise Exception
-    print(f"new_length {new_length} < previous_length {previous_length}")
+    assert (
+        new_length < previous_length
+    ), f"new_length {new_length} should be less than previous_length {previous_length}"
+    print(f"Deleted")
 
     print("\n == Create Record == ")
     if new_length == 0:
@@ -443,7 +510,6 @@ if __name__ == "__main__":
             )
         )
     example_goal = goals_db.get_goals()[0]
-    print(example_goal)
     goals_db.create_record(
         Record(
             goal_id=example_goal.id,
@@ -451,20 +517,22 @@ if __name__ == "__main__":
             amount=10,
         )
     )
+    print("Created")
 
     print("\n == Get Records == ")
     records = goals_db.get_records()
-    pprint(records)
+    print(f"Got {records}")
 
     print("\n == Get Record == ")
     example_record = records[0]
     get_record = goals_db.get_record(example_record.id)
-    print(get_record)
+    print(f"Got {get_record}")
 
     print("\n == Delete Record == ")
     previous_length = len(records)
     goals_db.delete_record(example_record.id)
     new_length = len(goals_db.get_records())
-    if new_length >= previous_length:
-        raise Exception
-    print(f"new_length {new_length} < previous_length {previous_length}")
+    assert (
+        new_length < previous_length
+    ), f"new_length {new_length} should be less than previous_length {previous_length}"
+    print(f"Deleted")

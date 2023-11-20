@@ -456,6 +456,20 @@ main_task = Task(
                                                 ),
                                                 Task(
                                                     "Update",
+                                                    events=[
+                                                        TaskEventStart(
+                                                            [2023, 11, 20, 12, 15]
+                                                        ),
+                                                        TaskEventPause(
+                                                            [2023, 11, 20, 12, 54]
+                                                        ),
+                                                        TaskEventStart(
+                                                            [2023, 11, 20, 16, 4]
+                                                        ),
+                                                        TaskEventComplete(
+                                                            [2023, 11, 20, 16, 12]
+                                                        ),
+                                                    ],
                                                 ),
                                                 Task(
                                                     "Delete",
