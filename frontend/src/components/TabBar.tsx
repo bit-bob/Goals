@@ -1,6 +1,5 @@
-import { Avatar, Flex } from "@mantine/core";
-import { IconBolt, IconTargetArrow } from "@tabler/icons-react";
-import React, { Fragment } from "react";
+import { Flex } from "@mantine/core";
+import React from "react";
 import { NavigationItem } from "../AppLayout";
 
 export interface TabBarProps {

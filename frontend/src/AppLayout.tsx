@@ -8,6 +8,7 @@ import {
   ButtonVariant,
   Flex,
   MantineSize,
+  MantineStyleProps,
   Stack,
   em,
 } from "@mantine/core";
@@ -15,7 +16,6 @@ import { Outlet } from "react-router-dom";
 import { TabBar } from "./components/TabBar";
 import { useMobileBreakpoint } from "./useMobileBreakpoint";
 import { IconBolt, IconTargetArrow } from "@tabler/icons-react";
-// @ts-ignore
 import styles from "./AppLayout.module.css";
 
 interface NoAction {
@@ -24,6 +24,7 @@ interface NoAction {
 interface ButtonAction {
   type: "button";
   id: string;
+  p?: MantineStyleProps["p"];
   variant: ButtonVariant;
   content: ReactNode;
   leftIcon?: ReactNode;
@@ -76,6 +77,7 @@ function Actions({ action, onAction }: ActionsProps) {
     case "button":
       return (
         <Button
+          p={action.p}
           variant={action.variant}
           onClick={() => onAction?.(action.id)}
           leftSection={action.leftIcon}
@@ -147,38 +149,39 @@ export default function AppLayout() {
         navbar={{
           width: 230,
           breakpoint: em(750),
+          collapsed: {
+            mobile: true,
+            desktop: false,
+          },
         }}
         padding="md"
       >
-        <AppShell.Header top="var(--inset-top)">
+        <AppShell.Header top={isMobile ? "var(--inset-top)" : undefined}>
           <Flex h="100%" px="md" align="center" justify="space-between">
             <Actions action={leadingAction} onAction={onAction} />
             {title}
             <Actions action={trailingAction} onAction={onAction} />
           </Flex>
         </AppShell.Header>
-        {!isMobile && (
-          <AppShell.Navbar p="md">
-            <Stack gap="xs">
-              {navigationItems.map((item) => (
-                <Flex
-                  key={item.to}
-                  align="center"
-                  p={6}
-                  className={styles.desktopNavigationItem}
-                >
-                  <Flex pr="sm">{item.icon}</Flex>
-                  {item.label}
-                </Flex>
-              ))}
-            </Stack>
-            {/* {Array(15)
-              .fill(0)
-              .map((_, index) => (
-                <Skeleton key={index} h={28} mt="sm" animate={false} />
-              ))} */}
-          </AppShell.Navbar>
-        )}
+        <AppShell.Navbar
+          p="md"
+          top={!isMobile ? "var(--inset-top)" : undefined}
+          bg="rgba(0, 0, 0, 0)"
+        >
+          <Stack gap="xs">
+            {navigationItems.map((item) => (
+              <Flex
+                key={item.to}
+                align="center"
+                p={6}
+                className={styles.desktopNavigationItem}
+              >
+                <Flex pr="sm">{item.icon}</Flex>
+                {item.label}
+              </Flex>
+            ))}
+          </Stack>
+        </AppShell.Navbar>
         <AppShell.Main
           style={{ scrollPaddingTop: 100 }}
           pt="calc(var(--app-shell-header-offset, 0px) + var(--inset-top) + var(--app-shell-padding))"

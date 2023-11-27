@@ -1,12 +1,4 @@
-import {
-  Card,
-  Flex,
-  NumberFormatter,
-  Progress,
-  SimpleGrid,
-  Text,
-} from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
+import { Card, NumberFormatter, SimpleGrid, Text } from "@mantine/core";
 import { Goal, Record } from "api-client";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -21,7 +13,7 @@ export interface GoalsGridProps {
 
 export function GoalsGrid({ goals, goalRecords }: GoalsGridProps) {
   useEffect(() => {
-    goals.forEach((goal) => {
+    goals.forEach(() => {
       // GoalsWidgetBridge.();
     });
   }, [goals, goalRecords]);
@@ -43,7 +35,7 @@ export function GoalsGrid({ goals, goalRecords }: GoalsGridProps) {
             padding="xl"
             bg="var(--mantine-color-body)"
             component={Link}
-            to={`/${goal.id}`}
+            to={`/goals/${goal.id}`}
           >
             <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
               {goal.name}

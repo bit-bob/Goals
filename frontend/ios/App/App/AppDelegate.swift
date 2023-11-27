@@ -1,4 +1,5 @@
 import UIKit
+import Dynamic
 import Capacitor
 
 @UIApplicationMain
@@ -8,16 +9,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        for scene in application.connectedScenes {
-            guard let windowScene = (scene as? UIWindowScene) else { return true }
-                
-            #if targetEnvironment(macCatalyst)
-            if let titlebar = windowScene.titlebar {
-                titlebar.titleVisibility = .hidden
-                titlebar.toolbar = nil
-            }
-            #endif
+        #if targetEnvironment(macCatalyst)
+        window?.backgroundColor = .red
+        if let titlebar = window?.windowScene?.titlebar {
+            let toolbar = NSToolbar(identifier: "YourAppToolbar")
+            toolbar.delegate = self
+            titlebar.toolbar = toolbar
+            titlebar.separatorStyle = .none
+            titlebar.titleVisibility = .hidden
+//            titlebar.toolbar = nil
         }
+        #endif
+        
+        (window?.rootViewController as? CAPBridgeViewController)?.webView?.backgroundColor = .clear;
+        (window?.rootViewController as? CAPBridgeViewController)?.webView?.underPageBackgroundColor = .clear;
+        (window?.rootViewController as? CAPBridgeViewController)?.webView?.isOpaque = false;
+        (window?.rootViewController as? CAPBridgeViewController)?.webView?.layer.backgroundColor = UIColor.clear.cgColor;
+        
+        
         return true
     }
 
@@ -57,3 +66,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
+#if targetEnvironment(macCatalyst)
+extension AppDelegate: NSToolbarDelegate {
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [NSToolbarItem.Identifier.flexibleSpace, .listView, .galleryView, .addNewItem]
+    }
+
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [.listView, .galleryView, .flexibleSpace, .addNewItem]
+    }
+
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+        
+        switch itemIdentifier {
+        case .listView:
+            toolbarItem.label = "List View"
+            toolbarItem.image = UIImage(systemName: "list.bullet")
+            toolbarItem.target = self
+            toolbarItem.action = #selector(switchToListView)
+        case .galleryView:
+            toolbarItem.label = "Gallery View"
+            toolbarItem.image = UIImage(systemName: "square.grid.2x2")
+            toolbarItem.target = self
+            toolbarItem.action = #selector(switchToGalleryView)
+        case .addNewItem:
+            toolbarItem.label = "Add New Item"
+            toolbarItem.image = UIImage(systemName: "plus")
+            toolbarItem.target = self
+            toolbarItem.action = #selector(addNewItem)
+        default:
+            return nil
+        }
+        
+        return toolbarItem
+    }
+
+    @objc func switchToListView() {
+        // Implement switching to list view
+    }
+
+    @objc func switchToGalleryView() {
+        // Implement switching to gallery view
+    }
+
+    @objc func addNewItem() {
+        // Implement adding a new item
+    }
+}
+
+
+extension NSToolbarItem.Identifier {
+    static let listView = NSToolbarItem.Identifier("listView")
+    static let galleryView = NSToolbarItem.Identifier("galleryView")
+    static let addNewItem = NSToolbarItem.Identifier("addNewItem")
+}
+#endif

@@ -1,6 +1,5 @@
 import React from "react";
-import { Drawer, Modal, em } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { Drawer, Modal } from "@mantine/core";
 import { ReactNode } from "react";
 import { useMobileBreakpoint } from "../useMobileBreakpoint";
 

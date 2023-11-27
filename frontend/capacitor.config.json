@@ -3,9 +3,5 @@
   "appName": "goals",
   "bundledWebRuntime": false,
   "webDir": "./dist",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
-  }
+  "backgroundColor": "#00000000"
 }

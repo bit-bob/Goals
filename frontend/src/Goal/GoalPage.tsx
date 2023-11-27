@@ -1,12 +1,7 @@
 import React, { CSSProperties, useContext, useEffect } from "react";
-import {
-  Link,
-  useLoaderData,
-  useNavigate,
-  useRevalidator,
-} from "react-router-dom";
+import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
 import { Goal, Progress, Record, ResponseError as EResponse } from "api-client";
-import { Button, Flex, Skeleton, Stack } from "@mantine/core";
+import { Skeleton, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronLeft } from "@tabler/icons-react";
 import moment from "moment";
@@ -39,8 +34,9 @@ export function GoalPage() {
     appControls.setTitle(goal.name);
     appControls.setLeadingAction({
       type: "button",
+      p: "0px",
       id: "back",
-      variant: "subtle",
+      variant: "transparent",
       content: "Goals",
       leftIcon: <IconChevronLeft />,
     });
@@ -53,7 +49,7 @@ export function GoalPage() {
     appControls.onAction((actionId) => {
       switch (actionId) {
         case "back":
-          return navigate("/");
+          return navigate("/goals");
         case "log-record":
           return openNewRecordForm();
         default:
@@ -89,7 +85,7 @@ export function GoalPage() {
             </div>
           );
         }}
-        renderElement={([_, resolvedRecords]) => (
+        renderElement={([, resolvedRecords]) => (
           <ProgressChart goal={goal} records={resolvedRecords} />
         )}
       />

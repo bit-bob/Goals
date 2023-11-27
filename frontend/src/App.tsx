@@ -5,11 +5,10 @@ import { SafeArea } from "capacitor-plugin-safe-area";
 import React from "react";
 import {
   createBrowserRouter,
-  createRoutesFromElements,
-  defer,
-  Route,
+  redirect,
   RouterProvider,
 } from "react-router-dom";
+import { Capacitor } from "@capacitor/core";
 
 import { goalsApi } from "./api";
 import AppLayout from "./AppLayout";
@@ -20,7 +19,7 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/nprogress/styles.css";
-import { TabBar } from "./components/TabBar";
+import { HomePage } from "./Home/page";
 
 SafeArea.getSafeAreaInsets().then(({ insets }) => {
   document.documentElement.style.setProperty("--inset-top", insets.top + "px");
@@ -51,12 +50,26 @@ function startNavigationProgress(
   };
 }
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" Component={AppLayout}>
-      <Route
-        path="/:goalId"
-        loader={async ({ params }) => {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+    async loader() {
+      // Only display marketing pages on web version
+      if (Capacitor.getPlatform() !== "web") {
+        return redirect("/goals");
+      }
+      return null;
+    },
+  },
+  {
+    path: "/goals",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/goals/:goalId",
+        element: <GoalPage />,
+        async loader({ params }) {
           const completeNavigationProgress = startNavigationProgress();
           const goal = await goalsApi.getGoal({ goalId: params.goalId! });
           completeNavigationProgress();
@@ -68,12 +81,12 @@ const router = createBrowserRouter(
             }),
             records: goalsApi.getGoalRecords({ goalId: goal.id! }),
           };
-        }}
-        Component={GoalPage}
-      />
-      <Route
-        path="/"
-        loader={async () => {
+        },
+      },
+      {
+        path: "/goals",
+        element: <GoalsPage />,
+        async loader() {
           const completeNavigationProgress = startNavigationProgress();
           const goals = await goalsApi.getGoals();
           const goalRecords = await Promise.all(
@@ -94,19 +107,21 @@ const router = createBrowserRouter(
           );
           completeNavigationProgress();
           return [goals, goalRecords];
-        }}
-        Component={GoalsPage}
-      />
-    </Route>
-  )
-);
+        },
+      },
+    ],
+  },
+]);
 
 export default function App() {
   return (
     <React.StrictMode>
       <ColorSchemeScript />
-      <MantineProvider defaultColorScheme="auto">
-        {/* @ts-ignore */}
+      <MantineProvider
+        defaultColorScheme="auto"
+        theme={{ fontFamily: "'DM Sans', sans-serif" }}
+      >
+        {/* @ts-expect-error - style prop is supported by <NavigationProgress />, but types are incorrect */}
         <NavigationProgress style={{ top: "var(--inset-top)" }} />
         <div
           style={{

@@ -1,7 +1,7 @@
-import { ActionIcon, Button, Flex, Stack, rem } from "@mantine/core";
+import { Stack, rem } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { IconColumns, IconLayoutGrid } from "@tabler/icons-react";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Goal, Record } from "api-client";
 import { useLoaderData, useRevalidator } from "react-router-dom";

@@ -13,8 +13,6 @@ import {
 import { DateTimePicker } from "@mantine/dates";
 import { Goal } from "api-client";
 import parse from "parse-duration";
-import { duration } from "moment";
-// @ts-ignore
 import humanizeDuration from "humanize-duration";
 
 interface NewGoalFormProps {
@@ -82,12 +80,12 @@ export function NewGoalForm({ onSubmit }: NewGoalFormProps) {
       reset: false,
     },
     validate: {
-      name: (value) => (Boolean(value) ? null : "Name required"),
+      name: (value) => (value ? null : "Name required"),
       intervalLength: (value) =>
         Number(parse(value ?? "", "sec")) > 0 ? null : "Invalid duration",
       bucketSize: (value) =>
         Number(parse(value ?? "", "sec")) > 0 ? null : "Invalid duration",
-      unit: (value) => (Boolean(value) ? null : "Unit required"),
+      unit: (value) => (value ? null : "Unit required"),
       intervalStartAmount: (value) =>
         typeof value === "number" ? null : "Interval start amount required",
       intervalTargetAmount: (value) =>
