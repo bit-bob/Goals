@@ -1410,17 +1410,70 @@ main_task = Task(
                         Task(
                             "Run the app on a server",
                             children=[
-                                Task(
-                                    "Pick a server",
-                                ),
+                                Task("Configure Kubernetes helm chart"),
+                                Task("Configure homelab external access for Helina's home IP address"),
+                                Task("Get a domain"),
+                                Task("Setup ingress"),
                             ],
                         ),
                     ],
+                ),
+                Task(
+                    "Frontend",
+                    children=[
+                        Task(
+                            "Electron support"
+                            children=[
+                                Task("Init electron/capacitor app"),
+                                Task(
+                                    "Configure Macos"
+                                    children=[
+                                        Task("Window vibrancy, allow translucent background"),
+                                        Task("Configure Traffic light position in sensible place"),
+                                    ],
+                                ),
+                                Task("Sanity check windows"),
+                            ],
+                        ),
+                        Task("Finish capacitor widget bridge implementation for iOS"),
+                        Task("Scope android changes"),
+                        Task("Correct the graph displayed in app"),
+                    ]
+                ),
+                Task(
+                    "CI/CD",
+                    children=[
+                        Task(
+                            "Changesets & Semver"
+                            children=[
+                                Task("Init changesets"),
+                                Task("Configure github bot"),
+                                Task("Introduce Helina to changesets, will be extra process in any new feature delivered"),
+                                Task("Integrate changesets to app store submissions"),
+                                Task("Integrate version number into settings page"),
+                            ],
+                        ),
+                        Task("Implement auto deploy to server from master, release helm chart & run native app builds"),
+                    ]
                 ),
             ],
         ),
         Task(
             "V1 - Users and Authentication",
+            children=[
+                Task("Breakdown following tasks into smaller deliverables"),
+                Task("Create user model with fields, email, password_hash, created_at"),
+                Task("Create POST /users endpoint. -> Creates user in database. Eventually needs to confirm email, this can be day two"),
+                Task("Create GET /auth/token endpoint. -> Accepts Basic authentication headers, returns json webtoken containing payload of User ID"),
+                Task("Create a FastAPI dependency called GetAuthenticatedUserID, it should check for a valid json webtoken in the Bearer token header and extract the user id. Return 401 if invalid token is used"),
+                Task("Add user_id field to goals table"),
+                Task("Update /goals CRUD to use the GetAuthenticatedUserID. New goals should set user_id field to this value, and view should be restricted to matching user id, returning 404 if owned by other user"),
+                Task("Update get, delete & update /records to require the user_id of the parent goal matches GetAuthenticatedUserID"),
+                Task("Breakdown following frontend tasks into smaller deliverables"),
+                Task("Update frontend, store json webtoken and send to backend. create signup, login screen and logout button"),
+                Task("Update landing page to redirect to app if logged in"),
+                Task("Update frontend routes to kick unauthenicated users to login screen on routes requiring login"),
+            ]
         ),
         Task(
             "V2 - More Fields",
