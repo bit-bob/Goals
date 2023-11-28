@@ -10,7 +10,11 @@ import { Logo } from "./Logo";
 
 import classes from "./Hero.module.css";
 
-export function Hero() {
+interface HeroProps {
+  onClickLearnMore?: () => void;
+}
+
+export function Hero({ onClickLearnMore }: HeroProps) {
   return (
     <>
       <Background />
@@ -40,15 +44,11 @@ export function Hero() {
             <DownloadAppButton platform={Platform.GooglePlay} />
           </Group>
 
-          <Text className={classes.description} c="dimmed">
-            Keep track of the things that matter to you with ease.
-          </Text>
-
           <Group className={classes.controls}>
             <Button
               radius="md"
               component={Link}
-              size="xl"
+              size="lg"
               className={classes.control}
               variant="gradient"
               gradient={{ from: "orange", to: "yellow" }}
@@ -62,7 +62,7 @@ export function Hero() {
               component="a"
               target="_blank"
               href="https://github.com/HelinaBerhane/Goals"
-              size="xl"
+              size="lg"
               variant="default"
               className={classes.control}
               leftSection={<IconBrandGithub size={20} />}
@@ -71,8 +71,12 @@ export function Hero() {
             </Button>
           </Group>
 
+          <Text className={classes.description} mt="md" c="dimmed">
+            Keep track of the things that matter to you with ease.
+          </Text>
+
           <Group mt="md">
-            <Button variant="transparent" p={0}>
+            <Button variant="transparent" p={0} onClick={onClickLearnMore}>
               Learn more
             </Button>
           </Group>
