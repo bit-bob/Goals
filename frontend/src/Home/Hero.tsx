@@ -2,13 +2,12 @@ import React from "react";
 import { Container, Text, Button, Group, Flex } from "@mantine/core";
 import { IconBrandGithub } from "@tabler/icons-react";
 import classes from "./Hero.module.css";
-import { DownloadAppButton } from "../components/DownloadAppButton";
-import { useNavigate } from "react-router-dom";
+import { DownloadAppButton, Platform } from "../components/DownloadAppButton";
+import { Link } from "react-router-dom";
 import { Background } from "./Background";
 import { Logo } from "./Logo";
 
 export function Hero() {
-  const navigate = useNavigate();
   return (
     <>
       <Background />
@@ -18,17 +17,25 @@ export function Hero() {
             <Logo />
             <h1 className={classes.title}>
               <Text
+                fw="900"
                 component="span"
                 variant="gradient"
-                gradient={{ from: "blue", to: "cyan" }}
+                gradient={{ from: "yellow", to: "orange" }}
                 inherit
               >
                 Your goals,
               </Text>
               <br />
-              Your way.
+              <Text fw="400" component="span" inherit>
+                your way.
+              </Text>
             </h1>
           </Flex>
+
+          <Group className={classes.controls}>
+            <DownloadAppButton platform={Platform.AppStore} />
+            <DownloadAppButton platform={Platform.GooglePlay} />
+          </Group>
 
           <Text className={classes.description} c="dimmed">
             Keep track of the things that matter to you with ease.
@@ -37,16 +44,15 @@ export function Hero() {
           <Group className={classes.controls}>
             <Button
               radius="md"
+              component={Link}
               size="xl"
               className={classes.control}
               variant="gradient"
-              gradient={{ from: "blue", to: "cyan" }}
-              onClick={() => navigate("/goals")}
+              gradient={{ from: "orange", to: "yellow" }}
+              to="/goals"
             >
               Get started
             </Button>
-
-            <DownloadAppButton />
 
             <Button
               radius="md"
