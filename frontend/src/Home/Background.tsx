@@ -14,6 +14,12 @@ export const Background = () => {
         fullScreen: false,
         fpsLimit: 120,
         interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "attract",
+            },
+          },
           modes: {
             repulse: {
               distance: 200,
