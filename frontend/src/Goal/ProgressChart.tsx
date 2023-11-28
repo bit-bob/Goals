@@ -1,12 +1,14 @@
+import React, { useEffect, useRef } from "react";
+
 import { Goal, Record } from "api-client";
 import {
-  createChart,
   ColorType,
   CrosshairMode,
-  LineType,
   LineStyle,
+  LineType,
+  createChart,
 } from "lightweight-charts";
-import React, { useEffect, useRef } from "react";
+
 import { getGraphDataFromRecords } from "../getGraphDataFromRecords";
 
 export const ChartComponent = (props: {

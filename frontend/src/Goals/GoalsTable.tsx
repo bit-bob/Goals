@@ -1,6 +1,7 @@
+import React from "react";
+
 import { Table } from "@mantine/core";
 import { Goal } from "api-client";
-import React from "react";
 
 export interface GoalsTableProps {
   goals: Goal[];

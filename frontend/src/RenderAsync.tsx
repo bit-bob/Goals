@@ -1,11 +1,11 @@
 import { ReactNode, useEffect, useState } from "react";
 
 interface RenderAsyncProps<T> {
-  resolve: Promise<T>;
   fallback: ReactNode;
+  renderElement: (data: T) => ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderErrorElement: (reason: any) => ReactNode;
-  renderElement: (data: T) => ReactNode;
+  resolve: Promise<T>;
 }
 
 export function RenderAsync<T>({

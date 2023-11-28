@@ -1,8 +1,10 @@
 import React from "react";
-import { FeaturesCards } from "./Features";
-import { Hero } from "./Hero";
+
 import { Container } from "@mantine/core";
+
+import { FeaturesCards } from "./Features";
 import { Footer } from "./Footer";
+import { Hero } from "./Hero";
 
 export const HomePage = () => {
   return (

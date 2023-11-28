@@ -1,4 +1,4 @@
-import { DefaultApi, Configuration } from "api-client";
+import { Configuration, DefaultApi } from "api-client";
 
 export const goalsApi = new DefaultApi(
   new Configuration({

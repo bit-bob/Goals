@@ -1,14 +1,15 @@
-import { Goal, Record } from "api-client";
 import React from "react";
 
-import { DisplayMode } from "./displayMode";
+import { Goal, Record } from "api-client";
+
 import { GoalsGrid } from "./GoalsGrid";
 import { GoalsTable } from "./GoalsTable";
+import { DisplayMode } from "./displayMode";
 
 interface GoalsListProps {
-  goals: Goal[];
-  goalRecords: { [goalId: string]: Record[] };
   displayMode: DisplayMode;
+  goalRecords: { [goalId: string]: Record[] };
+  goals: Goal[];
 }
 
 export function GoalsList({ goals, goalRecords, displayMode }: GoalsListProps) {

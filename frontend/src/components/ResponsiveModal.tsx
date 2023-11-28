@@ -1,13 +1,15 @@
 import React from "react";
-import { Drawer, Modal } from "@mantine/core";
 import { ReactNode } from "react";
+
+import { Drawer, Modal } from "@mantine/core";
+
 import { useMobileBreakpoint } from "../useMobileBreakpoint";
 
 interface ResponsiveModalProps {
-  opened: boolean;
-  onClose: () => void;
-  title: string;
   children: ReactNode;
+  onClose: () => void;
+  opened: boolean;
+  title: string;
 }
 
 export function ResponsiveModal({

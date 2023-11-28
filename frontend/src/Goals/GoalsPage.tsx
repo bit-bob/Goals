@@ -1,18 +1,17 @@
+import React, { useContext, useEffect } from "react";
+import { useLoaderData, useRevalidator } from "react-router-dom";
+
 import { Stack, rem } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { IconColumns, IconLayoutGrid } from "@tabler/icons-react";
-import React, { useContext, useEffect } from "react";
-
 import { Goal, Record } from "api-client";
-import { useLoaderData, useRevalidator } from "react-router-dom";
 
+import { AppControlContext } from "../AppLayout";
 import { goalsApi } from "../api";
 import { ResponsiveModal } from "../components/ResponsiveModal";
-
-import { DisplayMode } from "./displayMode";
 import { GoalsList } from "./GoalsList";
 import { NewGoalForm } from "./NewGoalForm";
-import { AppControlContext } from "../AppLayout";
+import { DisplayMode } from "./displayMode";
 
 export function GoalsPage() {
   const [

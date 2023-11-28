@@ -1,25 +1,26 @@
+import React from "react";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  redirect,
+} from "react-router-dom";
+
+import { Capacitor } from "@capacitor/core";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { NavigationProgress, nprogress } from "@mantine/nprogress";
 import { SafeArea } from "capacitor-plugin-safe-area";
-import React from "react";
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider,
-} from "react-router-dom";
-import { Capacitor } from "@capacitor/core";
 
-import { goalsApi } from "./api";
 import AppLayout from "./AppLayout";
 import { GoalPage } from "./Goal/GoalPage";
 import { GoalsPage } from "./Goals/GoalsPage";
+import { HomePage } from "./Home/page";
+import { goalsApi } from "./api";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/nprogress/styles.css";
-import { HomePage } from "./Home/page";
 
 SafeArea.getSafeAreaInsets().then(({ insets }) => {
   document.documentElement.style.setProperty("--inset-top", insets.top + "px");

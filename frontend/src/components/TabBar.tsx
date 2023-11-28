@@ -1,5 +1,7 @@
-import { Flex } from "@mantine/core";
 import React from "react";
+
+import { Flex } from "@mantine/core";
+
 import { NavigationItem } from "../AppLayout";
 
 export interface TabBarProps {

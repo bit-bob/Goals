@@ -1,12 +1,15 @@
 import React from "react";
-import { Text, Container, ActionIcon, Group, rem } from "@mantine/core";
+
+import { ActionIcon, Container, Group, Text, rem } from "@mantine/core";
 import {
+  IconBrandInstagram,
   IconBrandTwitter,
   IconBrandYoutube,
-  IconBrandInstagram,
 } from "@tabler/icons-react";
-import classes from "./Footer.module.css";
+
 import { Logo } from "./Logo";
+
+import classes from "./Footer.module.css";
 
 console.log(classes);
 

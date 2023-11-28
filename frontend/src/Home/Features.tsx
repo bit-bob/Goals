@@ -1,13 +1,15 @@
 import React from "react";
+
 import {
-  Title,
-  Text,
   Card,
   SimpleGrid,
+  Text,
+  Title,
   rem,
   useMantineTheme,
 } from "@mantine/core";
-import { IconTargetArrow, IconRefresh, IconBolt } from "@tabler/icons-react";
+import { IconBolt, IconRefresh, IconTargetArrow } from "@tabler/icons-react";
+
 import classes from "./Features.module.css";
 
 const mockdata = [

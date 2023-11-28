@@ -1,11 +1,14 @@
 import React from "react";
-import { Container, Text, Button, Group, Flex } from "@mantine/core";
-import { IconBrandGithub } from "@tabler/icons-react";
-import classes from "./Hero.module.css";
-import { DownloadAppButton, Platform } from "../components/DownloadAppButton";
 import { Link } from "react-router-dom";
+
+import { Button, Container, Flex, Group, Text } from "@mantine/core";
+import { IconBrandGithub } from "@tabler/icons-react";
+
+import { DownloadAppButton, Platform } from "../components/DownloadAppButton";
 import { Background } from "./Background";
 import { Logo } from "./Logo";
+
+import classes from "./Hero.module.css";
 
 export function Hero() {
   return (

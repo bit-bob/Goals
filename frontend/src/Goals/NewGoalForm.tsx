@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "@mantine/form";
+
 import {
   Autocomplete,
   Button,
@@ -11,9 +11,10 @@ import {
   TextInput,
 } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
+import { useForm } from "@mantine/form";
 import { Goal } from "api-client";
-import parse from "parse-duration";
 import humanizeDuration from "humanize-duration";
+import parse from "parse-duration";
 
 interface NewGoalFormProps {
   onSubmit: (goal: Goal) => void;

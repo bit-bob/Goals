@@ -1,16 +1,17 @@
+import React from "react";
+
 import { Button, Group, NumberInput, Stack } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { Goal, Record } from "api-client";
-import React from "react";
 
 import { ResponsiveModal } from "../components/ResponsiveModal";
 
 interface NewRecordFormProps {
-  opened: boolean;
-  onClose: () => void;
   goal: Goal;
+  onClose: () => void;
   onSubmit: (record: Record) => void;
+  opened: boolean;
 }
 
 export function NewRecordForm({

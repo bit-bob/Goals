@@ -1,6 +1,7 @@
+import React from "react";
+
 import { Text } from "@mantine/core";
 import { ResponseError as EResponse } from "api-client";
-import React from "react";
 
 interface ResponseErrorProps {
   responseError: EResponse;

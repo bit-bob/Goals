@@ -1,15 +1,16 @@
 import React from "react";
-import { useDisclosure } from "@mantine/hooks";
-import { Card, Flex, Progress, SimpleGrid, Text } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
-import { ResponsiveModal } from "./ResponsiveModal";
-import { NewGoalForm } from "./NewGoalForm";
-import { goalsApi } from "./api";
+import { Link, useLoaderData, useRevalidator } from "react-router-dom";
 
+import { Card, Flex, Progress, SimpleGrid, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconPlus } from "@tabler/icons-react";
 import {
   Goal,
 } from "api-client";
-import { Link, useLoaderData, useRevalidator } from "react-router-dom";
+
+import { NewGoalForm } from "./NewGoalForm";
+import { ResponsiveModal } from "./ResponsiveModal";
+import { goalsApi } from "./api";
 
 export default function Goals() {
   const [

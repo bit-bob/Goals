@@ -1,6 +1,7 @@
+import React from "react";
+
 import { Skeleton, Table } from "@mantine/core";
 import { Record } from "api-client";
-import React from "react";
 
 export interface RecordsTableProps {
   records: Record[];

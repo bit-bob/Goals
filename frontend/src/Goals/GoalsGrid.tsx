@@ -1,14 +1,16 @@
-import { Card, NumberFormatter, SimpleGrid, Text } from "@mantine/core";
-import { Goal, Record } from "api-client";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Sparklines, SparklinesLine } from "react-sparklines";
+
+import { Card, NumberFormatter, SimpleGrid, Text } from "@mantine/core";
+import { Goal, Record } from "api-client";
+
 import { getGraphDataFromRecords } from "../getGraphDataFromRecords";
 // import { GoalsWidgetBridge } from "capacitor-plugin-goals-widget-bridge";
 
 export interface GoalsGridProps {
-  goals: Goal[];
   goalRecords: { [goalId: string]: Record[] };
+  goals: Goal[];
 }
 
 export function GoalsGrid({ goals, goalRecords }: GoalsGridProps) {

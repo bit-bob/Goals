@@ -1,19 +1,19 @@
 import React, { CSSProperties, useContext, useEffect } from "react";
 import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
-import { Goal, Progress, Record, ResponseError as EResponse } from "api-client";
+
 import { Skeleton, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronLeft } from "@tabler/icons-react";
+import { ResponseError as EResponse, Goal, Progress, Record } from "api-client";
 import moment from "moment";
 
-import { goalsApi } from "../api";
+import { AppControlContext } from "../AppLayout";
 import { RenderAsync } from "../RenderAsync";
-
+import { goalsApi } from "../api";
+import { ResponseError } from "../components/ResponseError";
 import { NewRecordForm } from "./NewRecordForm";
 import { ProgressChart } from "./ProgressChart";
 import { RecordsTable, RecordsTableSkeleton } from "./RecordsTable";
-import { ResponseError } from "../components/ResponseError";
-import { AppControlContext } from "../AppLayout";
 
 export function GoalPage() {
   const { goal, progress, records } = useLoaderData() as {

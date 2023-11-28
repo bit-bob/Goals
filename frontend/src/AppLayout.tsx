@@ -1,4 +1,6 @@
 import React, { ReactNode, createContext, useState } from "react";
+import { Outlet } from "react-router-dom";
+
 import {
   ActionIcon,
   ActionIconVariant,
@@ -12,27 +14,27 @@ import {
   Stack,
   em,
 } from "@mantine/core";
-import { Outlet } from "react-router-dom";
+import { IconBolt, IconTargetArrow } from "@tabler/icons-react";
+
 import { TabBar } from "./components/TabBar";
 import { useMobileBreakpoint } from "./useMobileBreakpoint";
-import { IconBolt, IconTargetArrow } from "@tabler/icons-react";
+
 import styles from "./AppLayout.module.css";
 
 interface NoAction {
   type: "none";
 }
 interface ButtonAction {
-  type: "button";
-  id: string;
-  p?: MantineStyleProps["p"];
-  variant: ButtonVariant;
   content: ReactNode;
+  id: string;
   leftIcon?: ReactNode;
+  p?: MantineStyleProps["p"];
   rightIcon?: ReactNode;
+  type: "button";
+  variant: ButtonVariant;
 }
 
 interface IconGroup {
-  type: "icon-group";
   items: Array<{
     id: string;
     variant: ActionIconVariant;
@@ -40,21 +42,22 @@ interface IconGroup {
     size: MantineSize;
     icon: ReactNode;
   }>;
+  type: "icon-group";
 }
 
 type Action = NoAction | ButtonAction | IconGroup;
 
 export interface NavigationItem {
-  to: string;
   icon: ReactNode;
   label: string;
+  to: string;
 }
 
 interface AppControls {
-  setTitle: (title: string) => void;
-  setLeadingAction: (action: Action) => void;
-  setTrailingAction: (action: Action) => void;
   onAction: (listener: (actionId: string) => void) => void;
+  setLeadingAction: (action: Action) => void;
+  setTitle: (title: string) => void;
+  setTrailingAction: (action: Action) => void;
 }
 
 export const AppControlContext = createContext<AppControls>({
