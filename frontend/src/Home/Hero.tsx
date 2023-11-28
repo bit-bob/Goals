@@ -17,7 +17,7 @@ export function Hero() {
             <Logo />
             <h1 className={classes.title}>
               <Text
-                fw="900"
+                fw="1000"
                 component="span"
                 variant="gradient"
                 gradient={{ from: "yellow", to: "orange" }}
