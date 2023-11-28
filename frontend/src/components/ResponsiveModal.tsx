@@ -22,17 +22,17 @@ export function ResponsiveModal({
 
   return isMobile ? (
     <Drawer
+      onClose={onClose}
+      opened={opened}
+      overlayProps={{ backgroundOpacity: 0.5 }}
+      position="bottom"
       size="85%"
       title={title}
-      opened={opened}
-      onClose={onClose}
-      position="bottom"
-      overlayProps={{ backgroundOpacity: 0.5 }}
     >
       {children}
     </Drawer>
   ) : (
-    <Modal opened={opened} onClose={onClose} title={title} centered>
+    <Modal onClose={onClose} opened={opened} title={title} centered>
       {children}
     </Modal>
   );

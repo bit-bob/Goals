@@ -47,10 +47,10 @@ export function Footer() {
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
       <Text<"a">
-        key={index}
         className={classes.link}
         component="a"
         href={link.link}
+        key={index}
         onClick={(event) => event.preventDefault()}
       >
         {link.label}
@@ -80,27 +80,27 @@ export function Footer() {
         </Text>
 
         <Group
-          gap={0}
           className={classes.social}
+          gap={0}
           justify="flex-end"
           wrap="nowrap"
         >
-          <ActionIcon size="lg" color="gray" variant="subtle">
+          <ActionIcon color="gray" size="lg" variant="subtle">
             <IconBrandTwitter
-              style={{ width: rem(18), height: rem(18) }}
               stroke={1.5}
+              style={{ width: rem(18), height: rem(18) }}
             />
           </ActionIcon>
-          <ActionIcon size="lg" color="gray" variant="subtle">
+          <ActionIcon color="gray" size="lg" variant="subtle">
             <IconBrandYoutube
-              style={{ width: rem(18), height: rem(18) }}
               stroke={1.5}
+              style={{ width: rem(18), height: rem(18) }}
             />
           </ActionIcon>
-          <ActionIcon size="lg" color="gray" variant="subtle">
+          <ActionIcon color="gray" size="lg" variant="subtle">
             <IconBrandInstagram
-              style={{ width: rem(18), height: rem(18) }}
               stroke={1.5}
+              style={{ width: rem(18), height: rem(18) }}
             />
           </ActionIcon>
         </Group>

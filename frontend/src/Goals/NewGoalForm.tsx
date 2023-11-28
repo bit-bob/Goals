@@ -136,9 +136,9 @@ export function NewGoalForm({ onSubmit }: NewGoalFormProps) {
         </Flex>
 
         <Autocomplete
+          data={units}
           label="Unit"
           placeholder="Pick value"
-          data={units}
           {...form.getInputProps("unit")}
         />
 

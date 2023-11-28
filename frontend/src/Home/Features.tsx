@@ -37,21 +37,21 @@ export function FeaturesCards() {
   const theme = useMantineTheme();
   const features = mockdata.map((feature) => (
     <Card
-      key={feature.title}
-      shadow="md"
-      radius="md"
       className={classes.card}
+      key={feature.title}
       padding="xl"
+      radius="md"
+      shadow="md"
     >
       <feature.icon
-        style={{ width: rem(50), height: rem(50) }}
-        stroke={2}
         color={theme.colors.blue[6]}
+        stroke={2}
+        style={{ width: rem(50), height: rem(50) }}
       />
-      <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
+      <Text className={classes.cardTitle} fw={500} fz="lg" mt="md">
         {feature.title}
       </Text>
-      <Text fz="sm" c="dimmed" mt="sm">
+      <Text c="dimmed" fz="sm" mt="sm">
         {feature.description}
       </Text>
     </Card>
@@ -59,7 +59,7 @@ export function FeaturesCards() {
 
   return (
     <>
-      <Title order={2} className={classes.title} mt="xl">
+      <Title className={classes.title} mt="xl" order={2}>
         It’s never been so easy to keep track on your personal targets!
       </Title>
 
@@ -68,7 +68,7 @@ export function FeaturesCards() {
         budget, the miles driven in your car, or even hours studying for exams.
       </Text>
 
-      <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>
+      <SimpleGrid cols={{ base: 1, md: 3 }} mt={50} spacing="xl">
         {features}
       </SimpleGrid>
     </>

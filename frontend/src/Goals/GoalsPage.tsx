@@ -42,14 +42,14 @@ export function GoalsPage() {
           variant: displayMode === DisplayMode.Grid ? "filled" : "default",
           size: "lg",
           ariaLabel: "Gallery",
-          icon: <IconLayoutGrid style={{ width: rem(20) }} stroke={1.5} />,
+          icon: <IconLayoutGrid stroke={1.5} style={{ width: rem(20) }} />,
         },
         {
           id: "set-display-table",
           variant: displayMode === DisplayMode.Table ? "filled" : "default",
           size: "lg",
           ariaLabel: "Settings",
-          icon: <IconColumns style={{ width: rem(20) }} stroke={1.5} />,
+          icon: <IconColumns stroke={1.5} style={{ width: rem(20) }} />,
         },
       ],
     });
@@ -76,15 +76,15 @@ export function GoalsPage() {
   return (
     <Stack>
       <GoalsList
-        goals={goals}
-        goalRecords={goalRecords}
         displayMode={displayMode}
+        goalRecords={goalRecords}
+        goals={goals}
       />
 
       <ResponsiveModal
-        title="Add goal"
-        opened={newGoalDisclosure}
         onClose={closeNewGoalDisclosure}
+        opened={newGoalDisclosure}
+        title="Add goal"
       >
         <NewGoalForm
           onSubmit={async (newGoal) => {

@@ -10,14 +10,6 @@ export const Background = () => {
 
   return (
     <Particles
-      id="tsparticles"
-      init={particlesInit}
-      height="100vh"
-      style={{
-        position: "relative",
-        height: "100vh",
-        zIndex: -1,
-      }}
       options={{
         fullScreen: false,
         fpsLimit: 120,
@@ -69,6 +61,14 @@ export const Background = () => {
         },
         detectRetina: true,
       }}
+      style={{
+        position: "relative",
+        height: "100vh",
+        zIndex: -1,
+      }}
+      height="100vh"
+      id="tsparticles"
+      init={particlesInit}
     />
   );
 };

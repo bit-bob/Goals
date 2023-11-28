@@ -28,41 +28,41 @@ export default function Goals() {
         spacing={{ base: 10, sm: "xl" }}
       >
         <Card
-          radius="md"
-          padding="xl"
           bg="blue"
           component="button"
           onClick={toggleNewGoalDisclosure}
+          padding="xl"
+          radius="md"
           style={{ cursor: "pointer" }}
         >
-          <Flex h="100%" w="100%" align="center" justify="center">
+          <Flex align="center" h="100%" justify="center" w="100%">
             <IconPlus />
           </Flex>
         </Card>
         {goals.map((goal) => (
           <Card
-            key={goal.id}
-            withBorder
-            radius="md"
-            padding="xl"
             bg="var(--mantine-color-body)"
             component={Link}
+            key={goal.id}
+            padding="xl"
+            radius="md"
             to={`/${goal.id}`}
+            withBorder
           >
-            <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
+            <Text c="dimmed" fw={700} fz="xs" tt="uppercase">
               {goal.name}
             </Text>
-            <Text fz="lg" fw={500}>
+            <Text fw={500} fz="lg">
               $5.431 / $10.000
             </Text>
-            <Progress value={54.31} mt="md" size="lg" radius="xl" />
+            <Progress mt="md" radius="xl" size="lg" value={54.31} />
           </Card>
         ))}
       </SimpleGrid>
       <ResponsiveModal
-        title="Add goal"
-        opened={newGoalDisclosure}
         onClose={closeNewGoalDisclosure}
+        opened={newGoalDisclosure}
+        title="Add goal"
       >
         <NewGoalForm
           onSubmit={async (newGoal) => {

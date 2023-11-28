@@ -17,6 +17,6 @@ export function GoalsList({ goals, goalRecords, displayMode }: GoalsListProps) {
     case DisplayMode.Table:
       return <GoalsTable goals={goals} />;
     default:
-      return <GoalsGrid goals={goals} goalRecords={goalRecords} />;
+      return <GoalsGrid goalRecords={goalRecords} goals={goals} />;
   }
 }

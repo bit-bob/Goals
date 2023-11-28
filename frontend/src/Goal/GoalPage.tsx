@@ -61,8 +61,9 @@ export function GoalPage() {
   return (
     <Stack>
       <RenderAsync
-        resolve={Promise.all([progress, records])}
-        fallback={<Skeleton height={300} />}
+        renderElement={([, resolvedRecords]) => (
+          <ProgressChart goal={goal} records={resolvedRecords} />
+        )}
         renderErrorElement={(reason) => {
           const containerStyle: CSSProperties = {
             height: 300,
@@ -85,9 +86,8 @@ export function GoalPage() {
             </div>
           );
         }}
-        renderElement={([, resolvedRecords]) => (
-          <ProgressChart goal={goal} records={resolvedRecords} />
-        )}
+        fallback={<Skeleton height={300} />}
+        resolve={Promise.all([progress, records])}
       />
 
       {goal.intervalLength}
@@ -95,21 +95,21 @@ export function GoalPage() {
       {JSON.stringify(moment.duration(goal.intervalLength).years())}
 
       <RenderAsync
-        resolve={records}
         fallback={<RecordsTableSkeleton rowCount={4} />}
-        renderErrorElement={() => <div>Could not load records 😬</div>}
         renderElement={(records) => <RecordsTable records={records} />}
+        renderErrorElement={() => <div>Could not load records 😬</div>}
+        resolve={records}
       />
 
       <NewRecordForm
-        opened={newRecordFormOpened}
-        onClose={closeNewRecordForm}
-        goal={goal}
         onSubmit={async (newRecord) => {
           await goalsApi.createRecord({ record: newRecord });
           closeNewRecordForm();
           revalidate();
         }}
+        goal={goal}
+        onClose={closeNewRecordForm}
+        opened={newRecordFormOpened}
       />
     </Stack>
   );

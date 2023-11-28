@@ -10,7 +10,7 @@ interface ResponseErrorProps {
 export function ResponseError({ responseError }: ResponseErrorProps) {
   return (
     <>
-      <Text fw={900} size="64px" c="dimmed">
+      <Text c="dimmed" fw={900} size="64px">
         {responseError.response.status}
       </Text>
       <Text>An error occured</Text>

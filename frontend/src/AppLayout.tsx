@@ -80,11 +80,11 @@ function Actions({ action, onAction }: ActionsProps) {
     case "button":
       return (
         <Button
-          p={action.p}
-          variant={action.variant}
-          onClick={() => onAction?.(action.id)}
           leftSection={action.leftIcon}
+          onClick={() => onAction?.(action.id)}
+          p={action.p}
           rightSection={action.rightIcon}
+          variant={action.variant}
         >
           {action.content}
         </Button>
@@ -94,11 +94,11 @@ function Actions({ action, onAction }: ActionsProps) {
         <ActionIcon.Group>
           {action.items.map((item) => (
             <ActionIcon
-              key={item.id}
-              variant={item.variant}
-              size={item.size}
               aria-label={item.ariaLabel}
+              key={item.id}
               onClick={() => onAction?.(item.id)}
+              size={item.size}
+              variant={item.variant}
             >
               {item.icon}
             </ActionIcon>
@@ -147,8 +147,6 @@ export default function AppLayout() {
       }}
     >
       <AppShell
-        layout="alt"
-        header={{ height: 60 }}
         navbar={{
           width: 230,
           breakpoint: em(750),
@@ -157,27 +155,29 @@ export default function AppLayout() {
             desktop: false,
           },
         }}
+        header={{ height: 60 }}
+        layout="alt"
         padding="md"
       >
         <AppShell.Header top={isMobile ? "var(--inset-top)" : undefined}>
-          <Flex h="100%" px="md" align="center" justify="space-between">
+          <Flex align="center" h="100%" justify="space-between" px="md">
             <Actions action={leadingAction} onAction={onAction} />
             {title}
             <Actions action={trailingAction} onAction={onAction} />
           </Flex>
         </AppShell.Header>
         <AppShell.Navbar
+          bg="rgba(0, 0, 0, 0)"
           p="md"
           top={!isMobile ? "var(--inset-top)" : undefined}
-          bg="rgba(0, 0, 0, 0)"
         >
           <Stack gap="xs">
             {navigationItems.map((item) => (
               <Flex
-                key={item.to}
                 align="center"
-                p={6}
                 className={styles.desktopNavigationItem}
+                key={item.to}
+                p={6}
               >
                 <Flex pr="sm">{item.icon}</Flex>
                 {item.label}
@@ -186,9 +186,9 @@ export default function AppLayout() {
           </Stack>
         </AppShell.Navbar>
         <AppShell.Main
-          style={{ scrollPaddingTop: 100 }}
-          pt="calc(var(--app-shell-header-offset, 0px) + var(--inset-top) + var(--app-shell-padding))"
           pb="calc(var(--app-shell-header-height) + var(--inset-bottom) + var(--app-shell-padding))"
+          pt="calc(var(--app-shell-header-offset, 0px) + var(--inset-top) + var(--app-shell-padding))"
+          style={{ scrollPaddingTop: 100 }}
         >
           <Outlet />
         </AppShell.Main>

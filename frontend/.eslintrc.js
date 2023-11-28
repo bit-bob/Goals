@@ -35,5 +35,13 @@ module.exports = {
         "newlines-between": "always",
       },
     ],
+    "perfectionist/sort-jsx-props": [
+      "error",
+      {
+        type: "natural",
+        order: "asc",
+        groups: ["multiline", "unknown", "shorthand"],
+      },
+    ],
   },
 };

@@ -31,18 +31,18 @@ export function GoalsGrid({ goals, goalRecords }: GoalsGridProps) {
         const currentVal = data.length > 0 ? data[data.length - 1] : 0;
         return (
           <Card
-            key={goal.id}
-            withBorder
-            radius="md"
-            padding="xl"
             bg="var(--mantine-color-body)"
             component={Link}
+            key={goal.id}
+            padding="xl"
+            radius="md"
             to={`/goals/${goal.id}`}
+            withBorder
           >
-            <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
+            <Text c="dimmed" fw={700} fz="xs" tt="uppercase">
               {goal.name}
             </Text>
-            <Text fz="lg" fw={500}>
+            <Text fw={500} fz="lg">
               <NumberFormatter
                 suffix={` ${goal.unit}`}
                 value={currentVal}

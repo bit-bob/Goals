@@ -20,20 +20,20 @@ export function Hero({ onClickLearnMore }: HeroProps) {
       <Background />
       <Container mt="-100vh">
         <Flex direction="column" h="100vh" justify="center">
-          <Flex gap="md" align="center">
+          <Flex align="center" gap="md">
             <Logo />
             <h1 className={classes.title}>
               <Text
-                fw="1000"
                 component="span"
-                variant="gradient"
+                fw="1000"
                 gradient={{ from: "yellow", to: "orange" }}
+                variant="gradient"
                 inherit
               >
                 Your goals,
               </Text>
               <br />
-              <Text fw="400" component="span" inherit>
+              <Text component="span" fw="400" inherit>
                 your way.
               </Text>
             </h1>
@@ -46,37 +46,37 @@ export function Hero({ onClickLearnMore }: HeroProps) {
 
           <Group className={classes.controls}>
             <Button
-              radius="md"
-              component={Link}
-              size="lg"
               className={classes.control}
-              variant="gradient"
+              component={Link}
               gradient={{ from: "orange", to: "yellow" }}
+              radius="md"
+              size="lg"
               to="/goals"
+              variant="gradient"
             >
               Get started
             </Button>
 
             <Button
-              radius="md"
-              component="a"
-              target="_blank"
-              href="https://github.com/HelinaBerhane/Goals"
-              size="lg"
-              variant="default"
               className={classes.control}
+              component="a"
+              href="https://github.com/HelinaBerhane/Goals"
               leftSection={<IconBrandGithub size={20} />}
+              radius="md"
+              size="lg"
+              target="_blank"
+              variant="default"
             >
               GitHub
             </Button>
           </Group>
 
-          <Text className={classes.description} mt="md" c="dimmed">
+          <Text c="dimmed" className={classes.description} mt="md">
             Keep track of the things that matter to you with ease.
           </Text>
 
           <Group mt="md">
-            <Button variant="transparent" p={0} onClick={onClickLearnMore}>
+            <Button onClick={onClickLearnMore} p={0} variant="transparent">
               Learn more
             </Button>
           </Group>

@@ -30,9 +30,9 @@ export function NewRecordForm({
 
   return (
     <ResponsiveModal
-      title={`Log ${goal.name.toLowerCase()}`}
-      opened={opened}
       onClose={onClose}
+      opened={opened}
+      title={`Log ${goal.name.toLowerCase()}`}
     >
       <form onSubmit={form.onSubmit(onSubmit)}>
         <Stack gap="md">
