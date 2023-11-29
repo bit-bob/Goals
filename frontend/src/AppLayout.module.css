@@ -8,3 +8,11 @@
   color: var(--mantine-color-blue-light-color);
   cursor: pointer;
 }
+
+.drag {
+  -webkit-app-region: drag;
+}
+
+.noDrag {
+  -webkit-app-region: no-drag;
+}

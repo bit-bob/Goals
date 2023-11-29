@@ -1,0 +1,7 @@
+{
+  "appId": "dev.lukeharris.goals",
+  "appName": "goals",
+  "bundledWebRuntime": false,
+  "webDir": "./dist",
+  "backgroundColor": "#00000000"
+}

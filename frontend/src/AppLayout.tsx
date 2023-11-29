@@ -80,6 +80,7 @@ function Actions({ action, onAction }: ActionsProps) {
     case "button":
       return (
         <Button
+          className={styles.noDrag}
           leftSection={action.leftIcon}
           onClick={() => onAction?.(action.id)}
           p={action.p}
@@ -94,6 +95,7 @@ function Actions({ action, onAction }: ActionsProps) {
         <ActionIcon.Group>
           {action.items.map((item) => (
             <ActionIcon
+              className={styles.noDrag}
               aria-label={item.ariaLabel}
               key={item.id}
               onClick={() => onAction?.(item.id)}
@@ -159,7 +161,10 @@ export default function AppLayout() {
         layout="alt"
         padding="md"
       >
-        <AppShell.Header top={isMobile ? "var(--inset-top)" : undefined}>
+        <AppShell.Header
+          top={isMobile ? "var(--inset-top)" : undefined}
+          className={styles.drag}
+        >
           <Flex align="center" h="100%" justify="space-between" px="md">
             <Actions action={leadingAction} onAction={onAction} />
             {title}
@@ -169,7 +174,11 @@ export default function AppLayout() {
         <AppShell.Navbar
           bg="rgba(0, 0, 0, 0)"
           p="md"
-          top={!isMobile ? "var(--inset-top)" : undefined}
+          top={
+            !isMobile
+              ? "calc(var(--inset-top) + var(--app-shell-header-offset, 0px))"
+              : undefined
+          }
         >
           <Stack gap="xs">
             {navigationItems.map((item) => (
@@ -185,9 +194,15 @@ export default function AppLayout() {
             ))}
           </Stack>
         </AppShell.Navbar>
+        {/**
+         *
+         */}
         <AppShell.Main
           pb="calc(var(--app-shell-header-height) + var(--inset-bottom) + var(--app-shell-padding))"
           pt="calc(var(--app-shell-header-offset, 0px) + var(--inset-top) + var(--app-shell-padding))"
+          ml="var(--app-shell-navbar-offset, 0px)"
+          pl="var(--app-shell-padding)"
+          bg="var(--mantine-color-body)"
           style={{ scrollPaddingTop: 100 }}
         >
           <Outlet />
