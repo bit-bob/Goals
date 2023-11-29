@@ -1422,11 +1422,11 @@ main_task = Task(
                     "Frontend",
                     children=[
                         Task(
-                            "Electron support"
+                            "Electron support",
                             children=[
                                 Task("Init electron/capacitor app"),
                                 Task(
-                                    "Configure Macos"
+                                    "Configure Macos",
                                     children=[
                                         Task("Window vibrancy, allow translucent background"),
                                         Task("Configure Traffic light position in sensible place"),
@@ -1444,7 +1444,7 @@ main_task = Task(
                     "CI/CD",
                     children=[
                         Task(
-                            "Changesets & Semver"
+                            "Changesets & Semver",
                             children=[
                                 Task("Init changesets"),
                                 Task("Configure github bot"),
@@ -1619,7 +1619,7 @@ if __name__ == "__main__":
         priorities_included=[
             Priority.HIGHEST,
             Priority.HIGH,
-            # Priority.MEDIUM,
+            Priority.MEDIUM,
             # Priority.LOW,
             # Priority.LOWEST,
             # Priority.WAITING,
