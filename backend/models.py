@@ -46,9 +46,3 @@ class Record(BaseModel):
     ) -> "Record":
         self.date = get_timezone_aware_date(self.date)
         return self
-
-
-class Progress(BaseModel):
-    goal_id: UUID
-    records: list[Record]
-    recorded_amount_at_start: float

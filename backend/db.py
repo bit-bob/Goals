@@ -6,7 +6,7 @@ from uuid import UUID
 
 from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
-from models import Goal, Progress, Record
+from models import Goal, Record
 
 
 class GoalsDB(DBInterface):
@@ -296,8 +296,12 @@ class GoalsDB(DBInterface):
                         datetime(date,'utc') as date,
                         amount,
                         datetime(created_date,'utc') as created_date
-                    FROM records
-                    ORDER BY date, created_date;
+                    FROM 
+                        records
+                    ORDER BY 
+                        date, 
+                        created_date
+                    ;
                     """,
                 )
                 return [
@@ -376,34 +380,6 @@ class GoalsDB(DBInterface):
                     )
                     for row in cursor.fetchall()
                 ]
-
-    def get_progress_for_goal(
-        self,
-        goal_id: UUID,
-        interval_start_date: datetime,
-        interval_end_date: Optional[datetime] = None,
-    ) -> Progress:
-        records = self.get_records_for_goal(
-            goal_id=goal_id,
-        )
-        recorded_amount_at_start = 0
-        records_in_interval: list[Record] = []
-        for record in records:
-            if interval_end_date is not None:
-                if record.date > interval_end_date:
-                    continue
-
-            if record.date < interval_start_date:
-                recorded_amount_at_start = recorded_amount_at_start + record.amount
-
-            else:
-                records_in_interval.append(record)
-
-        return Progress(
-            goal_id=goal_id,
-            records=records_in_interval,
-            recorded_amount_at_start=recorded_amount_at_start,
-        )
 
     def get_record(
         self,

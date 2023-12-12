@@ -56,10 +56,6 @@ export const urls: RouteObject[] = [
           completeNavigationProgress();
           return {
             goal,
-            progress: goalsApi.getGoalProgress({
-              goalId: goal.id!,
-              intervalStartDate: new Date(),
-            }),
             records: goalsApi.getGoalRecords({ goalId: goal.id! }),
           };
         },

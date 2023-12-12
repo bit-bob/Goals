@@ -16,9 +16,8 @@ import { ProgressChart } from "./ProgressChart";
 import { RecordsTable, RecordsTableSkeleton } from "./RecordsTable";
 
 export function GoalPage() {
-  const { goal, progress, records } = useLoaderData() as {
+  const { goal, records } = useLoaderData() as {
     goal: Goal;
-    progress: Promise<Progress>;
     records: Promise<Record[]>;
   };
   const { revalidate } = useRevalidator();
@@ -81,13 +80,13 @@ export function GoalPage() {
           }
           return (
             <div style={containerStyle}>
-              <p>Could not load progress 😬</p>
+              <p>Could not load records 😬</p>
               <pre>{JSON.stringify(reason)}</pre>
             </div>
           );
         }}
         fallback={<Skeleton height={300} />}
-        resolve={Promise.all([progress, records])}
+        resolve={Promise.all([records])}
       />
 
       {goal.intervalLength}
