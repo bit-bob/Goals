@@ -295,7 +295,8 @@ class GoalsDB(DBInterface):
                         goal_id,
                         datetime(date,'utc') as date,
                         amount,
-                        datetime(created_date,'utc') as created_date
+                        datetime(created_date,'utc') as created_date,
+                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as balance   
                     FROM 
                         records
                     ORDER BY 
@@ -311,6 +312,7 @@ class GoalsDB(DBInterface):
                         date=row[2],
                         amount=row[3],
                         created_date=row[4],
+                        balance=row[5],
                     )
                     for row in cursor.fetchall()
                 ]
@@ -363,10 +365,16 @@ class GoalsDB(DBInterface):
                         goal_id,
                         datetime(date,'utc') as date,
                         amount,
-                        datetime(created_date,'utc') as created_date
-                    FROM records
-                    WHERE {where_clause}
-                    ORDER BY date, created_date;
+                        datetime(created_date,'utc') as created_date,
+                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as balance
+                    FROM 
+                        records
+                    WHERE 
+                        {where_clause}
+                    ORDER BY 
+                        date, 
+                        created_date
+                    ;
                     """,
                     args,
                 )
@@ -377,6 +385,7 @@ class GoalsDB(DBInterface):
                         date=row[2],
                         amount=row[3],
                         created_date=row[4],
+                        balance=row[5],
                     )
                     for row in cursor.fetchall()
                 ]
@@ -395,9 +404,12 @@ class GoalsDB(DBInterface):
                         goal_id,
                         datetime(date,'utc') as date,
                         amount,
-                        datetime(created_date,'utc') as created_date
-                    FROM records
-                    WHERE id=? 
+                        datetime(created_date,'utc') as created_date,
+                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as balance
+                    FROM 
+                        records
+                    WHERE 
+                        id=? 
                     """,
                     [
                         str(record_id),
@@ -416,6 +428,7 @@ class GoalsDB(DBInterface):
                     date=row[2],
                     amount=row[3],
                     created_date=row[4],
+                    balance=row[4],
                 )
 
     def delete_record(

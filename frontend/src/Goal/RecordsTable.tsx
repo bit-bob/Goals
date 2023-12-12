@@ -12,6 +12,7 @@ export function RecordsTable({ records }: RecordsTableProps) {
     <Table.Tr key={record.id}>
       <Table.Td>{record.date.toDateString()}</Table.Td>
       <Table.Td>{record.amount}</Table.Td>
+      <Table.Td>{record.balance}</Table.Td>
     </Table.Tr>
   ));
 
@@ -21,6 +22,7 @@ export function RecordsTable({ records }: RecordsTableProps) {
         <Table.Tr>
           <Table.Th>Date</Table.Th>
           <Table.Th>Amount</Table.Th>
+          <Table.Th>Balance</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
@@ -48,6 +50,7 @@ export function RecordsTableSkeleton({ rowCount }: { rowCount: number }) {
         <Table.Tr>
           <Table.Th>Date</Table.Th>
           <Table.Th>Amount</Table.Th>
+          <Table.Th>Balance</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>

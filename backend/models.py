@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
+from typing import Optional
 from uuid import UUID, uuid4
 
 from dates import datetime_now, get_timezone_aware_date
@@ -39,6 +40,7 @@ class Record(BaseModel):
     created_date: datetime = Field(
         default_factory=datetime_now,
     )
+    balance: Optional[float] = None
 
     @model_validator(mode="after")
     def make_dates_timezone_aware(
