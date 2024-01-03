@@ -13,6 +13,7 @@ export function GoalsTable({ goals }: GoalsTableProps) {
       <Table.Td>{goal.name}</Table.Td>
       <Table.Td>{goal.unit}</Table.Td>
       <Table.Td>{goal.intervalTargetAmount}</Table.Td>
+      <Table.Td>{goal.progress}</Table.Td>
     </Table.Tr>
   ));
 
@@ -23,6 +24,7 @@ export function GoalsTable({ goals }: GoalsTableProps) {
           <Table.Th>Name</Table.Th>
           <Table.Th>Unit</Table.Th>
           <Table.Th>Target amount</Table.Th>
+          <Table.Th>Progress</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>

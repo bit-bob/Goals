@@ -21,6 +21,7 @@ class Goal(BaseModel):
     created_date: datetime = Field(
         default_factory=datetime_now,
     )
+    progress: Optional[float] = None
 
     @model_validator(mode="after")
     def make_dates_timezone_aware(
@@ -40,7 +41,7 @@ class Record(BaseModel):
     created_date: datetime = Field(
         default_factory=datetime_now,
     )
-    balance: Optional[float] = None
+    progress: Optional[float] = None
 
     @model_validator(mode="after")
     def make_dates_timezone_aware(

@@ -29,6 +29,10 @@ def read_goal(row) -> Goal:
 
     created_date = read_date(row[9])
 
+    progress = interval_start_amount
+    if row[10] is not None:
+        progress += row[10]
+
     return Goal(
         id=id,
         name=name,
@@ -40,6 +44,7 @@ def read_goal(row) -> Goal:
         unit=unit,
         reset=reset,
         created_date=created_date,
+        progress=progress,
     )
 
 
@@ -138,18 +143,23 @@ class GoalsDB(DBInterface):
                 cursor.execute(
                     """
                     SELECT
-                        id,
-                        name,
-                        datetime(interval_start_date,'utc') as interval_start_date,
-                        interval_start_amount,
-                        interval_target_amount,
-                        interval_length_seconds,
-                        bucket_size_seconds,
-                        unit,
-                        reset,
-                        datetime(created_date,'utc') as created_date
+                        goals.id,
+                        goals.name,
+                        datetime(goals.interval_start_date,'utc') as interval_start_date,
+                        goals.interval_start_amount,
+                        goals.interval_target_amount,
+                        goals.interval_length_seconds,
+                        goals.bucket_size_seconds,
+                        goals.unit,
+                        goals.reset,
+                        datetime(goals.created_date,'utc') as created_date,
+                        SUM(records.amount) as progress
                     FROM 
                         goals
+                    LEFT OUTER JOIN
+                        records ON goals.id = records.goal_id
+                    GROUP BY
+                        goals.id
                     ORDER BY 
                         interval_start_date, 
                         created_date
@@ -169,20 +179,28 @@ class GoalsDB(DBInterface):
                 cursor.execute(
                     """
                     SELECT
-                        id,
-                        name,
-                        datetime(interval_start_date,'utc') as interval_start_date,
-                        interval_start_amount,
-                        interval_target_amount,
-                        interval_length_seconds,
-                        bucket_size_seconds,
-                        unit,
-                        reset,
-                        datetime(created_date,'utc') as created_date
+                        goals.id,
+                        goals.name,
+                        datetime(goals.interval_start_date,'utc') as interval_start_date,
+                        goals.interval_start_amount,
+                        goals.interval_target_amount,
+                        goals.interval_length_seconds,
+                        goals.bucket_size_seconds,
+                        goals.unit,
+                        goals.reset,
+                        datetime(goals.created_date,'utc') as created_date,
+                        SUM(records.amount) as progress
                     FROM 
                         goals
-                    WHERE 
-                        id=?
+                    LEFT OUTER JOIN
+                        records ON goals.id = records.goal_id
+                    WHERE
+                        goals.id=?
+                    GROUP BY
+                        goals.id
+                    ORDER BY 
+                        interval_start_date, 
+                        created_date
                     ;
                     """,
                     [
@@ -313,7 +331,7 @@ class GoalsDB(DBInterface):
                         datetime(date,'utc') as date,
                         amount,
                         datetime(created_date,'utc') as created_date,
-                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as balance   
+                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as progress   
                     FROM 
                         records
                     ORDER BY 
@@ -329,7 +347,7 @@ class GoalsDB(DBInterface):
                         date=row[2],
                         amount=row[3],
                         created_date=row[4],
-                        balance=row[5],
+                        progress=row[5],
                     )
                     for row in cursor.fetchall()
                 ]
@@ -383,7 +401,7 @@ class GoalsDB(DBInterface):
                         datetime(date,'utc') as date,
                         amount,
                         datetime(created_date,'utc') as created_date,
-                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as balance
+                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as progress
                     FROM 
                         records
                     WHERE 
@@ -402,7 +420,7 @@ class GoalsDB(DBInterface):
                         date=row[2],
                         amount=row[3],
                         created_date=row[4],
-                        balance=row[5],
+                        progress=row[5],
                     )
                     for row in cursor.fetchall()
                 ]
@@ -422,7 +440,7 @@ class GoalsDB(DBInterface):
                         datetime(date,'utc') as date,
                         amount,
                         datetime(created_date,'utc') as created_date,
-                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as balance
+                        SUM (amount) OVER (PARTITION BY goal_id ORDER BY date) as progress
                     FROM 
                         records
                     WHERE 
@@ -445,7 +463,7 @@ class GoalsDB(DBInterface):
                     date=row[2],
                     amount=row[3],
                     created_date=row[4],
-                    balance=row[4],
+                    progress=row[4],
                 )
 
     def delete_record(
