@@ -1,8 +1,6 @@
 import logging
-from datetime import datetime
 from uuid import UUID
 
-from dates import get_timezone_aware_date
 from db import goals_db
 from exceptions import ResourceNotFoundException, handle_http_exceptions
 from fastapi import APIRouter
