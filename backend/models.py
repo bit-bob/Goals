@@ -22,6 +22,7 @@ class Goal(BaseModel):
         default_factory=datetime_now,
     )
     progress: Optional[float] = None
+    goal_progress: Optional[float] = None
 
     @model_validator(mode="after")
     def make_dates_timezone_aware(

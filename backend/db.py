@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 from uuid import UUID
 
+from dates import datetime_now
 from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
 from models import Goal, Record
@@ -11,6 +12,17 @@ from models import Goal, Record
 
 def read_date(date_str: str) -> datetime:
     return datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").astimezone(timezone.utc)
+
+
+def get_goal_progress(
+    start_amount: float,
+    end_amount: float,
+    start_time: datetime,
+    interval_length: timedelta,
+    current_time: datetime,
+) -> float:
+    percentage = (current_time - start_time) / interval_length
+    return start_amount + percentage * (end_amount - start_amount)
 
 
 def read_goal(row) -> Goal:
@@ -33,6 +45,14 @@ def read_goal(row) -> Goal:
     if row[10] is not None:
         progress += row[10]
 
+    goal_progress = get_goal_progress(
+        start_amount=interval_start_amount,
+        end_amount=interval_target_amount,
+        start_time=interval_start_date,
+        interval_length=interval_length,
+        current_time=datetime_now(),
+    )
+
     return Goal(
         id=id,
         name=name,
@@ -45,6 +65,7 @@ def read_goal(row) -> Goal:
         reset=reset,
         created_date=created_date,
         progress=progress,
+        goal_progress=goal_progress,
     )
 
 
