@@ -1,12 +1,46 @@
 import sqlite3
 from contextlib import closing
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from uuid import UUID
 
 from exceptions import ResourceNotFoundException
 from interfaces import DBInterface
 from models import Goal, Record
+
+
+def read_date(date_str: str) -> datetime:
+    return datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").astimezone(timezone.utc)
+
+
+def read_goal(row) -> Goal:
+    id = UUID(row[0])
+    name = str(row[1])
+
+    interval_start_amount = row[3]
+    interval_target_amount = row[4]
+
+    interval_start_date = read_date(row[2])
+    interval_length = timedelta(seconds=float(row[5]))
+
+    bucket_size = timedelta(seconds=float(row[6]))
+    unit = str(row[7])
+    reset = bool(row[8])
+
+    created_date = read_date(row[9])
+
+    return Goal(
+        id=id,
+        name=name,
+        interval_start_date=interval_start_date,
+        interval_start_amount=interval_start_amount,
+        interval_target_amount=interval_target_amount,
+        interval_length=interval_length,
+        bucket_size=bucket_size,
+        unit=unit,
+        reset=reset,
+        created_date=created_date,
+    )
 
 
 class GoalsDB(DBInterface):
@@ -114,25 +148,16 @@ class GoalsDB(DBInterface):
                         unit,
                         reset,
                         datetime(created_date,'utc') as created_date
-                    FROM goals
-                    ORDER BY interval_start_date, created_date;
+                    FROM 
+                        goals
+                    ORDER BY 
+                        interval_start_date, 
+                        created_date
+                    ;
                     """,
                 )
-                return [
-                    Goal(
-                        id=row[0],
-                        name=str(row[1]),
-                        interval_start_date=row[2],
-                        interval_start_amount=row[3],
-                        interval_target_amount=row[4],
-                        interval_length=timedelta(seconds=float(row[5])),
-                        bucket_size=timedelta(seconds=float(row[6])),
-                        unit=str(row[7]),
-                        reset=row[8],
-                        created_date=row[9],
-                    )
-                    for row in cursor.fetchall()
-                ]
+
+                return [read_goal(row) for row in cursor.fetchall()]
 
     def get_goal(
         self,
@@ -154,8 +179,11 @@ class GoalsDB(DBInterface):
                         unit,
                         reset,
                         datetime(created_date,'utc') as created_date
-                    FROM goals
-                    WHERE id=? 
+                    FROM 
+                        goals
+                    WHERE 
+                        id=?
+                    ;
                     """,
                     [
                         str(goal_id),
@@ -168,18 +196,7 @@ class GoalsDB(DBInterface):
                         message=f"Goal not found for id={goal_id}"
                     )
 
-                return Goal(
-                    id=row[0],
-                    name=str(row[1]),
-                    interval_start_date=row[2],
-                    interval_start_amount=row[3],
-                    interval_target_amount=row[4],
-                    interval_length=timedelta(seconds=float(row[5])),
-                    bucket_size=timedelta(seconds=float(row[6])),
-                    unit=str(row[7]),
-                    reset=row[8],
-                    created_date=row[9],
-                )
+                return read_goal(row)
 
     def update_goal(
         self,
