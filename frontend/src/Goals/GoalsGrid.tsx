@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 
-import { Card, NumberFormatter, SimpleGrid, Text } from "@mantine/core";
+import { Card, NumberFormatter, SimpleGrid, Text, getThemeColor, useMantineTheme } from "@mantine/core";
 import { Goal, Record } from "api-client";
 
 import { getGraphDataFromRecords } from "../getGraphDataFromRecords";
@@ -19,6 +19,7 @@ export function GoalsGrid({ goals, goalRecords }: GoalsGridProps) {
       // GoalsWidgetBridge.();
     });
   }, [goals, goalRecords]);
+  const theme = useMantineTheme();
   return (
     <SimpleGrid
       cols={{ base: 1, sm: 1, md: 2, lg: 3, xl: 4 }}
@@ -56,7 +57,7 @@ export function GoalsGrid({ goals, goalRecords }: GoalsGridProps) {
               />
             </Text>
             <Sparklines data={data} height={40}>
-              <SparklinesLine color="var(--mantine-color-blue-6)" />
+              <SparklinesLine color={getThemeColor(theme.primaryColor, theme)} />
             </Sparklines>
           </Card>
         );
