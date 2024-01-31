@@ -95,10 +95,13 @@ export function GoalPage() {
 
       <RenderAsync
         fallback={<RecordsTableSkeleton rowCount={4} />}
-        renderElement={(records) => <RecordsTable records={records} onDelete={async (id) => {
+        renderElement={(records) => <RecordsTable
+          records={records}
+          onDelete={async (id) => {
             await goalsApi.deleteRecord({ recordId: id });
             revalidate();
-        }} />}
+          }}
+        />}
         renderErrorElement={() => <div>Could not load records 😬</div>}
         resolve={records}
       />

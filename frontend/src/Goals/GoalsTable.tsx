@@ -8,13 +8,14 @@ import { Link } from "react-router-dom";
 
 export interface GoalsTableProps {
   goals: Goal[];
+  onDelete: (goalId : string) => void;
 }
 
 const clamp = (min: number, value: number, max: number) => (
   Math.max(min, Math.min(value, max) )
 )
 
-export function GoalsTable({ goals }: GoalsTableProps) {
+export function GoalsTable({ goals, onDelete }: GoalsTableProps) {
   // note: if it has the word use, it shouldn't be used in a for loop. needs to be higher up
   // google "rules of hooks" for more information
   const theme = useMantineTheme();
@@ -44,10 +45,9 @@ export function GoalsTable({ goals }: GoalsTableProps) {
           value={100 * progressPercent}
           style={{ width: 100 }}
         /></Table.Td>
-        <Table.Td><Button
-          component={Link} // note: we use 'Link' instead of 'a' because 'a' would make the whole page reload
-          to={`/goals/${goal.id}`}
-        >View</Button></Table.Td>
+        {/* // note: we use 'Link' instead of 'a' because 'a' would make the whole page reload */}
+        <Table.Td><Button component={Link} to={`/goals/${goal.id}`}>View</Button></Table.Td>
+        <Table.Td><Button variant="danger" onClick={() => onDelete(goal.id!)}>Delete</Button></Table.Td>
       </Table.Tr>
     )
   });
