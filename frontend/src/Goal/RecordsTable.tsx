@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Skeleton, Table } from "@mantine/core";
+import { Button, Skeleton, Table } from "@mantine/core";
 import { Record } from "api-client";
 
 export interface RecordsTableProps {
@@ -13,6 +13,7 @@ export function RecordsTable({ records }: RecordsTableProps) {
       <Table.Td>{record.date.toDateString()}</Table.Td>
       <Table.Td>{record.amount}</Table.Td>
       <Table.Td>{record.progress}</Table.Td>
+      <Table.Td><Button variant="danger">Delete</Button></Table.Td>
     </Table.Tr>
   ));
 
