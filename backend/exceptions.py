@@ -20,7 +20,7 @@ def handle_http_exceptions(f):
             return await f(*args, **kwargs)
 
         except ResourceNotFoundException as error:
-            raise HTTPException(status_code=404, detail=error)
+            raise HTTPException(status_code=404, detail=str(error))
 
         except Exception as error:
             # TODO: Create an exception metric for tracing

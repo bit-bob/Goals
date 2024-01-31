@@ -2,7 +2,7 @@ import logging
 from uuid import UUID
 
 from db import goals_db
-from exceptions import ResourceNotFoundException, handle_http_exceptions
+from exceptions import handle_http_exceptions
 from fastapi import APIRouter
 from models import Goal, Record
 
@@ -59,9 +59,6 @@ async def get_goal_records(
 async def delete_goal(
     goal_id: UUID,
 ) -> None:
-    try:
-        goal = goals_db.get_goal(goal_id)
-        logging.warn(f"Deleting '{goal.name}'")
-        goals_db.delete_goal(goal_id)
-    except ResourceNotFoundException:
-        pass
+    goal = goals_db.get_goal(goal_id)
+    logging.warn(f"Deleting '{goal.name}'")
+    goals_db.delete_goal(goal_id)
