@@ -40,6 +40,7 @@
     "match-sorter": "^6.3.1",
     "moment": "^2.29.4",
     "parse-duration": "^1.1.0",
+    "polished": "^4.2.2",
     "postcss-preset-mantine": "^1.11.0",
     "postcss-simple-vars": "^7.0.1",
     "react": "^18.2.0",
