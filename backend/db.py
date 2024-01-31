@@ -69,6 +69,24 @@ def read_goal(row) -> Goal:
     )
 
 
+def read_record(row) -> Record:
+    id = UUID(row[0])
+    goal_id = UUID(row[1])
+    date = read_date(row[2])
+    amount = float(row[3])
+    created_date = read_date(row[4])
+    progress = float(row[5]) if row[5] is not None else 0
+
+    return Record(
+        id=id,
+        goal_id=goal_id,
+        date=date,
+        amount=amount,
+        created_date=created_date,
+        progress=progress,
+    )
+
+
 class GoalsDB(DBInterface):
     path = "backend/goals.db"
 
@@ -361,17 +379,7 @@ class GoalsDB(DBInterface):
                     ;
                     """,
                 )
-                return [
-                    Record(
-                        id=row[0],
-                        goal_id=row[1],
-                        date=row[2],
-                        amount=row[3],
-                        created_date=row[4],
-                        progress=row[5],
-                    )
-                    for row in cursor.fetchall()
-                ]
+                return [read_record(row) for row in cursor.fetchall()]
 
     def get_records_for_goal(
         self,
@@ -434,17 +442,7 @@ class GoalsDB(DBInterface):
                     """,
                     args,
                 )
-                return [
-                    Record(
-                        id=row[0],
-                        goal_id=row[1],
-                        date=row[2],
-                        amount=row[3],
-                        created_date=row[4],
-                        progress=row[5],
-                    )
-                    for row in cursor.fetchall()
-                ]
+                return [read_record(row) for row in cursor.fetchall()]
 
     def get_record(
         self,
@@ -478,14 +476,7 @@ class GoalsDB(DBInterface):
                         message=f"Record not found for id={record_id}"
                     )
 
-                return Record(
-                    id=row[0],
-                    goal_id=row[1],
-                    date=row[2],
-                    amount=row[3],
-                    created_date=row[4],
-                    progress=row[4],
-                )
+                return read_record(row)
 
     def delete_record(
         self,
