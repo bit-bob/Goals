@@ -5,15 +5,17 @@ import { Record } from "api-client";
 
 export interface RecordsTableProps {
   records: Record[];
+  onDelete: (recordId : string) => void;
 }
 
-export function RecordsTable({ records }: RecordsTableProps) {
+export function RecordsTable({ records, onDelete }: RecordsTableProps) {
+
   const rows = records.map((record) => (
     <Table.Tr key={record.id}>
       <Table.Td>{record.date.toDateString()}</Table.Td>
       <Table.Td>{record.amount}</Table.Td>
       <Table.Td>{record.progress}</Table.Td>
-      <Table.Td><Button variant="danger">Delete</Button></Table.Td>
+      <Table.Td><Button variant="danger" onClick={() => onDelete(record.id!)}>Delete</Button></Table.Td>
     </Table.Tr>
   ));
 
