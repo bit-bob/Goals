@@ -60,7 +60,7 @@ export function GoalPage() {
   return (
     <Stack>
       <RenderAsync
-        renderElement={([, resolvedRecords]) => (
+        renderElement={(resolvedRecords) => (
           <ProgressChart goal={goal} records={resolvedRecords} />
         )}
         renderErrorElement={(reason) => {
@@ -86,7 +86,7 @@ export function GoalPage() {
           );
         }}
         fallback={<Skeleton height={300} />}
-        resolve={Promise.all([records])}
+        resolve={records}
       />
 
       {goal.intervalLength}

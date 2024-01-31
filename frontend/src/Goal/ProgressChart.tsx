@@ -120,5 +120,6 @@ export function ProgressChart({
   goal: Goal;
   records: Record[];
 }) {
+  console.log(records);
   return <ChartComponent goal={goal} records={records} />;
 }
