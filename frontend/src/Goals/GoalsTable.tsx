@@ -1,16 +1,30 @@
 import React from "react";
 
-import { DefaultMantineColor, Progress, Table } from "@mantine/core";
+import { DefaultMantineColor, Progress, Table, useMantineTheme } from "@mantine/core";
+import { mix } from "polished"
+
 import { Goal } from "api-client";
 
 export interface GoalsTableProps {
   goals: Goal[];
 }
 
+const clamp = (min: number, value: number, max: number) => (
+  Math.max(min, Math.min(value, max) )
+)
+
 export function GoalsTable({ goals }: GoalsTableProps) {
+  // note: if it has the word use, it shouldn't be used in a for loop. needs to be higher up
+  // google "rules of hooks" for more information
+  const theme = useMantineTheme();
+
   const rows = goals.map((goal) => {
-    const progressPercent = 100 * (goal.progress ?? 0 - goal.intervalStartAmount) / (goal.goalProgress ?? goal.intervalTargetAmount - goal.intervalStartAmount);
-    const progressColour : DefaultMantineColor = progressPercent >= 100 ? "green" : "blue";
+    const progressPercent = clamp(
+      0,
+      (goal.progress ?? 0 - goal.intervalStartAmount) / (goal.goalProgress ?? goal.intervalTargetAmount - goal.intervalStartAmount),
+      1
+    );
+    const progressColour: DefaultMantineColor = mix(progressPercent, theme.colors.teal[6], theme.colors.indigo[6])
     return (
       <Table.Tr key={goal.id}>
         <Table.Td>{goal.name}</Table.Td>
@@ -22,7 +36,7 @@ export function GoalsTable({ goals }: GoalsTableProps) {
           radius="xs"
           size="xl"
           color={progressColour}
-          value={progressPercent}
+          value={100 * progressPercent}
           style={{ width: 100 }}
         /></Table.Td>
       </Table.Tr>
