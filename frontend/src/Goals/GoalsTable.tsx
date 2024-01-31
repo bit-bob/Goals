@@ -1,9 +1,10 @@
 import React from "react";
 
-import { DefaultMantineColor, Progress, Table, useMantineTheme } from "@mantine/core";
+import { Button, DefaultMantineColor, Progress, Table, useMantineTheme } from "@mantine/core";
 import { mix } from "polished"
 
 import { Goal } from "api-client";
+import { Link } from "react-router-dom";
 
 export interface GoalsTableProps {
   goals: Goal[];
@@ -24,7 +25,11 @@ export function GoalsTable({ goals }: GoalsTableProps) {
       (goal.progress ?? 0 - goal.intervalStartAmount) / (goal.goalProgress ?? goal.intervalTargetAmount - goal.intervalStartAmount),
       1
     );
-    const progressColour: DefaultMantineColor = mix(progressPercent, theme.colors.teal[6], theme.colors.indigo[6])
+    const progressColour: DefaultMantineColor = mix(
+      progressPercent,
+      theme.colors.teal[6],
+      theme.colors.indigo[6]
+    )
     return (
       <Table.Tr key={goal.id}>
         <Table.Td>{goal.name}</Table.Td>
@@ -39,6 +44,10 @@ export function GoalsTable({ goals }: GoalsTableProps) {
           value={100 * progressPercent}
           style={{ width: 100 }}
         /></Table.Td>
+        <Table.Td><Button
+          component={Link} // note: we use 'Link' instead of 'a' because 'a' would make the whole page reload
+          to={`/goals/${goal.id}`}
+        >View</Button></Table.Td>
       </Table.Tr>
     )
   });
