@@ -6,13 +6,13 @@ import { Notifications } from "@mantine/notifications";
 import { NavigationProgress } from "@mantine/nprogress";
 import { SafeArea } from "capacitor-plugin-safe-area";
 
+import { theme } from "./theme";
 import { urls } from "./urls";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/nprogress/styles.css";
-import { theme } from "./theme";
 
 SafeArea.getSafeAreaInsets().then(({ insets }) => {
   document.documentElement.style.setProperty("--inset-top", insets.top + "px");

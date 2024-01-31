@@ -4,7 +4,7 @@ import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
 import { Skeleton, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronLeft } from "@tabler/icons-react";
-import { ResponseError as EResponse, Goal, Progress, Record } from "api-client";
+import { ResponseError as EResponse, Goal, Record } from "api-client";
 import moment from "moment";
 
 import { AppControlContext } from "../AppLayout";
@@ -94,14 +94,16 @@ export function GoalPage() {
       {JSON.stringify(moment.duration(goal.intervalLength).years())}
 
       <RenderAsync
+        renderElement={(records) => (
+          <RecordsTable
+            onDelete={async (id) => {
+              await goalsApi.deleteRecord({ recordId: id });
+              revalidate();
+            }}
+            records={records}
+          />
+        )}
         fallback={<RecordsTableSkeleton rowCount={4} />}
-        renderElement={(records) => <RecordsTable
-          records={records}
-          onDelete={async (id) => {
-            await goalsApi.deleteRecord({ recordId: id });
-            revalidate();
-          }}
-        />}
         renderErrorElement={() => <div>Could not load records 😬</div>}
         resolve={records}
       />

@@ -1,12 +1,12 @@
 import React from "react";
+import { useRevalidator } from "react-router-dom";
 
 import { Goal, Record } from "api-client";
 
+import { goalsApi } from "../api";
 import { GoalsGrid } from "./GoalsGrid";
 import { GoalsTable } from "./GoalsTable";
 import { DisplayMode } from "./displayMode";
-import { goalsApi } from "../api";
-import { useRevalidator } from "react-router-dom";
 
 interface GoalsListProps {
   displayMode: DisplayMode;
@@ -21,11 +21,11 @@ export function GoalsList({ goals, goalRecords, displayMode }: GoalsListProps) {
 
   switch (displayMode) {
     case DisplayMode.Table:
-      return <GoalsTable goals={goals} 
-          onDelete={async (id) => {
+      return <GoalsTable onDelete={async (id) => {
             await goalsApi.deleteGoal({ goalId: id });
             revalidate();
-          }}/>;
+          }} 
+          goals={goals}/>;
     default:
       return <GoalsGrid goalRecords={goalRecords} goals={goals} />;
   }

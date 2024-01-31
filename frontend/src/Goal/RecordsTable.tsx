@@ -15,7 +15,7 @@ export function RecordsTable({ records, onDelete }: RecordsTableProps) {
       <Table.Td>{record.date.toDateString()}</Table.Td>
       <Table.Td>{record.amount}</Table.Td>
       <Table.Td>{record.progress}</Table.Td>
-      <Table.Td><Button variant="danger" onClick={() => onDelete(record.id!)}>Delete</Button></Table.Td>
+      <Table.Td><Button onClick={() => onDelete(record.id!)} variant="danger">Delete</Button></Table.Td>
     </Table.Tr>
   ));
 
