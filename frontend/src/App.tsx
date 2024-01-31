@@ -12,6 +12,7 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/nprogress/styles.css";
+import { theme } from "./theme";
 
 SafeArea.getSafeAreaInsets().then(({ insets }) => {
   document.documentElement.style.setProperty("--inset-top", insets.top + "px");
@@ -29,7 +30,7 @@ export default function App() {
       <ColorSchemeScript />
       <MantineProvider
         defaultColorScheme="auto"
-        theme={{ fontFamily: "'DM Sans', sans-serif" }}
+        theme={theme}
       >
         {/* @ts-expect-error - style prop is supported by <NavigationProgress />, but types are incorrect */}
         <NavigationProgress style={{ top: "var(--inset-top)" }} />
