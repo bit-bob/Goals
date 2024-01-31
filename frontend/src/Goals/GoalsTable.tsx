@@ -27,7 +27,7 @@ export function GoalsTable({ goals }: GoalsTableProps) {
     );
     const progressColour: DefaultMantineColor = mix(
       progressPercent,
-      theme.colors.teal[6],
+      parseThemeColor({color : "teal", theme}).value,
       parseThemeColor({color : theme.primaryColor, theme}).value
     )
     return (
