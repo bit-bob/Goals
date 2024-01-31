@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, DefaultMantineColor, Progress, Table, useMantineTheme } from "@mantine/core";
+import { Button, DefaultMantineColor, Progress, Table, parseThemeColor, useMantineTheme } from "@mantine/core";
 import { mix } from "polished"
 
 import { Goal } from "api-client";
@@ -28,7 +28,7 @@ export function GoalsTable({ goals }: GoalsTableProps) {
     const progressColour: DefaultMantineColor = mix(
       progressPercent,
       theme.colors.teal[6],
-      theme.colors.indigo[6]
+      parseThemeColor({color : theme.primaryColor, theme}).value
     )
     return (
       <Table.Tr key={goal.id}>
