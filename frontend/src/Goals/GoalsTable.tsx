@@ -27,12 +27,12 @@ export function GoalsTable({ goals, onDelete }: GoalsTableProps) {
   const theme = useMantineTheme();
 
   const rows = goals.map((goal) => {
-    const progress = goal.progress ?? 0
-    const goalProgress = goal.goalProgress ??
-          goal.intervalTargetAmount
+    const progress = goal.progress ?? 0;
+    const goalProgress = goal.goalProgress ?? goal.intervalTargetAmount;
     const progressPercent = clamp(
       0,
-      (progress - goal.intervalStartAmount) / (goalProgress - goal.intervalStartAmount),
+      (progress - goal.intervalStartAmount) /
+        (goalProgress - goal.intervalStartAmount),
       1
     );
     const progressPercentRounded = Math.round(100 * progressPercent)
@@ -61,12 +61,12 @@ export function GoalsTable({ goals, onDelete }: GoalsTableProps) {
         </Table.Td>
         {/* // note: we use 'Link' instead of 'a' because 'a' would make the whole page reload */}
         <Table.Td>
-          <Button component={Link} to={`/goals/${goal.id}`}>
+          <Button component={Link} size="xs" to={`/goals/${goal.id}`}>
             View
           </Button>
         </Table.Td>
         <Table.Td>
-          <Button onClick={() => onDelete(goal.id!)} variant="danger">
+          <Button onClick={() => onDelete(goal.id!)} size="xs" variant="danger">
             Delete
           </Button>
         </Table.Td>

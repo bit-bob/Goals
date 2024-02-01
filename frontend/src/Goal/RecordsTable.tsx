@@ -36,6 +36,7 @@ function RecordRow({
         <Button
           loading={loading}
           onClick={asyncActionHandler(setLoading, onDelete)}
+          size="xs"
           variant="danger"
         >
           Delete

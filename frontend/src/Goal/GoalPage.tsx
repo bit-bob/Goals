@@ -5,7 +5,6 @@ import { Skeleton, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronLeft } from "@tabler/icons-react";
 import { ResponseError as EResponse, Goal, Record } from "api-client";
-import moment from "moment";
 
 import { AppControlContext } from "../AppLayout";
 import { RenderAsync } from "../RenderAsync";
