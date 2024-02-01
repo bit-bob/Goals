@@ -10,20 +10,22 @@ import {
 } from "lightweight-charts";
 
 import { getGraphDataFromRecords } from "../getGraphDataFromRecords";
+import { getThemeColor, parseThemeColor, useMantineTheme } from "@mantine/core";
 
 export const ChartComponent = (props: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
+  color: string;
   goal: Goal;
   records: Record[];
 }) => {
   const {
     colors: {
       backgroundColor = "transparent",
-      lineColor = "var(--mantine-color-blue-1)",
+      lineColor = props.color,
       textColor = "white",
       areaTopColor = "#2962FF",
-      areaBottomColor = "rgba(41, 98, 255, 0.28)",
+      areaBottomColor = props.color,
     } = {},
     goal,
     records,
@@ -55,7 +57,7 @@ export const ChartComponent = (props: {
 
     const newSeries = chart.addLineSeries({
       lineType: LineType.Simple,
-      // color: "red",
+      color: props.color,
     });
 
     const ledger = getGraphDataFromRecords(records);
@@ -120,6 +122,13 @@ export function ProgressChart({
   goal: Goal;
   records: Record[];
 }) {
+  const theme = useMantineTheme();
   console.log(records);
-  return <ChartComponent goal={goal} records={records} />;
+  return (
+    <ChartComponent
+      color={parseThemeColor({ color: theme.primaryColor, theme }).value}
+      goal={goal}
+      records={records}
+    />
+  );
 }
