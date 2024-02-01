@@ -1,24 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, Skeleton, Table } from "@mantine/core";
 import { Record } from "api-client";
 
 export interface RecordsTableProps {
   records: Record[];
-  onDelete: (recordId : string) => void;
+  onDelete: (recordId: string) => Promise<void>;
 }
 
-export function RecordsTable({ records, onDelete }: RecordsTableProps) {
+const asyncActionHandler =
+  (
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    event: () => Promise<void>
+  ) =>
+  async () => {
+    setLoading(true);
+    await event();
+    setLoading(false);
+  };
 
-  const rows = records.map((record) => (
-    <Table.Tr key={record.id}>
+function RecordRow({
+  record,
+  onDelete,
+}: {
+  record: Record;
+  onDelete: () => Promise<void>;
+}) {
+  const [loading, setLoading] = useState(false);
+  return (
+    <Table.Tr>
       <Table.Td>{record.date.toDateString()}</Table.Td>
       <Table.Td>{record.amount}</Table.Td>
       <Table.Td>{record.progress}</Table.Td>
-      <Table.Td><Button onClick={() => onDelete(record.id!)} variant="danger">Delete</Button></Table.Td>
+      <Table.Td>
+        <Button
+          loading={loading}
+          onClick={asyncActionHandler(setLoading, onDelete)}
+          variant="danger"
+        >
+          Delete
+        </Button>
+      </Table.Td>
     </Table.Tr>
-  ));
+  );
+}
 
+export function RecordsTable({ records, onDelete }: RecordsTableProps) {
   return (
     <Table>
       <Table.Thead>
@@ -26,9 +53,18 @@ export function RecordsTable({ records, onDelete }: RecordsTableProps) {
           <Table.Th>Date</Table.Th>
           <Table.Th>Amount</Table.Th>
           <Table.Th>Progress</Table.Th>
+          <Table.Th></Table.Th>
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        {records.map((record) => (
+          <RecordRow
+            key={record.id}
+            onDelete={() => onDelete(record.id!)}
+            record={record}
+          />
+        ))}
+      </Table.Tbody>
     </Table>
   );
 }

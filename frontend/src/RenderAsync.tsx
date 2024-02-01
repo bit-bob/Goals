@@ -22,7 +22,6 @@ export function RenderAsync<T>({
   useEffect(() => {
     setLoading(true);
     setError(undefined);
-    setData(undefined);
     resolve
       .then((data) => {
         setLoading(false);
@@ -34,7 +33,7 @@ export function RenderAsync<T>({
       });
   }, [resolve]);
 
-  if (loading) {
+  if (loading && !data) {
     return fallback;
   }
 

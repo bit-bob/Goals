@@ -19,6 +19,7 @@
     "@capacitor/core": "latest",
     "@capacitor/ios": "^5.5.1",
     "@capacitor/splash-screen": "latest",
+    "@formkit/auto-animate": "^0.8.1",
     "@mantine/core": "^7.2.2",
     "@mantine/dates": "^7.2.2",
     "@mantine/form": "^7.2.2",
