@@ -6,6 +6,7 @@ import {
   DefaultMantineColor,
   Progress,
   Table,
+  Tooltip,
   parseThemeColor,
   useMantineTheme,
 } from "@mantine/core";
@@ -34,6 +35,7 @@ export function GoalsTable({ goals, onDelete }: GoalsTableProps) {
       (progress - goal.intervalStartAmount) / (goalProgress - goal.intervalStartAmount),
       1
     );
+    const progressPercentRounded = Math.round(100 * progressPercent)
     const progressColour: DefaultMantineColor = mix(
       progressPercent,
       parseThemeColor({ color: "teal", theme }).value,
@@ -47,13 +49,15 @@ export function GoalsTable({ goals, onDelete }: GoalsTableProps) {
         <Table.Td>{progress}</Table.Td>
         <Table.Td>{Number(goalProgress.toPrecision(3))}</Table.Td>
         <Table.Td>
+        <Tooltip label={`${progressPercentRounded} %`}>
           <Progress
             color={progressColour}
             radius="xs"
             size="xl"
             style={{ width: 100 }}
-            value={100 * progressPercent}
+            value={progressPercentRounded}
           />
+        </Tooltip>
         </Table.Td>
         {/* // note: we use 'Link' instead of 'a' because 'a' would make the whole page reload */}
         <Table.Td>
