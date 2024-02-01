@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 
+import { parseThemeColor, useMantineTheme } from "@mantine/core";
 import { Goal, Record } from "api-client";
 import {
   ColorType,
   CrosshairMode,
-  LineStyle,
   LineType,
+  LineStyle,
   createChart,
 } from "lightweight-charts";
 
 import { getGraphDataFromRecords } from "../getGraphDataFromRecords";
-import { getThemeColor, parseThemeColor, useMantineTheme } from "@mantine/core";
 
 export const ChartComponent = (props: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
