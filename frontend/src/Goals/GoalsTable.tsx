@@ -26,11 +26,12 @@ export function GoalsTable({ goals, onDelete }: GoalsTableProps) {
   const theme = useMantineTheme();
 
   const rows = goals.map((goal) => {
+    const progress = goal.progress ?? 0
+    const goalProgress = goal.goalProgress ??
+          goal.intervalTargetAmount
     const progressPercent = clamp(
       0,
-      (goal.progress ?? 0 - goal.intervalStartAmount) /
-        (goal.goalProgress ??
-          goal.intervalTargetAmount - goal.intervalStartAmount),
+      (progress - goal.intervalStartAmount) / (goalProgress - goal.intervalStartAmount),
       1
     );
     const progressColour: DefaultMantineColor = mix(
@@ -43,8 +44,8 @@ export function GoalsTable({ goals, onDelete }: GoalsTableProps) {
         <Table.Td>{goal.name}</Table.Td>
         <Table.Td>{goal.unit}</Table.Td>
         <Table.Td>{goal.intervalTargetAmount}</Table.Td>
-        <Table.Td>{goal.progress}</Table.Td>
-        <Table.Td>{goal.goalProgress}</Table.Td>
+        <Table.Td>{progress}</Table.Td>
+        <Table.Td>{Number(goalProgress.toPrecision(3))}</Table.Td>
         <Table.Td>
           <Progress
             color={progressColour}
