@@ -89,10 +89,6 @@ export function GoalPage() {
         resolve={records}
       />
 
-      {goal.intervalLength}
-      <br />
-      {JSON.stringify(moment.duration(goal.intervalLength).years())}
-
       <RenderAsync
         renderElement={(records) => (
           <RecordsTable
